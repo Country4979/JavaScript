@@ -1,0 +1,3 @@
+* VSCODE https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference
+* Guía JS de referencia
+https://developer.mozilla.org/es/docs/Web/JavaScript
