@@ -36,7 +36,7 @@ TODO MENSJE "HAS GANADO"
 TODO MENSJE "EMPATE"
 */
 
-//VARIABLES DE LOS BARCOS Y TOCADO, HUNDICO Y AGUA
+//VARIABLES DE LOS BARCOS Y TOCADO, HUNDIDO Y AGUA
 const LANCHA = ['🛶']
 const CRUCERO = ['🚤', '🚤']
 const SUBMARINO = ['🛳', '🛳', '🛳']
@@ -45,30 +45,88 @@ const PORTAAVIONES = ['🚢', '🚢', '🚢', '🚢', '🚢']
 const VACIO = ['']
 const AGUA = ['💧']
 const TOCADO = ['🔥']
+let tocado = []
+const lenght_total = 3 * LANCHA.length + 3 * CRUCERO.length + 2 * SUBMARINO.length + BUQUE.length + PORTAAVIONES.length  //tocados totales para ganar
+
+//JUGADORES
+let playerA = {
+    nombre = 'PLAYER A',
+    fire = [], //Disparos realizados - Cada bucle es un ciclo while
+    totalA_inherit = lenght_total - daños // Cuantos impactos me quedan
+    causedB_inherit = [] // Daños causados en B
+}
+
+let playerB = {
+    nombre = 'PLAYER B',
+    fire = [], //Disparos realizados - Cada bucle es un ciclo while
+    total_inherit = lenght_total - daños // Cuantos impactos me quedan
+    causedA_inherit = [] // Daños causados en A
+}
+
+const EMPATE = '¡EMPATE!'
+
+
+let tocado_A = 24
+let tocado_B = []
+let winner = the_winner()
+
+//VARIABLES VICTORIA
+
+
 
 //IMPRESIONES
-const LINEA_TITULO = []
-const SEMILINEA1 = []
-const SEMILINEA2 = '================' // TODO mejorar para que tenga la misma longitud que RONDA_A y Ronda B
+const LINEA_TITULO = '==================================================='
+const SEMILINEA1 = '========='
+const SEMILINEA2 = '================='
+const SEMILINEA3 = '================' // TODO mejorar para que tenga la misma longitud que RONDA_A y Ronda_B
 let n_ronda = ''
 const RONDA_A =  'Ronda ' + n_ronda + ' for A' 
 const RONDA_B =  'Ronda ' + n_ronda + ' for B'
 //impresion ronda A
 console.log(RONDA_A)
-console.log(SEMILINEA2)
+console.log(SEMILINEA3)
 //impresion ronda B
 console.log(RONDA_B)
-console.log(SEMILINEA2)
+console.log(SEMILINEA3)
 
 
 // ESCRIBIMOS CODIGO
 console.log()
-console.log('===================================================')
-console.log('========= The battleship simulator starts =========')
-console.log('===================================================')
+console.log(LINEA_TITULO)
+console.log(SEMILINEA1 + ' The battleship simulator starts ' + SEMILINEA1) 
+console.log(LINEA_TITULO)
 console.log()
 console.log()
 
-console.log('===================================================')
-console.log('================= The game starts =================')
-console.log('===================================================')
+console.log(LINEA_TITULO)
+console.log(SEMILINEA2 + ' The game starts ' + SEMILINEA2)
+console.log(LINEA_TITULO)
+console.log()
+console.log()
+
+console.log(LINEA_TITULO)
+console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
+
+
+//FUNCIONES
+
+//GANAR
+
+function the_winner () {
+    switch ()
+    case (playerA.totalA_inherit > playerB.totalB_inherit):
+        winner = playerA.nombre;
+        break
+    case (playerA.totalA_inherit < playerB.totalB_inherit):
+        winner = playerB.nombre;
+        break
+    default:
+        winner = EMPATE;
+        break;
+}
+
+function to_win () {
+    if (tocado_A = lenght_total) {
+        console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
+    }
+}
