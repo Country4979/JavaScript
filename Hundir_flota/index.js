@@ -37,16 +37,25 @@ TODO MENSJE "EMPATE"
 */
 
 //VARIABLES DE LOS BARCOS Y TOCADO, HUNDIDO Y AGUA
-const LANCHA = ['🛶']
-const CRUCERO = ['🚤', '🚤']
-const SUBMARINO = ['🛳', '🛳', '🛳']
+const LANCHA1 = ['🛶']
+const LANCHA2 = ['🛶']
+const LANCHA3 = ['🛶']
+const CRUCERO1 = ['🚤', '🚤']
+const CRUCERO2 = ['🚤', '🚤']
+const CRUCERO3 = ['🚤', '🚤']
+const SUBMARINO1 = ['🛳', '🛳', '🛳']
+const SUBMARINO2 = ['🛳', '🛳', '🛳']
+const SUBMARINO3 = ['🛳', '🛳', '🛳']
 const BUQUE = ['🛥', '🛥', '🛥', '🛥']
 const PORTAAVIONES = ['🚢', '🚢', '🚢', '🚢', '🚢']
 const VACIO = ['']
 const AGUA = ['💧']
 const TOCADO = ['🔥']
 let tocado = []
-const lenght_total = 3 * LANCHA.length + 3 * CRUCERO.length + 2 * SUBMARINO.length + BUQUE.length + PORTAAVIONES.length  //tocados totales para ganar
+let lifePlayerA = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
+let lifePlayerB = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
+
+//const lenght_total = 3 * LANCHA.length + 3 * CRUCERO.length + 2 * SUBMARINO.length + BUQUE.length + PORTAAVIONES.length  //tocados totales para ganar
 
 //JUGADORES
 let playerA = {
@@ -109,6 +118,9 @@ console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
 
 
 //FUNCIONES
+
+// Para elegir un barco al azar: 
+const aleatorioPlayerA = lifePlayerA[Math.floor(Math.random() * lifePlayerA.length)]
 
 //GANAR
 
