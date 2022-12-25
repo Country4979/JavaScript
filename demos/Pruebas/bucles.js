@@ -1,4 +1,4 @@
-function dump_props(obj, obj_name) {
+/*function dump_props(obj, obj_name) {
     let result = '';
     for (let i in obj) {
       result += obj_name + '.' + i + ' = ' + obj[i] + '<br>';
@@ -12,3 +12,4 @@ function dump_props(obj, obj_name) {
 const oneDown = threeArr.pop();
 console.log(oneDown);
 console.log(threeArr);
+*/

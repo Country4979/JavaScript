@@ -28,13 +28,15 @@ TODO x3 CRUCEROS (2 CASILLAS)
 TODO 4 TABLEROS
 TODO 10 FILAS CON INICIO EN LETRAS
 TODO COLUMNAS CON INICIO EN NÚMERO
-TODO CELDAS VACÍAS
-TODO TÍTULO DE TABLERO
-TODO "CONTADOR DE BARCOS" JUGADOR A
-TODO "CONTADOR DE BARCOS" JUGADOR B
+✅ CELDAS VACÍAS
+✅ TÍTULO DE TABLERO
+✅ "CONTADOR DE BARCOS" JUGADOR A
+✅ "CONTADOR DE BARCOS" JUGADOR B
 TODO MENSJE "HAS GANADO"
 TODO MENSJE "EMPATE"
 */
+
+import board.js
 
 //VARIABLES DE LOS BARCOS Y TOCADO, HUNDIDO Y AGUA
 const LANCHA1 = ['🛶']
@@ -107,6 +109,8 @@ console.log(LINEA_TITULO)
 console.log()
 console.log()
 
+//print_board(board)
+
 console.log(LINEA_TITULO)
 console.log(SEMILINEA2 + ' The game starts ' + SEMILINEA2)
 console.log(LINEA_TITULO)
@@ -116,7 +120,7 @@ console.log()
 console.log(LINEA_TITULO)
 console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
 
-
+/*
 //FUNCIONES
 
 // Para elegir un barco al azar: 
@@ -142,3 +146,5 @@ function to_win () {
         console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
     }
 }
+
+console.log(aleatorioPlayerA)
