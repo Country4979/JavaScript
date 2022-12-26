@@ -56,26 +56,27 @@ let lifePlayerA = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBM
 let lifePlayerB = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
 
 //DISPAROS
-const FIGURE_SHOOT = ['  💧  ', '  🔥  ']
+const FIGURE = ['  💧  ', '  🔥  ']
 let shoot = 0;
-let shootPlayerA = 0;
-let shootPlayerB = 0;
 
 function next_player(){
-    if ((shoot == 0) || (shootPlayerA <= shootPlayerB)) {
-        console.log('FUEGO PLAYER A');
-        shootPlayerA++;
+    if ((shoot == 0) || (playerA.shoot <= playerB.shoot)) {
+        playerA.shoot++;
+        return 'A'
     }else{
-        console.log('FUEGO PLAYER B');
-        shootPlayerB++;
+        playerB.shoot++;
+        return 'B'
     }
 }
 
 // JUEGO
-while (shoot < 100) {
-    next_player();
+while (shoot < 6) {
+    if (shoot % 2 == 0){
+        console.log("Ronda " + playerA.shoot + " for " + next_player() + "\n" + "==============");
+    } else {
+        console.log("Ronda " + playerB.shoot + " for " + next_player() + "\n" + "==============")
+    }
     shoot++
-    console.log(shoot)
 }
 
 
