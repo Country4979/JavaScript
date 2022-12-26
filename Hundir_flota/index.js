@@ -36,7 +36,7 @@ TODO MENSJE "HAS GANADO"
 TODO MENSJE "EMPATE"
 */
 
-import board.js
+//import board.js
 
 //VARIABLES DE LOS BARCOS Y TOCADO, HUNDIDO Y AGUA
 const LANCHA1 = ['🛶']
@@ -51,11 +51,33 @@ const SUBMARINO3 = ['🛳', '🛳', '🛳']
 const BUQUE = ['🛥', '🛥', '🛥', '🛥']
 const PORTAAVIONES = ['🚢', '🚢', '🚢', '🚢', '🚢']
 const VACIO = ['']
-const AGUA = ['💧']
-const TOCADO = ['🔥']
 let tocado = []
 let lifePlayerA = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
 let lifePlayerB = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
+
+//DISPAROS
+const FIGURE_SHOOT = ['  💧  ', '  🔥  ']
+let shoot = 0;
+let shootPlayerA = 0;
+let shootPlayerB = 0;
+
+function next_player(){
+    if ((shoot == 0) || (shootPlayerA <= shootPlayerB)) {
+        console.log('FUEGO PLAYER A');
+        shootPlayerA++;
+    }else{
+        console.log('FUEGO PLAYER B');
+        shootPlayerB++;
+    }
+}
+
+// JUEGO
+while (shoot < 100) {
+    next_player();
+    shoot++
+    console.log(shoot)
+}
+
 
 //const lenght_total = 3 * LANCHA.length + 3 * CRUCERO.length + 2 * SUBMARINO.length + BUQUE.length + PORTAAVIONES.length  //tocados totales para ganar
 

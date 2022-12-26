@@ -13,3 +13,13 @@ const oneDown = threeArr.pop();
 console.log(oneDown);
 console.log(threeArr);
 */
+
+function next_player(){
+  console.log(¡FUEGOOO!)
+}
+
+//JUEGO
+while (letshoot < 100) {
+  next_player(callbac);
+  letshhot++
+  }
