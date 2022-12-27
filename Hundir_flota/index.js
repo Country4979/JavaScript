@@ -38,7 +38,25 @@ TODO MENSJE "EMPATE"
 
 //import board.js
 
-//VARIABLES DE LOS BARCOS Y TOCADO, HUNDIDO Y AGUA
+// PLAYERS
+
+let playerA = {
+    nombre: 'PLAYER A',
+    shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
+    life: 2,//[LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES], // Cuantos impactos me quedan
+    causedB_inherit: [], // Daños causados en B
+    _shoots: [] //Coordenadas de disparos realizados
+}
+
+let playerB = {
+    nombre: 'PLAYER B',
+    shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
+    life: 2,//[LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES], // hacer un .lenghtCuantos impactos me quedan
+    causedA_inherit: [], // Daños causados en A
+    _shoots: [] //Coordenadas de disparos realizados
+
+
+//VARIABLES DE LOS BARCOS, TOCADO Y AGUA
 const LANCHA1 = ['🛶']
 const LANCHA2 = ['🛶']
 const LANCHA3 = ['🛶']
@@ -69,42 +87,70 @@ function next_player(){
     }
 }
 
-// JUEGO
-while (shoot < 6) {
+//WIN OR TIE FUNCTIONS
+
+function to_tie() {        //FUNCIÓN EMPATAR
+    if (playerA.life > playerB.life) {
+        return 'PLAYER  A'
+        //console.log('A')
+    }
+    else if (playerA.life < playerB.life) {
+        return 'PLAYER  B'
+       // console.log('B')
+    }
+    else {
+        return 'NO WINNER'
+        //console.log('TIE: NO WINNER')
+    }
+}
+
+function to_win() {     //FUNCIÓN GANAR O PERDER
+    if (playerA.life == 0){
+        return 'PLAYER  B'
+        //console.log('B')
+    }
+    else if (playerB.life == 0){
+        return 'PLAYER  A'
+        //console.log('A')
+    }
+    else if (shoot == 100) {
+        return to_tie()
+        }
+}
+
+// THE GAME
+while (shoot < 100 && playerA.life != 0 && playerB.life != 0) {
     if (shoot % 2 == 0){
         console.log("Ronda " + playerA.shoot + " for " + next_player() + "\n" + "==============");
-    } else {
+        //function to_shoot();
+        to_win();
+    } 
+    else {
         console.log("Ronda " + playerB.shoot + " for " + next_player() + "\n" + "==============")
+        to_win()
     }
     shoot++
 }
 
+console.log(
+    'And the winnwer is.....' + '\n' +
+    '============================='  + '\n' +
+    '========= ' + to_win() + ' =========' + '\n' +
+    '============================='
+)
 
-//const lenght_total = 3 * LANCHA.length + 3 * CRUCERO.length + 2 * SUBMARINO.length + BUQUE.length + PORTAAVIONES.length  //tocados totales para ganar
 
-//JUGADORES
-let playerA = {
-    nombre = 'PLAYER A',
-    fire = [], //Disparos realizados - Cada bucle es un ciclo while
-    totalA_inherit = lenght_total - daños // Cuantos impactos me quedan
-    causedB_inherit = [] // Daños causados en B
+
+/*TODO CON UN CALLBACK HACER FUNCION SEGUN LA VIDA DE CADA UNO
+let lifeA = playerA.life
+let lifeB = playerB.life
+function callbaccc(shoot, lifeA, lifeB){
+    life A = 0 FIN JUEGO Y SACAR WINNER A
+    life B = 0 FIN JUEGO Y SACAR WINNER B
+    shoot = 100 FIN JUEGO Y SACAR to_tie()
 }
+*/
 
-let playerB = {
-    nombre = 'PLAYER B',
-    fire = [], //Disparos realizados - Cada bucle es un ciclo while
-    total_inherit = lenght_total - daños // Cuantos impactos me quedan
-    causedA_inherit = [] // Daños causados en A
-}
-
-const EMPATE = '¡EMPATE!'
-
-
-let tocado_A = 24
-let tocado_B = []
-let winner = the_winner()
-
-//VARIABLES VICTORIA
 
 
 
@@ -116,12 +162,7 @@ const SEMILINEA3 = '================' // TODO mejorar para que tenga la misma lo
 let n_ronda = ''
 const RONDA_A =  'Ronda ' + n_ronda + ' for A' 
 const RONDA_B =  'Ronda ' + n_ronda + ' for B'
-//impresion ronda A
-console.log(RONDA_A)
-console.log(SEMILINEA3)
-//impresion ronda B
-console.log(RONDA_B)
-console.log(SEMILINEA3)
+
 
 
 // ESCRIBIMOS CODIGO
