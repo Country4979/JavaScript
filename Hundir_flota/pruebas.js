@@ -8,7 +8,7 @@ let y = board[Math.floor(Math.random() * board.length)]
 
 console.log(board)
 
-console.log(x, y)*/
+console.log(x, y)
 
 //JUGADORES
 let playerA = {
@@ -94,3 +94,39 @@ console.log(
     '========= ' + to_win() + ' =========' + '\n' +
     '============================='
     )
+*/
+
+// FUNCIONES DISPARAR Y ACTUALIZACIÓN DEL ARRAY DE LOS DISPAROS
+
+//TODO ver por qué no identifica el array dentro del array
+let madeShoot = [[5, 7], [1, 6], [2, 4], [9, 8], [6, 9], [5, 3], [5, 0], [5, 1], [5, 4], [5, 5], [5, 6], [5, 8], [5, 9]];
+let coordShoot = []
+console.log(madeShoot)
+
+//FUNCIÓN COORDENADAS DISPARO
+
+function x_Coord(min, max){     //Valor aleatorio entre 1 y 9 para X
+    return Math.floor((Math.random() * (max - min + 1)) + min)
+}
+
+function coord_Shoot() {                           
+    let x = x_Coord(1, 9); //Intervalo entre 1 y 9 para el aleatorio pq las filas tienen un índice 0 = i
+    let y = Math.floor(Math.random() * 10);  //Número aleatorio entre 0 y 10
+    //Asigno los valores de x e y al array coordShoot
+    coordShoot[0] = x;
+    coordShoot[1] = y;
+}
+
+function update_Shoot(madeShoot, coordShoot) {
+    if (madeShoot.indexOf(coordShoot) === -1) { //Este valor no está en el índice del array 
+        madeShoot.push(coordShoot);
+        console.log('Añado el valor ' + coordShoot + ' a array madeShoot')
+    }
+    else if (madeShoot.indexOf(coordShoot) > -1) { //este valor está en el índice del array
+        console.log('Este disparo ya se ha realizado')
+    }
+}
+
+coord_Shoot()
+update_Shoot(madeShoot, coordShoot)
+

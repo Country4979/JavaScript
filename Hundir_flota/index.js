@@ -117,7 +117,7 @@ function to_win() {     //FUNCIÓN GANAR O PERDER
         return to_tie()
         }
 }
-
+//TODO hacer un do while del ciclo
 // THE GAME
 while (shoot < 100 && playerA.life != 0 && playerB.life != 0) {
     if (shoot % 2 == 0){
