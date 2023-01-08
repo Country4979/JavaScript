@@ -1,0 +1,7 @@
+funcion colocarBarco:
+- dado un **barco** y un **tablero**
+- mientras sea cierto
+  - generar **posición** aleatoria del **barco** (respetando límites del **tablero**) 
+  - si se puede colocar el **barco**, en la **posición** del **tablero**
+    - entonces colocar el **barco**, en la **posición** del **tablero**
+    - salir del bucle

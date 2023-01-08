@@ -9,24 +9,74 @@ let y = board[Math.floor(Math.random() * board.length)]
 console.log(board)
 
 console.log(x, y)
-
+*/
+//TODO  Este funciona, pero hay verlo bien para cada tipo de barco
+const LANCHA = ['🛶']
+const CRUCERO = ['🚤', '🚤']
+const SUBMARINO = ['🛳', '🛳', '🛳']
+const BUQUE = ['🛥', '🛥', '🛥', '🛥']
+const PORTAAVIONES = ['🚢','🚢', '🚢', '🚢', '🚢']
+//
 //JUGADORES
+/*
 let playerA = {
-    nombre: 'PLAYER A',
+    name: 'PLAYER A',
+    lancha1: LANCHA,
+    lancha2: LANCHA,
+    lancha3: LANCHA,
+    crucero1: CRUCERO,
+    crucero2: CRUCERO,
+    crucero3: CRUCERO,
+    submarino1: SUBMARINO,
+    submarino2: SUBMARINO,
+    submarino3: SUBMARINO,
+    buque1: BUQUE,
+    portaaviones1: PORTAAVIONES,
     shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
-    life: 2,//[LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES], // Cuantos impactos me quedan
-    causedB_inherit: [], // Daños causados en B
-    _shoots: [] //Coordenadas de disparos realizados
 }
+let lifePlayerA = [
+    playerA.lancha1.length, playerA.lancha2.length, playerA.lancha3.length, 
+    playerA.crucero1.length, playerA.crucero2.length, playerA.crucero3.length,
+    playerA.submarino1.length, playerA.submarino2.length, playerA.submarino3.length,
+    playerA.buque1.length,
+    playerA.portaaviones1.length]
 
-let playerB = {
-    nombre: 'PLAYER B',
-    shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
-    life: 55,//[LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES], // hacer un .lenghtCuantos impactos me quedan
-    causedA_inherit: [], // Daños causados en A
-    _shoots: [] //Coordenadas de disparos realizados
-}
+let life = () => playerA.lancha1.length
 
+console.log(playerA.crucero1)
+console.log(life)
+console.log()
+
+playerA.crucero1.splice(0, 1)
+console.log(playerA.crucero1.length)
+console.log(playerA.crucero1)
+console.log()
+
+playerA.lancha1.splice(0, 1)
+console.log(playerA.lancha1.length)
+console.log(playerA.lancha1)
+console.log()
+
+console.log(life())
+*/
+
+
+/*let lifePlayerA = 
+[playerA.lancha1[0], playerA.lancha2[0], playerA.lancha3[0], 
+    playerA.crucero1[0], playerA.crucero1[1], playerA.crucero1[0], playerA.crucero1[1], playerA.crucero1[0], playerA.crucero1[1],
+    playerA.submarino1[0], playerA.submarino1[1], playerA.submarino1[2],
+    playerA.submarino2[0], playerA.submarino2[1], playerA.submarino2[2],
+    playerA.submarino3[0], playerA.submarino3[1], playerA.submarino3[2],
+    playerA.buque1[0], playerA.buque1[1], playerA.buque1[2], playerA.buque1[3],
+    playerA.portaaviones1[0], playerA.portaaviones1[1], playerA.portaaviones1[2], playerA.portaaviones1[3], playerA.portaaviones1[4]]*/
+//VIDA BARCOS
+/*playerA.lifePlayerA.forEach(vida_barcos)
+function vida_barcos() {
+    console.log(playerA.lifePlayerA)
+}*/
+
+
+/*
 //DISPAROS
 const FIGURE_SHOOT = ['  💧  ', '  🔥  ']
 
@@ -96,8 +146,16 @@ console.log(
     )
 */
 
-// FUNCIONES DISPARAR Y ACTUALIZACIÓN DEL ARRAY DE LOS DISPAROS
+/* FUNCIONES DISPARAR Y ACTUALIZACIÓN DEL ARRAY DE LOS DISPAROS
+const LANCHA = ['🛶']
+const CRUCERO = ['🚤']
+const SUBMARINO = ['🛳']
+const BUQUE = ['🛥']
+const PORTAAVIONES = ['🚢']
+//celda vacía = ' -  |'*/
 
+
+/*
 //TODO ver por qué no identifica el array dentro del array
 let madeShoot = [[5, 7], [1, 6], [2, 4], [9, 8], [6, 9], [5, 3], [5, 0], [5, 1], [5, 4], [5, 5], [5, 6], [5, 8], [5, 9]];
 let coordShoot = []
@@ -126,7 +184,211 @@ function update_Shoot(madeShoot, coordShoot) {
         console.log('Este disparo ya se ha realizado')
     }
 }
-
 coord_Shoot()
 update_Shoot(madeShoot, coordShoot)
+console.log(madeShoot)
+*/
 
+
+const lineaInferior = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
+const lineaInferior1 = [' |\t   ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     |'];
+const lineaInferior2 = [' |_________', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____','_____|'];
+/*
+//VARIABLES DE LOS BARCOS (es necesario?)
+const LANCHA = ['🛶']
+const CRUCERO = ['🚤']
+const SUBMARINO = ['🛳']
+const BUQUE = ['🛥']
+const PORTAAVIONES = ['🚢']
+const VACIO = [" '' "] // Celda vacía
+let lifePlayerA = [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]]
+let lifePlayerB = [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]]
+*/
+
+
+//DISPAROS
+const FIGURE = ['  💧  ', '  🔥  '];
+let shoot = 0;
+
+
+
+//EL TABLERO
+
+let gridSize = 10;
+let myGrid = create_Grid(gridSize);
+let enemyGrid = create_Grid(gridSize);
+let x = Math.floor(Math.random() * 10);  //Número aleatorio entre 0 y 10
+let y = Math.floor(Math.random() * 10);  //Número aleatorio entre 0 y 10;
+
+//print_Grid(enemyGrid, true);
+//print_Grid(myGrid)  // Omitimos el segundo parámetro porque enemyGrid será false
+
+function create_Grid(size) {
+    let grid = [];
+    for (let i = 0; i < size; i++) {
+        grid[i] = [];
+        for (let j = 0; j < size; j++) {
+        grid[i][j] = ' -  |';
+        }
+    }
+    return grid
+}
+
+//Imprinmir grid
+
+function print_Grid(grid, isEnemy = false) {   // Imprimimos el tablero metiendo el parámetro tablero y si es el nuestro o el del enemigo. En el primero podemos ver los barcos y en el segundo, no
+    const lineaInferior = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
+    const lineaInferior1 = [' |\t   ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     |'];
+    const lineaInferior2 = [' |_________', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____','_____|'];
+    const headers = create_Headers(grid.length);
+    console.log(lineaInferior.join('_'))
+    console.log(lineaInferior1.join('|'))
+    console.log(headers);
+    console.log(lineaInferior2.join('|'))
+    for (let i = 0; i < grid.length; i++) {
+        let rowStr = ' |    ' + i + '    | ';       // Los cabeceros de las filas
+        for (let cell of grid[i]) {
+            if (isEnemy && cell == '0') {
+                rowStr += ' - '
+                
+            } else {
+                rowStr += cell + ' ';
+            }
+        }
+        console.log(lineaInferior1.join('|'))
+        console.log(rowStr);
+        console.log(lineaInferior2.join('|'))
+    }
+}
+
+function create_Headers(size) {     //Los cabeceros de las columnas
+    let result = ' |  ';
+    for (let i = 65; i < size + 65; i++) {
+        result += String.fromCharCode(i) + '  |  ';
+    }
+    return ' | (INDEX)' + result
+}
+
+function place_Lancha(x, y, c, grid) {  //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+    for (let i = 0; i < 3; i++){        //Iteramos 3 veces para colocar 1 lancha cada vez.
+        let x1  = Math.floor(Math.random() * 10) ;
+        let y1 = Math.floor(Math.random() * 10);
+        x = x1;
+        y = y1;
+        grid[y][x] = c;
+    }
+}
+
+function random(min, max) {                     //Función para generar un número aleattorio entre dos números
+    return Math.floor((Math.random() * (max - min + 1)) + min)
+}
+
+
+//FUNCIONES DEL PORTAAVIONES  --> FUNCIONA
+function Portaaviones_H(x, y, c, grid) {    //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+    let x1  = random(0, 5);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
+    let y1 = Math.floor(Math.random() * 10);
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 5; i++)
+        if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
+            grid[y][x] = c;
+            x++;
+        }
+}
+
+function Portaaviones_V(x, y, c, grid) {    //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+    let y1  = random(0, 5);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
+    let x1 = Math.floor(Math.random() * 10);
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 5; i++)
+        if (grid[y][x] = ' -  |' && y < 10 && y >= 0){ //Obligo a colocarlo entre el 0 y el 10
+            grid[y][x] = c;
+            y++;
+        }
+}
+
+function place_Portaaviones(){  //--> FUNCIONA
+    let a = random(0, 10)
+    if (a % 2 == 0) {
+        Portaaviones_H(x, y,'🚢  |', myGrid)
+    }
+    else{
+        Portaaviones_V(x, y,'🚢  |', myGrid)
+    }
+}
+
+//FUNCIONES DEL BUQUE  --> FUNCIONAN
+function Buque_H(x, y, c, grid) {    
+    let x1  = random(0, 6);                         //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco en el eje X.
+    let y1 = Math.floor(Math.random() * 10);        //Obtengo un número aleatorio entre 0 y 10 para el eje Y.
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 4; i++)
+        if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
+            grid[y][x] = c;
+            x++;
+        }
+}
+
+function Buque_V(x, y, c, grid) {    
+    let y1  = random(0, 6);                         //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco en el eje Y.
+    let x1 = Math.floor(Math.random() * 10);        //Obtengo un número aleatorio entre 0 y 10 para el eje X.
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 4; i++)
+        if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
+            grid[y][x] = c;
+            y++;
+        }
+}
+
+function place_Buque(){  //--> FUNCIONA
+    let a = random(0, 10)
+    if (a % 2 == 0) {
+        Buque_H(x, y,' 🛥  |', myGrid)
+    }
+    else{
+        Buque_V(x, y,' 🛥  |', myGrid)
+    }
+}
+
+//FUNCIONES SUBMARINOS --> NO FUNCIONAN
+
+/*function submarino_H (x, y, c, myGrid) {
+    let x1 = random(0, 7);
+    let y1 = Math.floor(Math.random() * 10);
+
+
+        if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
+            grid[y][x] = c;
+            x++;
+        }
+        else{
+            do {x++}
+            while (grid[y][x] != ' -  |' && x < 10 && x >= 0)
+        }
+    }
+}*/
+
+
+function prueba() {
+    let a = x;
+    let b = a + 1;
+    let c = a + 2
+    if ((a = b) && (b = c)){
+        console.log('algo va mal')
+    }
+    else
+    {console.log('dale acña')}
+    //variable que recoja posicion 1 y valor. si las tres son iguales, pa lante
+    
+}
+//Colocar los barcos
+place_Portaaviones() // Colocamos 1 portaaviones en el tablero del PlayerA
+//place_Buque()   //Colocamos un buqe en el tablero del PlayerA
+ //Colocamos 3 submarinos en el tablero del PlayerA
+//place_Lancha(x, y, '🛶  |', myGrid) //Colocamos una lancha en el tablero del playerA
+print_Grid(myGrid)
+console.log(myGrid)

@@ -22,12 +22,8 @@ TODO RESULTADO DEL DISPARO
 ✅ constante TOCADO
 TODO x2 SUBMARINOS (3 CASILLAS)
 TODO x3 LANCHAS (1 CASILLA)
-TODO 1x PORTAAVIONES (5 CASILLAS)
 TODO 1x BUQUE (4 CASILLAS)
 TODO x3 CRUCEROS (2 CASILLAS)
-TODO 4 TABLEROS
-TODO 10 FILAS CON INICIO EN LETRAS
-TODO COLUMNAS CON INICIO EN NÚMERO
 ✅ CELDAS VACÍAS
 ✅ TÍTULO DE TABLERO
 ✅ "CONTADOR DE BARCOS" JUGADOR A
@@ -38,45 +34,39 @@ TODO MENSJE "EMPATE"
 
 //import board.js
 
-// PLAYERS
+//VARIABLES DE LOS BARCOS, TOCADO Y AGUA
+const LANCHA = ['🛶']
+const CRUCERO = ['🚤']
+const SUBMARINO = ['🛳']
+const BUQUE = ['🛥']
+const PORTAAVIONES = ['🚢']
+const VACIO = ['']
 
+// PLAYERS
+let life = 0;
 let playerA = {
     nombre: 'PLAYER A',
     shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
-    life: 2,//[LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES], // Cuantos impactos me quedan
+    lifePlayerA: [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]],
     causedB_inherit: [], // Daños causados en B
-    _shoots: [] //Coordenadas de disparos realizados
+    shootsA: [] //Coordenadas de disparos realizados
 }
+let lifeA = PlayerA.lifePlayerA.forEach(function(a) {life += a.length})
 
 let playerB = {
     nombre: 'PLAYER B',
     shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
-    life: 2,//[LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES], // hacer un .lenghtCuantos impactos me quedan
+    lifePlayerB: [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]],   
     causedA_inherit: [], // Daños causados en A
-    _shoots: [] //Coordenadas de disparos realizados
-
-
-//VARIABLES DE LOS BARCOS, TOCADO Y AGUA
-const LANCHA1 = ['🛶']
-const LANCHA2 = ['🛶']
-const LANCHA3 = ['🛶']
-const CRUCERO1 = ['🚤', '🚤']
-const CRUCERO2 = ['🚤', '🚤']
-const CRUCERO3 = ['🚤', '🚤']
-const SUBMARINO1 = ['🛳', '🛳', '🛳']
-const SUBMARINO2 = ['🛳', '🛳', '🛳']
-const SUBMARINO3 = ['🛳', '🛳', '🛳']
-const BUQUE = ['🛥', '🛥', '🛥', '🛥']
-const PORTAAVIONES = ['🚢', '🚢', '🚢', '🚢', '🚢']
-const VACIO = ['']
-let tocado = []
-let lifePlayerA = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
-let lifePlayerB = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
+    shootsB: [] //Coordenadas de disparos realizados
+}
+let lifeB = PlayerB.lifePlayerB.forEach(function(a) {life += a.length})
 
 //DISPAROS
-const FIGURE = ['  💧  ', '  🔥  ']
+const FIGURE = ['  💧  ', '  🔥  '];
 let shoot = 0;
 
+//FUNCIÓN NEXT_PLAYER
 function next_player(){
     if ((shoot == 0) || (playerA.shoot <= playerB.shoot)) {
         playerA.shoot++;
@@ -90,11 +80,11 @@ function next_player(){
 //WIN OR TIE FUNCTIONS
 
 function to_tie() {        //FUNCIÓN EMPATAR
-    if (playerA.life > playerB.life) {
+    if (lifeA > lifeB) {
         return 'PLAYER  A'
         //console.log('A')
     }
-    else if (playerA.life < playerB.life) {
+    else if (lifeA < lifeB) {
         return 'PLAYER  B'
        // console.log('B')
     }
@@ -117,7 +107,8 @@ function to_win() {     //FUNCIÓN GANAR O PERDER
         return to_tie()
         }
 }
-//TODO hacer un do while del ciclo
+
+//TODO hacer un do while del ciclo?
 // THE GAME
 while (shoot < 100 && playerA.life != 0 && playerB.life != 0) {
     if (shoot % 2 == 0){
@@ -212,3 +203,29 @@ function to_win () {
 }
 
 console.log(aleatorioPlayerA)
+
+ORDEN PARA PRIMERA IMPRESION
+
+TITULOS
+
+MOSTRAR TABLERO PLAYER A CON LOS BARCOS
+    portaaviones
+    crucero
+    submarino1
+    submarino2
+    submarino3
+    barquito1
+    barquito2
+    barquito3
+    lancha1
+    lancha2
+    lancha3
+
+LO MISMO PLAYER B
+
+CICLOS 0 - 100
+RONDA DE DISPARO
+
+RESULTADO
+
+GANADORES

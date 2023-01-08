@@ -3,67 +3,81 @@ const linea0 = [' | (INDEX) ', '  A  ', '  B  ', '  C  ', '  D  ', '  E  ', '  F
 const lineaInferior = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
 const lineaInferior1 = [' |\t   ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     |'];
 const lineaInferior2 = [' |_________', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____','_____|'];
-const ROWS = 10; // Filas del tablero
-const COLS = 10; // Columnas del tablero
-let board = []; // El tablero
 
 //VARIABLES DE LOS BARCOS (es necesario?)
-const LANCHA1 = ['  🛶  ']
-const LANCHA2 = ['  🛶  ']
-const LANCHA3 = ['  🛶  ']
-const CRUCERO1 = ['  🚤  ', '  🚤  ']
-const CRUCERO2 = ['  🚤  ', '  🚤  ']
-const CRUCERO3 = ['  🚤  ', '  🚤  ']
-const SUBMARINO1 = ['  🛳  ', '  🛳  ', '  🛳  ']
-const SUBMARINO2 = ['  🛳  ', '  🛳  ', '  🛳  ']
-const SUBMARINO3 = ['  🛳  ', '  🛳  ', '  🛳  ']
-const BUQUE = ['  🛥  ', '  🛥  ', '  🛥  ', '  🛥  ']
-const PORTAAVIONES = ['  🚢  ', '  🚢  ', '  🚢  ', '  🚢  ', '  🚢  ']
+const LANCHA = ['🛶']
+const CRUCERO = ['🚤']
+const SUBMARINO = ['🛳']
+const BUQUE = ['🛥']
+const PORTAAVIONES = ['🚢']
 const VACIO = [" '' "] // Celda vacía
-let tocado = []
-let lifePlayerA = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
-let lifePlayerB = [LANCHA1, LANCHA2, LANCHA3, CRUCERO1, CRUCERO2, CRUCERO3, SUBMARINO1, SUBMARINO2, SUBMARINO3, BUQUE, PORTAAVIONES]
+let lifePlayerA = [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]]
+let lifePlayerB = [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]]
 
 
 
+//DISPAROS
+const FIGURE = ['  💧  ', '  🔥  '];
+let shoot = 0;
 
-function print_board(board) {
-    let tablero =[]
-    let print_tablero =
+
+
+//EL TABLERO
+let board = [];
+let gridSize = 10;
+let player_A_Grid = create_Grid(gridSize);
+let player_B_Grid = create_Grid(gridSize);
+
+console.log('TABLERO PLAYER A')
+print_Grid(player_A_Grid)                  //Omitimos el segundo parámetro porque player_B será false
+console.log()
+console.log()
+console.log('TABLERO PLAYER B')
+print_Grid(player_B_Grid, true);        //Diciendo que el segundo parámetro sea true, decimos que es el del player_B
+
+
+function create_Grid(size) {        //Función que crea matriz (array de dos dimensiones) de 10x10, que es el tablero
+    let grid = [];
+    for (let i = 0; i < size; i++) {        //Filas - 1ª dimensión
+        grid[i] = [];
+        for (let j = 0; j < size; j++) {    //Columnas - 2ª dimensión
+        grid[i][j] = ' -  |';
+        }
+    }
+    return grid
+}
+
+//Imprinmir tablero
+
+function print_Grid(grid, is_player_B = false) {   // Imprimimos el tablero metiendo el parámetro tablero y si es el nuestro o el del enemigo. En el primero podemos ver los barcos y en el segundo, no
+    const lineaInferior = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
+    const lineaInferior1 = [' |\t   ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     |'];
+    const lineaInferior2 = [' |_________', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____','_____|'];
+    const headers = create_Headers(grid.length);
     console.log(lineaInferior.join('_'))
     console.log(lineaInferior1.join('|'))
-    console.log(linea0.join('|'))
-    console.log(lineaInferior2.join('|'))  //Hasta aqui me dibuja la primera línea, que es constante para todos los tableros
-    for(let i = 0; i < ROWS; i++) {  //Iteración uitaria de "rows" filas del tablero
-        let fila = [' |    ' + i + '    '];  // Creamos una variable vacía al principio por cada iteraciçon de la fila         //' |    ' + i + '    ' //Cómo se pinta cada elemento del tablero
-        for(let j = 0; j < COLS; j++){ //Iteración unitaria de "cols" columnas del tablero
-            fila.push(lifePlayerA); // <-- el ramdon aquí
+    console.log(headers);                           //Los cabeceros de las columnas
+    console.log(lineaInferior2.join('|'))
+    for (let i = 0; i < grid.length; i++) {         // Los cabeceros de las filas
+        let rowStr = ' |    ' + i + '    | ';       
+        for (let cell of grid[i]) {
+            if (is_player_B && cell == '0') {
+                rowStr += ' - '
+                
+            } else {
+                rowStr += cell + ' ';
+            }
         }
         console.log(lineaInferior1.join('|'))
-        tablero.push(fila) //Por cada finalización del ciclo anterior, se añade una fila a la variable tablero
-        console.log(fila.join('|') + '|' + "\n" + lineaInferior2.join('|')) //Imprime el valor cada fila y columna en cada ciclo
+        console.log(rowStr);
+        console.log(lineaInferior2.join('|'))
     }
-    return tablero; //Devolvemos el contenido de board
 }
 
-// una funcion que nos permite randomizar los elementos de un array
-function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-  
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+function create_Headers(size) {     //Los cabeceros de las columnas
+    let result = ' |  ';
+    for (let i = 65; i < size + 65; i++) {
+        result += String.fromCharCode(i) + '  |  ';
     }
-  
-    return array;
+    return ' | (INDEX)' + result
 }
-
-board = shuffle(board)
-print_board(board)
