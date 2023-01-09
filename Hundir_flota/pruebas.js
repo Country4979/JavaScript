@@ -16,6 +16,7 @@ const CRUCERO = ['🚤', '🚤']
 const SUBMARINO = ['🛳', '🛳', '🛳']
 const BUQUE = ['🛥', '🛥', '🛥', '🛥']
 const PORTAAVIONES = ['🚢','🚢', '🚢', '🚢', '🚢']
+const EMPTY = ' -  |'
 //
 //JUGADORES
 /*
@@ -285,7 +286,7 @@ function random(min, max) {                     //Función para generar un núme
 
 
 //FUNCIONES DEL PORTAAVIONES  --> FUNCIONA
-function Portaaviones_H(x, y, c, grid) {    //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+function Portaaviones_H(x, y, c, grid) {        //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
     let x1  = random(0, 5);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
     let y1 = Math.floor(Math.random() * 10);
     x = x1;
@@ -297,7 +298,7 @@ function Portaaviones_H(x, y, c, grid) {    //Función para colocar los barcos e
         }
 }
 
-function Portaaviones_V(x, y, c, grid) {    //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+function Portaaviones_V(x, y, c, grid) {        //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
     let y1  = random(0, 5);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
     let x1 = Math.floor(Math.random() * 10);
     x = x1;
@@ -309,7 +310,7 @@ function Portaaviones_V(x, y, c, grid) {    //Función para colocar los barcos e
         }
 }
 
-function place_Portaaviones(){  //--> FUNCIONA
+function place_Portaaviones(){
     let a = random(0, 10)
     if (a % 2 == 0) {
         Portaaviones_H(x, y,'🚢  |', myGrid)
@@ -319,7 +320,7 @@ function place_Portaaviones(){  //--> FUNCIONA
     }
 }
 
-//FUNCIONES DEL BUQUE  --> FUNCIONAN
+//FUNCIONES DEL BUQUE  --> NO FUNCIONA --> PISAR BARCO 
 function Buque_H(x, y, c, grid) {    
     let x1  = random(0, 6);                         //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco en el eje X.
     let y1 = Math.floor(Math.random() * 10);        //Obtengo un número aleatorio entre 0 y 10 para el eje Y.
@@ -333,7 +334,7 @@ function Buque_H(x, y, c, grid) {
 }
 
 function Buque_V(x, y, c, grid) {    
-    let y1  = random(0, 6);                         //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco en el eje Y.
+    let y1 = random(0, 6);                         //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco en el eje Y.
     let x1 = Math.floor(Math.random() * 10);        //Obtengo un número aleatorio entre 0 y 10 para el eje X.
     x = x1;
     y = y1;
@@ -344,7 +345,7 @@ function Buque_V(x, y, c, grid) {
         }
 }
 
-function place_Buque(){  //--> FUNCIONA
+function place_Buque(){
     let a = random(0, 10)
     if (a % 2 == 0) {
         Buque_H(x, y,' 🛥  |', myGrid)
@@ -354,41 +355,109 @@ function place_Buque(){  //--> FUNCIONA
     }
 }
 
-//FUNCIONES SUBMARINOS --> NO FUNCIONAN
+//FUNCIONES SUBMARINOS --> NO FUNCIONAN --> NO PISAR OTROS BARCOS
 
-/*function submarino_H (x, y, c, myGrid) {
-    let x1 = random(0, 7);
+function submarino_H(x, y, c, grid) {           //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+    let x1  = random(0, 7);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
     let y1 = Math.floor(Math.random() * 10);
-
-
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 3; i++)
         if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
             grid[y][x] = c;
             x++;
         }
+}
+
+function submarino_V(x, y, c, grid) {           //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+    let y1 = random(0, 7);                         //Obtengo un número aleatorio entre 0 y 67 que es el espacio máximo en el que puede colocarse este barco en el eje Y.
+    let x1 = Math.floor(Math.random() * 10);        //Obtengo un número aleatorio entre 0 y 10 para el eje X.
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 3; i++)
+        if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
+            grid[y][x] = c;
+            y++;
+        }
+}
+
+function place_Submarino(){
+    let a = random(0, 10)
+    for(let i = 0; i < 3; i++){
+        if (a % 2 == 0) {
+            submarino_H(x, y,' 🛳  |', myGrid)
+        }
         else{
-            do {x++}
-            while (grid[y][x] != ' -  |' && x < 10 && x >= 0)
+            submarino_V(x, y,' 🛳  |', myGrid)
         }
     }
-}*/
+}
 
+//FUNCIONES CRUCERO --> NO FUNCIONAN --> NO PISAR OTROS BARCOS
 
-function prueba() {
-    let a = x;
-    let b = a + 1;
-    let c = a + 2
-    if ((a = b) && (b = c)){
-        console.log('algo va mal')
+function crucero_H(x, y, c, grid) {           //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+    let x1  = random(0, 7);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
+    let y1 = Math.floor(Math.random() * 10);
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 3; i++)
+        if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
+            grid[y][x] = c;
+            x++;
+        }
+}
+
+function crucero_V(x, y, c, grid) {           //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
+    let y1 = random(0, 7);                         //Obtengo un número aleatorio entre 0 y 67 que es el espacio máximo en el que puede colocarse este barco en el eje Y.
+    let x1 = Math.floor(Math.random() * 10);        //Obtengo un número aleatorio entre 0 y 10 para el eje X.
+    x = x1;
+    y = y1;
+    for (let i = 0; i < 3; i++)
+        if (grid[y][x] = ' -  |' && x < 10 && x >= 0){
+            grid[y][x] = c;
+            y++;
+        }
+}
+
+function place_Crucero(){
+    let a = random(0, 10)
+    for (let i = 0; i < 3; i++){
+        if (a % 2 == 0) {
+            crucero_H(x, y,'🚤  |', myGrid)
+        }
+        else{
+            crucero_V(x, y,'🚤  |', myGrid)
+        }
     }
-    else
-    {console.log('dale acña')}
-    //variable que recoja posicion 1 y valor. si las tres son iguales, pa lante
-    
+}
+
+function prueba_H() {     //Me dice si se puede colocar un submarino ahí = true
+    let x1 = random(0, 7);
+    let y1 = Math.floor(Math.random() * 10);
+    var indices = [];
+    let cosa = myGrid[x1]
+    var idx = cosa.indexOf(' -  |');
+    while (idx != -1) {     //Devuelve un array con las posiciones libres
+      indices.push(idx);
+      idx = cosa.indexOf(' -  |', idx + 1);
+    }
+    console.log(indices);
+    for (let i = 0;i < 3; i++)
+    if ((indices[i] + 1) == indices[i+1] && (indices[i] + 2) == indices[i+2]){
+        console.log('Coloca el barco aquí')
+        return true
+    }
+    else {
+        console.log('No se puede colocar el barco aquí')
+        return false
+    }   
 }
 //Colocar los barcos
 place_Portaaviones() // Colocamos 1 portaaviones en el tablero del PlayerA
 //place_Buque()   //Colocamos un buqe en el tablero del PlayerA
- //Colocamos 3 submarinos en el tablero del PlayerA
-//place_Lancha(x, y, '🛶  |', myGrid) //Colocamos una lancha en el tablero del playerA
+place_Submarino()  //Colocamos 3 submarinos en el tablero del PlayerA
+place_Crucero() //Colocamos 3 cruceros en el trablero del PlayerA
+place_Lancha(x, y, '🛶  |', myGrid) //Colocamos una lancha en el tablero del playerA
 print_Grid(myGrid)
-console.log(myGrid)
+console.log(prueba_H())
+
