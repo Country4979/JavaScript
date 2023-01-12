@@ -1,4 +1,22 @@
-const legolas = {
+class Personaje {
+    constructor(name, attackSpeed = 0, attackDamage = 0){
+        this.name = name
+        this.attackSpeed = attackSpeed
+        this.attackDamage = attackDamage
+        console.log(`Construyendo ${name}`)
+    }
+}
+
+//Objetos de clase pesonaje
+const legolas = new Personaje('Legolas', 20, 10)
+const aragorn = new Personaje('Aragon', 15, 15)
+const gimly = new Personaje('Gimly', 7, 20)
+
+//Objeto literal
+let saruman = {name: 'Saruman'};
+saruman._proto_ = new Personaje();
+
+/*const legolas = {
     name: 'Legolas',
     attackSpeed: 20,
     attackDamage: 10
@@ -14,7 +32,7 @@ const gimly = {
     name: 'Gimly',
     attackSpeed: 7,
     attackDamage: 20
-}
+}*/
 
 function atacar(personaje, callback) { //   si callback === attackWithSword(personaje)
     let attack = callback(personaje) //     let attack

@@ -1,0 +1,24 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "En esta simulación se lleva a cabo una partida aleatoria a este juego en la que se enfrentan los jugadores Player A y Player B.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Country4979/JavaScript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Country4979/JavaScript/issues"
+  },
+  "homepage": "https://github.com/Country4979/JavaScript#readme",
+  "type": "module"
+}

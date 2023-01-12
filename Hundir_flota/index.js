@@ -43,7 +43,40 @@ const PORTAAVIONES = ['🚢']
 const VACIO = ['']
 
 // PLAYERS
-let life = 0;
+function Player(name){      //Clase Player con las propiedades name, ships, shoots, life y coordshoot.
+    this.name = name
+    this.ships = {          //Objeto al que se le añaden los barcos
+        lancha1: new this.ship('Lancha', 1, '🛶'),
+        lancha2: new this.ship('Lancha', 1, '🛶'),
+        lancha3: new this.ship('Lancha', 1, '🛶'),
+
+        crucero1: new this.ship('Crucero', 2, '🚤'),
+        crucero2: new this.ship('Crucero', 2, '🚤'),
+        crucero3: new this.ship('Crucero', 2, '🚤'),
+
+        submarino1: new this.ship('Submarino', 3, '🛳'),
+        submarino2: new this.ship('Submarino', 3, '🛳'),
+
+        buque: new this.ship('Buque', 4, '🛥'),
+
+        portaaviones: new this.ship('Portaavines', 5, '🚢')
+    }
+    this.shoots = 0,        //Disparos realizados por el jugador
+    this.life = ships.lancha1[1] + this.ships.lancha2[1] + ships.lancha3[1] + this.ships.crucero1[1] + this.ships.crucero2[1] + this.ships.crucero3[1] + this.ships.submarino1[1] + this.ships.submarino2[1] + this.ships.buque[1] + this.ships.portaaviones[1]
+    this.coordShoot = []    //Coordenadas del disparo
+    this.coordAllShoots = []    //Todas las coordenadas para no repetir el disparo
+}
+
+function ship(name,nposition,figure){
+    this.name = name
+    this.nposition = nposition
+    this.img = this.
+    this.location = []
+}
+
+let p = new Player('Player A')
+console.log(p.ships)
+/*let life = 0;
 let playerA = {
     nombre: 'PLAYER A',
     shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
@@ -61,7 +94,7 @@ let playerB = {
     shootsB: [] //Coordenadas de disparos realizados
 }
 let lifeB = PlayerB.lifePlayerB.forEach(function(a) {life += a.length})
-
+*/
 //DISPAROS
 const FIGURE = ['  💧  ', '  🔥  '];
 let shoot = 0;
@@ -175,7 +208,7 @@ console.log()
 console.log(LINEA_TITULO)
 console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
 
-/*
+
 //FUNCIONES
 
 // Para elegir un barco al azar: 
@@ -184,7 +217,7 @@ const aleatorioPlayerA = lifePlayerA[Math.floor(Math.random() * lifePlayerA.leng
 //GANAR
 
 function the_winner () {
-    switch ()
+    switch (j=25){
     case (playerA.totalA_inherit > playerB.totalB_inherit):
         winner = playerA.nombre;
         break
@@ -194,6 +227,7 @@ function the_winner () {
     default:
         winner = EMPATE;
         break;
+    }
 }
 
 function to_win () {
@@ -203,7 +237,7 @@ function to_win () {
 }
 
 console.log(aleatorioPlayerA)
-
+/*
 ORDEN PARA PRIMERA IMPRESION
 
 TITULOS
@@ -229,3 +263,4 @@ RONDA DE DISPARO
 RESULTADO
 
 GANADORES
+*/

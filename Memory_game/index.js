@@ -1,98 +1,96 @@
-/* 📌filas
-TODO cartas
-📌columnas
-TODO jugador
-TODO puntuación (si las cartas son iguales)
-TODO contadores
-TODO turnos
-📌figuras
-TODO mensajes
-TODO celdas vacías
-TODO simular cartas seleccionadas */
-
-//OBJETIVOS
-
-//Mostrar el tablero inicial
-//Filas del tablero
-const ROWS = 3
-//Columnas del tablero
-const COLS = 2
-//Figuras disponibles para las cartas
-const FIGURES = ['🤓', '🔥', '💙']
-
-console.log['Aviable figures: ', FIGURES]
-
-//Construimos el tablero
-let board = []
-
-//por cada fila
-/*for(let i = 0; i < ROWS; i++) {
-    //una fila cualquiera
-    let row = []
-    //creamos las columna
-    for(let j = 0; j < COLS; j++) {
-    //console.log(j, i)
-    row[j] = FIGURES[i]
-    console.log(FIGURES[i])
-    }
-    board[i] = row
-}*/
-
-/*for (let i =0; i < ROWS * COLS / 2; i++) {
-    for (let j = 0; j < 2; j++) {
-        //board[j + i * ROWS] = FIGURES[i]  --> INTENTEAR
-        const figure = FIGURE[i]
-        board.push(FIGURES[i]) // Si solamente queremos añadir elementos al array, lo hacemos con push
-    }
-}*/
-//Alternativa a popular el Array board
-for(let figure of FIGURES) {
-    // TODO Se puede mejorar teniendo en cuenta que podriamos jugar con trios de cartas o cuartetos, etc
-    board.push(figure)
-    board.push(figure)
-}
-console.log('the board', board)
-
-// Función que nos sirve para poder mostrar por pantalla las cartas en filas y columnas
-function printBoard(board) {
-    for(let i = 0; i < ROWS; i++) {
-        let line = ''
-        for(let j = 0; j < COLS; j++){
-            // line = line + ' '
-            line += board[i * COLS + j] // equivale a line = line + ' '
-        }
-        console.log(line)
-    }
-}
-
-// una funcion que nos permite randomizar los elementos de un array
-function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-  
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-  
-    return array;
-}
-
-board = shuffle(board)
-printBoard(board)
-// console.log('Initial table')
-// for(let i = 0; i < ROWS; i++) {
-//     console.log(board[i])
-// }
+import {printBoard, printHeading, printLine} from './printer.js'
+const { printBoard, printHeading, printLine } = usePrinter()
+// import allPrinters from './printers.js // peta porque no hemos puesto ningún "export default" en el archivo printers.js
+import {FIGURES} from './data.js'
+import game from './game.js'  //Importa todo el elemento game porque en game le hemos hecho un default
 
 
-// TODO Generar selección de cartas de forma aleatoria.
-// TODO Mostrarla por pantalla hasta que quede solucionado el juego.
+// DONE Generar selección de cartas de forma aleatoria.
+// DONE Mostrarla por pantalla hasta que quede solucionado el juego.
 // TODO Una vez terminado el juego, se mostrarán algunas estadísticas.
 // TODO Intentaremos añadir un poco de inteligencia para que el juego sea más listo
+
+
+// una funcion que nos permite randomizar los elementos de un array
+// function shuffle(array) {
+//     let currentIndex = array.length,  randomIndex;
+
+//     // While there remain elements to shuffle.
+//     while (currentIndex != 0) {
+
+//       // Pick a remaining element.
+//       randomIndex = Math.floor(Math.random() * currentIndex);
+//       currentIndex--;
+
+//       // And swap it with the current element.
+//       [array[currentIndex], array[randomIndex]] = [
+//         array[randomIndex], array[currentIndex]];
+//     }
+
+//     return array;
+// }
+Array.prototype.shuffle = function () {
+    var i = this.length, j, temp;
+    if (i == 0) return this;
+    while (--i) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = this[i];
+        this[i] = this[j];
+        this[j] = temp;
+    }
+    return this;
+}
+
+try {
+    // ------- preparación del juego
+    printHeading('Available figures')
+    console.log(FIGURES)
+
+
+    // por cada fila
+    // for(let i = 0; i < ROWS; i++) {
+    //     // una fila cualquiera
+    //     let row = []
+    //     // por cada columna
+    //     for(let j = 0; j < COLS; j++) {
+    //         //console.log(j, i)
+    //         row[j] = FIGURES[i]
+    //     }
+    //     board[i] = row
+    // }
+
+    // for(let i = 0; i < ROWS * COLS / 2; i++) { // 3 * 2 / 2 === 3, la misma dimensión que FIGURES.length
+    //     for (let j = 0; j < 2; j++) { // Por cada figura, insertamos 2 veces en el mazo
+    //         // board[j + i * ROWS] = FIGURES[j] // intentadlo vosotros
+    //         const figure = FIGURES[i]
+    //         board.push(figure) // Si solamente queremos añadir elementos al array, lo hacemos con Array.push
+    //     }
+    // }
+
+    // ✅generar cartas con las figuras disponibles
+    game.setupGame(FIGURES)
+    printHeading('the board')
+
+    // ✅mostrar las cartas dispuestas en filas y columnas
+    printBoard(game.board, true)
+    // ------- empieza el juego
+    // ✅mostrar las cartas cubiertas en filas y columnas
+    printHeading('The memory game starts')
+    printBoard(game.board)
+    game.start()
+
+    // ------- una vez terminado el juego
+    // ✅mostrar que ha terminado el juego diciendo cuántas rondas hemos necesitado
+    printLine('')
+    printLine('The game has ended! Rounds needed: ', game.rounds)
+    //Qué carta y ha sido girada más veces
+    //👀 OJO PORQUE SORT ALTERA EL ARRAY!!!!
+    //const sortedCardsDesc = game.board.sort((cardA, cardB)) => cardB.timesTurned - cardA.timesTurned
+    //Por cada elemento de board devuelvo un card objeto nuevo gracias a map
+    const sortedCardsDesc = game.board.map(e => e).sort((cardA, cardB) => cardB.timesTurned - cardA.timesTurned)
+    console.log(`The cad ${sortedCardsDesc[0].figure} had max turns: ${sortedCardsDesc[0].timesTurned} times`)
+}
+catch {
+    console.log ("Me cachis")
+    console.error(e)
+}
