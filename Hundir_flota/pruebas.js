@@ -1,3 +1,8 @@
+import { LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2, LINEA_TITULO, usePrinter } from './printer.js'
+import { LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT, } from './data.js'
+import usePrinter from './printer.js'
+const { print_Grid, printHeading, printLine, create_Headers } = usePrinter()
+/*
 /*DISPARO
 let vacio = ['rojo', 'verde', 'azul']
 let barco = ['barco1', 'barco2']
@@ -9,7 +14,7 @@ let y = board[Math.floor(Math.random() * board.length)]
 console.log(board)
 
 console.log(x, y)
-*/
+
 //TODO  Este funciona, pero hay verlo bien para cada tipo de barco
 class BARCO {
     constructor (figure, length, firstPosition, lastposition) {
@@ -48,7 +53,7 @@ const BUQUE = new BARCO(
                     x1++;
                 }
             }
-    }*/
+    }
 );
 const PORTAAVIONES = new BARCO('🚢  |', 5, ['x0', 'y0'], ['x1', 'y1'])
 const EMPTY = ' -  |'
@@ -223,7 +228,7 @@ function update_Shoot(madeShoot, coordShoot) {
 coord_Shoot()
 update_Shoot(madeShoot, coordShoot)
 console.log(madeShoot)
-*/
+
 
 
 const lineaInferior = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
@@ -239,7 +244,7 @@ const PORTAAVIONES = ['🚢']
 const VACIO = [" '' "] // Celda vacía
 let lifePlayerA = [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]]
 let lifePlayerB = [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]]
-*/
+
 
 
 //DISPAROS
@@ -348,7 +353,7 @@ function placePortaaviones(){
 function placeBuqueX(x, y, figure, grid){
     let x1  = random(0, 10 - BUQUE.length);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
     let y1 = Math.floor(Math.random() * 10);
-    while (grid[y1][x1] != EMPTY || grid[y1][x1+1] != EMPTY || grid[y1][x1+2] != EMPTY || grid[y1][x1+3] != EMPTY && x1 < 10 && x1 >= 0){
+    while (grid[y1][x1] != EMPTY || grid[y1][x1+1] != EMPTY || grid[y1][x1+2] != EMPTY || grid[y1][x1+3] != EMPTY && x < 10 && x >= 0){
         x1  = random(0, 10 - BUQUE.length);                     
         y1 = Math.floor(Math.random() * 10);
     }    
@@ -361,7 +366,7 @@ function placeBuqueX(x, y, figure, grid){
 function placeBuqueV(x, y, figure, grid){
     let y1  = random(0, 10 - BUQUE.length);                     //Obtengo un número aleatorio entre 0 y 6, que es el espacio máximo en el que puede colocarse este barco.
     let x1 = Math.floor(Math.random() * 10);
-    while (grid[y1][x1] != EMPTY || grid[y1+1][x1] != EMPTY || grid[y1+2][x1] != EMPTY || grid[y1+3][x1] != EMPTY && y1 < 10 && y1 >= 0){
+    while (grid[y1][x1] != EMPTY || grid[y1+1][x1] != EMPTY || grid[y1+2][x1] != EMPTY || grid[y1+3][x1] != EMPTY && y < 10 && y >= 0){
         y1  = random(0, 10 - BUQUE.length);                     
         x1 = Math.floor(Math.random() * 10);
     }    
@@ -440,7 +445,7 @@ function placeCruceroX(x, y, figure, grid) {           //Función para colocar l
 function placeCruceroV(x, y, figure, grid) {           //Función para colocar los barcos en una cordenada x,y que muestre el caracter C y lo coloque en el grid playerA o playerB
     let y1  = random(0, 10 - CRUCERO.length);                     
     let x1 = Math.floor(Math.random() * 10);
-    while (grid[y1][x1] != EMPTY || grid[y1+1][x1] != EMPTY && y1 < 10 && y1 >= 0){
+    while (grid[y1][x1] != EMPTY || grid[y1+1][x1] != EMPTY && y < 10 && y >= 0){
         y1  = random(0, 10 - CRUCERO.length);                     
         x1 = Math.floor(Math.random() * 10);
     }    
@@ -469,7 +474,7 @@ function placeLancha(x, y, figure, grid) {  //Función para colocar los barcos e
     let y1 = Math.floor(Math.random() * 10);                     
     let x1 = Math.floor(Math.random() * 10);
     for(let i = 0; i < 3; i++){
-        while (grid[y1][x1] != EMPTY  && y1 < 10 && y1 >= 0 && x1 < 10 && x1 >= 0){
+        while (grid[y1][x1] != EMPTY  && y1 < 10 && y1 >= 0 && x < 10 && x >= 0){
             y1 = Math.floor(Math.random() * 10);                    
             x1 = Math.floor(Math.random() * 10);
         }    
@@ -491,6 +496,6 @@ placeCrucero()
 
 //Colocamos las 3 lanchas en el tablero del playerA
 placeLancha(x, y, LANCHA.figure, myGrid)
-
+*/
 //Imprimimos es tablero
 print_Grid(myGrid)

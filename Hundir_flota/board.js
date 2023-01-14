@@ -28,12 +28,7 @@ let gridSize = 10;
 let player_A_Grid = create_Grid(gridSize);
 let player_B_Grid = create_Grid(gridSize);
 
-console.log('TABLERO PLAYER A')
-print_Grid(player_A_Grid)                  //Omitimos el segundo parámetro porque player_B será false
-console.log()
-console.log()
-console.log('TABLERO PLAYER B')
-print_Grid(player_B_Grid, true);        //Diciendo que el segundo parámetro sea true, decimos que es el del player_B
+
 
 
 function create_Grid(size) {        //Función que crea matriz (array de dos dimensiones) de 10x10, que es el tablero
@@ -81,3 +76,10 @@ function create_Headers(size) {     //Los cabeceros de las columnas
     }
     return ' | (INDEX)' + result
 }
+
+console.log('TABLERO PLAYER A')
+print_Grid(player_A_Grid)                  //Omitimos el segundo parámetro porque player_B será false
+console.log()
+console.log()
+console.log('TABLERO PLAYER B')
+print_Grid(player_B_Grid, true);        //Diciendo que el segundo parámetro sea true, decimos que es el del player_B

@@ -1,47 +1,20 @@
 /* 
-✅ ENUNCIADO ARRANQUE JUEGO 
-✅ ENUNCIADO "JUEGO COMIENZA"
-TODO JUGADOR A
-TODO JUGADOR B
-TODO TEXTO Ownboard
-TODO PANTALLA JUGADOR A
-TODO PANTALLA JUGADOR B
-TODO contador RONDA PARA A
-TODO contador RONDA PARA B
-TODO CONTADOR DE DISPAROS PARA JUGADOR A
-TODO CONTADOR DE DISPAROS PARA JUGADOR B
-TODO DISPAROS DONDE APUNTA
-TODO RESULTADO DEL DISPARO
-✅ constante LANCHA
-✅ constante CRUCERO
-✅ constante SUBMARINO
-✅ constante BUQUE
-✅ constante PORTAAVIONES
-✅ constante VACÍO
-✅ constante AGUA
-✅ constante TOCADO
-TODO x2 SUBMARINOS (3 CASILLAS)
-TODO x3 LANCHAS (1 CASILLA)
-TODO 1x BUQUE (4 CASILLAS)
-TODO x3 CRUCEROS (2 CASILLAS)
-✅ CELDAS VACÍAS
-✅ TÍTULO DE TABLERO
-✅ "CONTADOR DE BARCOS" JUGADOR A
-✅ "CONTADOR DE BARCOS" JUGADOR B
-TODO MENSJE "HAS GANADO"
-TODO MENSJE "EMPATE"
+
 */
-import { LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2} from '.printer.js'
-import { LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT, PLAYERA, PLAYERB } from './data.js'
+import { LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2, LINEA_TITULO, SEMILINEA1, SEMILINEA2, SEMILINEA3 } from './printer.js'
+import usePrinter from './printer.js'
+import { LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT, EMPTY } from './data.js'
+import { boardGameGrid, playerAGrid, playerBGrid, x, y } from './game.js'
+import {
+    PortaavionesH, PortaavionesV, placePortaaviones,
+    placeBuqueX, placeBuqueV, placeBuque,
+    placeSubmarinoX, placeSubmarinoV, placeSubmarino,
+    placeCruceroX, placeCruceroV, placeCrucero,
+    placeLancha
+    } from './ship_functions.js'
+const { printHeading, printLine, create_Headers, print_Grid } = usePrinter()
 //import board.js
 
-//VARIABLES DE LOS BARCOS, TOCADO Y AGUA
-const LANCHA = ['🛶']
-const CRUCERO = ['🚤']
-const SUBMARINO = ['🛳']
-const BUQUE = ['🛥']
-const PORTAAVIONES = ['🚢']
-const VACIO = ['']
 
 
 
@@ -52,8 +25,7 @@ function ship(name,nposition,figure){
     this.location = []
 }
 
-let p = new Player('Player A')
-console.log(p.ships)
+
 /*let life = 0;
 let playerA = {
     nombre: 'PLAYER A',
@@ -73,154 +45,33 @@ let playerB = {
 }
 let lifeB = PlayerB.lifePlayerB.forEach(function(a) {life += a.length})
 */
-//DISPAROS
-const FIGURE = ['  💧  ', '  🔥  '];
-let shoot = 0;
 
-//FUNCIÓN NEXT_PLAYER
-function next_player(){
-    if ((shoot == 0) || (playerA.shoot <= playerB.shoot)) {
-        playerA.shoot++;
-        return 'A'
-    }else{
-        playerB.shoot++;
-        return 'B'
-    }
-}
-
-//WIN OR TIE FUNCTIONS
-
-function to_tie() {        //FUNCIÓN EMPATAR
-    if (lifeA > lifeB) {
-        return 'PLAYER  A'
-        //console.log('A')
-    }
-    else if (lifeA < lifeB) {
-        return 'PLAYER  B'
-       // console.log('B')
-    }
-    else {
-        return 'NO WINNER'
-        //console.log('TIE: NO WINNER')
-    }
-}
-
-function to_win() {     //FUNCIÓN GANAR O PERDER
-    if (playerA.life == 0){
-        return 'PLAYER  B'
-        //console.log('B')
-    }
-    else if (playerB.life == 0){
-        return 'PLAYER  A'
-        //console.log('A')
-    }
-    else if (shoot == 100) {
-        return to_tie()
-        }
-}
-
-//TODO hacer un do while del ciclo?
-// THE GAME
-while (shoot < 100 && playerA.life != 0 && playerB.life != 0) {
-    if (shoot % 2 == 0){
-        console.log("Ronda " + playerA.shoot + " for " + next_player() + "\n" + "==============");
-        //function to_shoot();
-        to_win();
-    } 
-    else {
-        console.log("Ronda " + playerB.shoot + " for " + next_player() + "\n" + "==============")
-        to_win()
-    }
-    shoot++
-}
-
-console.log(
-    'And the winnwer is.....' + '\n' +
-    '============================='  + '\n' +
-    '========= ' + to_win() + ' =========' + '\n' +
-    '============================='
-)
-
-
-
-/*TODO CON UN CALLBACK HACER FUNCION SEGUN LA VIDA DE CADA UNO
-let lifeA = playerA.life
-let lifeB = playerB.life
-function callbaccc(shoot, lifeA, lifeB){
-    life A = 0 FIN JUEGO Y SACAR WINNER A
-    life B = 0 FIN JUEGO Y SACAR WINNER B
-    shoot = 100 FIN JUEGO Y SACAR to_tie()
-}
-*/
-
-
-
-
-//IMPRESIONES
-const LINEA_TITULO = '==================================================='
-const SEMILINEA1 = '========='
-const SEMILINEA2 = '================='
-const SEMILINEA3 = '================' // TODO mejorar para que tenga la misma longitud que RONDA_A y Ronda_B
-let n_ronda = ''
-const RONDA_A =  'Ronda ' + n_ronda + ' for A' 
-const RONDA_B =  'Ronda ' + n_ronda + ' for B'
-
-
-
-// ESCRIBIMOS CODIGO
-console.log()
-console.log(LINEA_TITULO)
-console.log(SEMILINEA1 + ' The battleship simulator starts ' + SEMILINEA1) 
-console.log(LINEA_TITULO)
-console.log()
-console.log()
-
-//print_board(board)
-
-console.log(LINEA_TITULO)
-console.log(SEMILINEA2 + ' The game starts ' + SEMILINEA2)
-console.log(LINEA_TITULO)
-console.log()
-console.log()
-
-console.log(LINEA_TITULO)
-console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
 
 
 //FUNCIONES
 
-// Para elegir un barco al azar: 
-const aleatorioPlayerA = lifePlayerA[Math.floor(Math.random() * lifePlayerA.length)]
 
 //GANAR
 
-function the_winner () {
-    switch (j=25){
-    case (playerA.totalA_inherit > playerB.totalB_inherit):
-        winner = playerA.nombre;
-        break
-    case (playerA.totalA_inherit < playerB.totalB_inherit):
-        winner = playerB.nombre;
-        break
-    default:
-        winner = EMPATE;
-        break;
-    }
-}
 
-function to_win () {
-    if (tocado_A = lenght_total) {
-        console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
-    }
-}
 
-console.log(aleatorioPlayerA)
+//MOSTRAR TÍTULOS
 
-ORDEN PARA PRIMERA IMPRESION
+printHeading(' The Battleship simulator starts ')
+console.log()
+printHeading(' This the is board game ')
+console.log()
 
-TITULOS
+//TABLERO
+print_Grid(boardGameGrid)
+console.log()
+
+//EL JUEGO COMIENZA
+printHeading(' The game starts ')
+console.log()
 
 //MOSTRAR TABLERO PLAYER A CON LOS BARCOS
+printLine('This is the Player A boardgame')
 
 //Colocar los barcos
 // ✅ Colocamos 1 portaaviones en el tablero del PlayerA
@@ -229,22 +80,42 @@ placePortaaviones()
 placeBuque()
 
 // ✅ Colocamos los 2 submarinos en el tablero del Player A
-placeSubmarino()
+//placeSubmarino()
 
 // ✅ Colocamos los 3 cruceros en el tablero del Player A
 placeCrucero()
 
 //Colocamos las 3 lanchas en el tablero del playerA
-placeLancha(x, y, LANCHA.figure, myGrid)
+placeLancha(x, y, LANCHA.figure, playerAGrid)
 
 //Imprimimos es tablero
-print_Grid(myGrid)
+print_Grid(playerAGrid)
+console.log()
+//HACEMOS LO MISMO POARA EL PLAYER B
+printLine('This is the Player B boardgame')
 
-//LO MISMO PLAYER B
 
+// ✅ Colocamos 1 portaaviones en el tablero del PlayerA
+//placePortaaviones()
+// ✅ Colocamos un buqe en el tablero del PlayerA
+//placeBuque()
+
+// ✅ Colocamos los 2 submarinos en el tablero del Player A
+//placeSubmarino()
+
+// ✅ Colocamos los 3 cruceros en el tablero del Player A
+//placeCrucero()
+
+//Colocamos las 3 lanchas en el tablero del playerA
+//placeLancha(x, y, LANCHA.figure, myGrid)
+
+print_Grid(playerBGrid)
 //CICLOS 0 - 100
 //RONDA DE DISPARO
 
 //RESULTADO
 
-//GANADORES
+/*GANADORES
+console.log(LINEA_TITULO)
+console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
+*/
