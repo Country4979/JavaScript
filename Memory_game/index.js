@@ -1,15 +1,13 @@
-import {printBoard, printHeading, printLine} from './printer.js'
+import usePrinter from './printer.js'
 const { printBoard, printHeading, printLine } = usePrinter()
-// import allPrinters from './printers.js // peta porque no hemos puesto ningún "export default" en el archivo printers.js
-import {FIGURES} from './data.js'
-import game from './game.js'  //Importa todo el elemento game porque en game le hemos hecho un default
-
+// import allPrinters from './printer.js' // petaría si no tenemos ningun "export default" en printer.js
+import { FIGURES } from './data.js'
+import game from './game.js'
 
 // DONE Generar selección de cartas de forma aleatoria.
 // DONE Mostrarla por pantalla hasta que quede solucionado el juego.
 // TODO Una vez terminado el juego, se mostrarán algunas estadísticas.
 // TODO Intentaremos añadir un poco de inteligencia para que el juego sea más listo
-
 
 // una funcion que nos permite randomizar los elementos de un array
 // function shuffle(array) {
@@ -42,7 +40,11 @@ Array.prototype.shuffle = function () {
 }
 
 try {
+
     // ------- preparación del juego
+    // ✅generar figuras
+    // TODO Mostrar el tablero inicial.
+
     printHeading('Available figures')
     console.log(FIGURES)
 
@@ -83,14 +85,22 @@ try {
     // ✅mostrar que ha terminado el juego diciendo cuántas rondas hemos necesitado
     printLine('')
     printLine('The game has ended! Rounds needed: ', game.rounds)
-    //Qué carta y ha sido girada más veces
-    //👀 OJO PORQUE SORT ALTERA EL ARRAY!!!!
-    //const sortedCardsDesc = game.board.sort((cardA, cardB)) => cardB.timesTurned - cardA.timesTurned
-    //Por cada elemento de board devuelvo un card objeto nuevo gracias a map
-    const sortedCardsDesc = game.board.map(e => e).sort((cardA, cardB) => cardB.timesTurned - cardA.timesTurned)
-    console.log(`The cad ${sortedCardsDesc[0].figure} had max turns: ${sortedCardsDesc[0].timesTurned} times`)
-}
-catch {
-    console.log ("Me cachis")
+    // ✅Qué carta ha sido girada más veces
+    // 👀 OJO PORQUE SORT ALTERA EL ARRAY!!!
+    //const sortedCardsDesc = game.board.sort((cardA, cardB) => cardB.timesTurned - cardA.timesTurned)
+    // Por cada elemento de board devuelvo un card Objeto nuevo gracias a map
+    // OPCION 1
+    // const sortedCardsDesc = game.board.map(e => e).sort((cardA, cardB) => cardB.timesTurned - cardA.timesTurned)
+    // OPCION 2
+    //const sortedCardsDesc = [...game.board].sort((cardA, cardB) => cardB.timesTurned - cardA.timesTurned)
+    // OPCION 3
+    const sortedCardsDesc = game.board.filter(e => true).sort((cardA, cardB) => cardB.timesTurned - cardA.timesTurned)
+    console.log(`The card ${sortedCardsDesc[0].figure} had max turns: ${sortedCardsDesc[0].timesTurned}`)
+
+    // 🟩Qué carta y en qué posición ha sido girada más veces
+
+    // 🟩Evolución del juego al 0%, 25%, 50%, 75%, 100%
+} catch (e) {
+    console.info("Hemos tenido un error 😭")
     console.error(e)
 }

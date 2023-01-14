@@ -31,7 +31,8 @@ TODO x3 CRUCEROS (2 CASILLAS)
 TODO MENSJE "HAS GANADO"
 TODO MENSJE "EMPATE"
 */
-
+import { LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2} from '.printer.js'
+import { LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT, PLAYERA, PLAYERB } from './data.js'
 //import board.js
 
 //VARIABLES DE LOS BARCOS, TOCADO Y AGUA
@@ -42,30 +43,7 @@ const BUQUE = ['🛥']
 const PORTAAVIONES = ['🚢']
 const VACIO = ['']
 
-// PLAYERS
-function Player(name){      //Clase Player con las propiedades name, ships, shoots, life y coordshoot.
-    this.name = name
-    this.ships = {          //Objeto al que se le añaden los barcos
-        lancha1: new this.ship('Lancha', 1, '🛶'),
-        lancha2: new this.ship('Lancha', 1, '🛶'),
-        lancha3: new this.ship('Lancha', 1, '🛶'),
 
-        crucero1: new this.ship('Crucero', 2, '🚤'),
-        crucero2: new this.ship('Crucero', 2, '🚤'),
-        crucero3: new this.ship('Crucero', 2, '🚤'),
-
-        submarino1: new this.ship('Submarino', 3, '🛳'),
-        submarino2: new this.ship('Submarino', 3, '🛳'),
-
-        buque: new this.ship('Buque', 4, '🛥'),
-
-        portaaviones: new this.ship('Portaavines', 5, '🚢')
-    }
-    this.shoots = 0,        //Disparos realizados por el jugador
-    this.life = ships.lancha1[1] + this.ships.lancha2[1] + ships.lancha3[1] + this.ships.crucero1[1] + this.ships.crucero2[1] + this.ships.crucero3[1] + this.ships.submarino1[1] + this.ships.submarino2[1] + this.ships.buque[1] + this.ships.portaaviones[1]
-    this.coordShoot = []    //Coordenadas del disparo
-    this.coordAllShoots = []    //Todas las coordenadas para no repetir el disparo
-}
 
 function ship(name,nposition,figure){
     this.name = name
@@ -237,30 +215,36 @@ function to_win () {
 }
 
 console.log(aleatorioPlayerA)
-/*
+
 ORDEN PARA PRIMERA IMPRESION
 
 TITULOS
 
-MOSTRAR TABLERO PLAYER A CON LOS BARCOS
-    portaaviones
-    crucero
-    submarino1
-    submarino2
-    submarino3
-    barquito1
-    barquito2
-    barquito3
-    lancha1
-    lancha2
-    lancha3
+//MOSTRAR TABLERO PLAYER A CON LOS BARCOS
 
-LO MISMO PLAYER B
+//Colocar los barcos
+// ✅ Colocamos 1 portaaviones en el tablero del PlayerA
+placePortaaviones()
+// ✅ Colocamos un buqe en el tablero del PlayerA
+placeBuque()
 
-CICLOS 0 - 100
-RONDA DE DISPARO
+// ✅ Colocamos los 2 submarinos en el tablero del Player A
+placeSubmarino()
 
-RESULTADO
+// ✅ Colocamos los 3 cruceros en el tablero del Player A
+placeCrucero()
 
-GANADORES
-*/
+//Colocamos las 3 lanchas en el tablero del playerA
+placeLancha(x, y, LANCHA.figure, myGrid)
+
+//Imprimimos es tablero
+print_Grid(myGrid)
+
+//LO MISMO PLAYER B
+
+//CICLOS 0 - 100
+//RONDA DE DISPARO
+
+//RESULTADO
+
+//GANADORES
