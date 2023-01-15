@@ -1,17 +1,42 @@
-//DISPAROS
+
+/*function ship(name,nposition,figure){
+    this.name = name
+    this.nposition = nposition
+    this.img = this.
+    this.location = []
+}*/
+
+
+/*let life = 0;
+let playerA = {
+    nombre: 'PLAYER A',
+    shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
+    lifePlayerA: [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]],
+    causedB_inherit: [], // Daños causados en B
+    shootsA: [] //Coordenadas de disparos realizados
+}
+let lifeA = PlayerA.lifePlayerA.forEach(function(a) {life += a.length})
+
+let playerB = {
+    nombre: 'PLAYER B',
+    shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
+    lifePlayerB: [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]],   
+    causedA_inherit: [], // Daños causados en A
+    shootsB: [] //Coordenadas de disparos realizados
+}
+let lifeB = PlayerB.lifePlayerB.forEach(function(a) {life += a.length})
+*/
+
+
+
+//FUNCIONES
+
+
+//GANAR//DISPAROS
 const FIGURE = ['  💧  ', '  🔥  '];
 let shoot = 0;
 
-//FUNCIÓN NEXT_PLAYER
-function next_player(){
-    if ((shoot == 0) || (playerA.shoot <= playerB.shoot)) {
-        playerA.shoot++;
-        return 'A'
-    }else{
-        playerB.shoot++;
-        return 'B'
-    }
-}
+
 
 //WIN OR TIE FUNCTIONS
 

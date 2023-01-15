@@ -1,57 +1,22 @@
 /* 
 
 */
-import { LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2, LINEA_TITULO, SEMILINEA1, SEMILINEA2, SEMILINEA3 } from './printer.js'
-import usePrinter from './printer.js'
-import { LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT, EMPTY } from './data.js'
-import { boardGameGrid, playerAGrid, playerBGrid, x, y } from './game.js'
-import {
+import placesShips from './ship_functions.js'
+import usePrinter, { LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2, LINEA_TITULO, SEMILINEA1, SEMILINEA2, SEMILINEA3 } from './printer.js'
+
+import { EMPTY, LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT,} from './data.js'
+import { boardGameGrid, playerAGrid, playerBGrid, game } from './game.js'
+
+const {
     PortaavionesH, PortaavionesV, placePortaaviones,
-    placeBuqueX, placeBuqueV, placeBuque,
-    placeSubmarinoX, placeSubmarinoV, placeSubmarino,
-    placeCruceroX, placeCruceroV, placeCrucero,
+    placeBuqueH, placeBuqueV, placeBuque,
+    placeSubmarinoH, placeSubmarinoV, placeSubmarino,
+    placeCruceroH, placeCruceroV, placeCrucero,
     placeLancha
-    } from './ship_functions.js'
+    } = placesShips() 
 const { printHeading, printLine, create_Headers, print_Grid } = usePrinter()
-//import board.js
 
 
-
-
-function ship(name,nposition,figure){
-    this.name = name
-    this.nposition = nposition
-    this.img = this.
-    this.location = []
-}
-
-
-/*let life = 0;
-let playerA = {
-    nombre: 'PLAYER A',
-    shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
-    lifePlayerA: [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]],
-    causedB_inherit: [], // Daños causados en B
-    shootsA: [] //Coordenadas de disparos realizados
-}
-let lifeA = PlayerA.lifePlayerA.forEach(function(a) {life += a.length})
-
-let playerB = {
-    nombre: 'PLAYER B',
-    shoot: 0, //Disparos realizados - Cada bucle es un ciclo while
-    lifePlayerB: [LANCHA, LANCHA, LANCHA, [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [CRUCERO, CRUCERO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [SUBMARINO, SUBMARINO, SUBMARINO], [BUQUE, BUQUE, BUQUE, BUQUE], [PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES, PORTAAVIONES]],   
-    causedA_inherit: [], // Daños causados en A
-    shootsB: [] //Coordenadas de disparos realizados
-}
-let lifeB = PlayerB.lifePlayerB.forEach(function(a) {life += a.length})
-*/
-
-
-
-//FUNCIONES
-
-
-//GANAR
 
 
 
@@ -75,44 +40,38 @@ printLine('This is the Player A boardgame')
 
 //Colocar los barcos
 // ✅ Colocamos 1 portaaviones en el tablero del PlayerA
-placePortaaviones()
+placePortaaviones(playerAGrid)
 // ✅ Colocamos un buqe en el tablero del PlayerA
-placeBuque()
+placeBuque(playerAGrid)
 
 // ✅ Colocamos los 2 submarinos en el tablero del Player A
-//placeSubmarino()
+placeSubmarino(playerAGrid)
 
 // ✅ Colocamos los 3 cruceros en el tablero del Player A
-placeCrucero()
+placeCrucero(playerAGrid)
 
 //Colocamos las 3 lanchas en el tablero del playerA
-placeLancha(x, y, LANCHA.figure, playerAGrid)
+placeLancha(playerAGrid)
 
 //Imprimimos es tablero
 print_Grid(playerAGrid)
 console.log()
-//HACEMOS LO MISMO POARA EL PLAYER B
+//HACEMOS LO MISMO PARA EL PLAYER B
 printLine('This is the Player B boardgame')
 
+placePortaaviones(playerBGrid)
+placeBuque(playerBGrid)
+placeSubmarino(playerBGrid)
+placeCrucero(playerBGrid)
+placeLancha(playerBGrid)
 
-// ✅ Colocamos 1 portaaviones en el tablero del PlayerA
-//placePortaaviones()
-// ✅ Colocamos un buqe en el tablero del PlayerA
-//placeBuque()
-
-// ✅ Colocamos los 2 submarinos en el tablero del Player A
-//placeSubmarino()
-
-// ✅ Colocamos los 3 cruceros en el tablero del Player A
-//placeCrucero()
-
-//Colocamos las 3 lanchas en el tablero del playerA
-//placeLancha(x, y, LANCHA.figure, myGrid)
+//Imprimimos es tablero
+print_Grid(playerBGrid)
+console.log()
 
 print_Grid(playerBGrid)
-//CICLOS 0 - 100
-//RONDA DE DISPARO
-
+//EL JUEGO
+game()
 //RESULTADO
 
 /*GANADORES

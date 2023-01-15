@@ -34,8 +34,8 @@ export default function usePrinter() {
         for (let i = 0; i < grid.length; i++) {
             let rowStr = ' |    ' + i + '    | ';       // Los cabeceros de las filas
             for (let cell of grid[i]) {
-                if (isEnemy && cell == '0') {
-                    rowStr += ' - '
+                if (isEnemy && cell == '0') {   // if (isEnemy && cell == LANCHA.figure || isEnemy && cell == CRUCERO.figure || isEnemy && cell == SUBMARINO.figure || isEnemy && cell == BUQUE.figure || isEnemy && cell == PORTAAVIONES.figure) {
+                    rowStr += ' - ' //  += EMPTRY
                     
                 } else {
                     rowStr += cell + ' ';
