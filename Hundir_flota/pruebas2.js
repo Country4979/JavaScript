@@ -141,8 +141,8 @@ function random(min, max) {                     //Función para generar un núme
         for (let i = 0; i < grid.length; i++) {
             let rowStr = ' |    ' + i + '    | ';       // Los cabeceros de las filas
             for (let cell of grid[i]) {
-                if (isEnemy && cell == '0') {   // if (isEnemy && cell == LANCHA.figure || isEnemy && cell == CRUCERO.figure || isEnemy && cell == SUBMARINO.figure || isEnemy && cell == BUQUE.figure || isEnemy && cell == PORTAAVIONES.figure) {
-                    rowStr += ' - ' //  += EMPTRY
+                if (isEnemy && cell == LANCHA.figure || isEnemy && cell == CRUCERO.figure || isEnemy && cell == SUBMARINO.figure || isEnemy && cell == BUQUE.figure || isEnemy && cell == PORTAAVIONES.figure) {
+                    rowStr += EMPTY + ' '
                     
                 } else {
                     rowStr += cell + ' ';
@@ -338,21 +338,42 @@ function placeLancha(playerGrid) {
 // //Colocamos un buqe en el tablero del PlayerA
 function game(){
     
-    while (shoot < 10 && playerA.life != 0 && playerB.life != 0) {
+    while (shoot < 2 && playerA.life != 0 && playerB.life != 0) {
         if (shoot % 2 == 0){
             printLine("Ronda " + playerB.shoots + " for " + next_player())
-            //console.log("Ronda " + playerB.shoots + " for " + next_player() + "\n" + "==============");
+            console.log()
+            printLine('Own board')
+            print_Grid(playerBGrid)
+            console.log()
+            printLine('Enemy board')
+            print_Grid(playerAGrid, true)
+            console.log()
             //function to_shoot();
             //to_win();
         } 
         else {
             printLine("Ronda " + playerA.shoots + " for " + next_player())
+            console.log()
+            printLine('Own board')
+            print_Grid(playerAGrid)
+            console.log()
+            printLine('Enemy board')
+            print_Grid(playerBGrid, true)
+            console.log()
             //to_win()
         }
         shoot++
     }
     printLine("Ronda " + playerB.shoots + " for " + next_player());
+    console.log()
+    printLine('Own board')
+    print_Grid(playerBGrid)
+    console.log()
+    printLine('Enemy board')
+    print_Grid(playerAGrid, true)
+    console.log()
 }
+
 function next_player(){
     if ((shoot == 0) || (playerA.shoots <= playerB.shoots)) {
         playerA.shoots++;

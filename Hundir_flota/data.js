@@ -1,6 +1,6 @@
 import { shoot, gridSize, create_Grid, playerAGrid, playerBGrid } from './game.js'
 
-class BARCO {
+export default class BARCO {
     constructor (figure, length, firstPosition, lastposition) {
         this.figure = figure;
         this.length = length;

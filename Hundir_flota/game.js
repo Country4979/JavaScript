@@ -30,16 +30,17 @@ export function random(min, max) {
 export function game(){
     while (shoot < 100 && playerA.life != 0 && playerB.life != 0) {
         if (shoot % 2 == 0){
-            console.log("Ronda " + playerB.shoots + " for " + next_player() + "\n" + "==============");
+            printLine("Ronda " + playerB.shoots + " for " + next_player())
             //function to_shoot();
             //to_win();
         } 
         else {
-            console.log("Ronda " + playerA.shoots + " for " + next_player() + "\n" + "==============")
+            printLine("Ronda " + playerA.shoots + " for " + next_player())
             //to_win()
         }
         shoot++
     }
+    printLine("Ronda " + playerB.shoots + " for " + next_player())
 }
 
 //Función siguiente jugador
