@@ -10,13 +10,13 @@ export default class BARCO {
 }
 
 
-export const LANCHA = new BARCO('🛶  |', 1, ['x0', 'y0'], ['x1', 'y1'])
-export const CRUCERO = new BARCO('🚤  |', 2, ['x0', 'y0'], ['x1', 'y1'])
-export const SUBMARINO = new BARCO(' 🛳  |', 3, ['x0', 'y0'], ['x1', 'y1'])
-export const BUQUE = new BARCO(' 🛥  |', 4, ['x0', 'y0'], ['x1', 'y1'])
-export const PORTAAVIONES = new BARCO('🚢  |', 5, ['x0', 'y0'], ['x1', 'y1'])
+export const LANCHA = new BARCO('🛶  |', 1)
+export const CRUCERO = new BARCO('🚤  |', 2)
+export const SUBMARINO = new BARCO(' 🛳  |', 3)
+export const BUQUE = new BARCO(' 🛥  |', 4)
+export const PORTAAVIONES = new BARCO('🚢  |', 5)
 
-export const FIGURE_SHOOT = ['  💧  ', '  🔥  ']
+export const DAMAGE = [' 💧 |', ' 🔥 |']
 
 /* PLAYERS
 export class PLAYER {
