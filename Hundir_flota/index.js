@@ -2,10 +2,11 @@
 
 */
 import placesShips from './ship_functions.js'
-import usePrinter, { LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2, LINEA_TITULO, SEMILINEA1, SEMILINEA2, SEMILINEA3 } from './printer.js'
+import usePrinter, { EMPTY, LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2, LINEA_TITULO, SEMILINEA1, SEMILINEA2, SEMILINEA3 } from './printer.js'
 
-import BARCO, { EMPTY, LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT,} from './data.js'
+import BARCO, { LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT,} from './data.js'
 import { boardGameGrid, playerAGrid, playerBGrid, game } from './game.js'
+
 
 const {
     PortaavionesH, PortaavionesV, placePortaaviones,

@@ -12,6 +12,8 @@ export let n_ronda = ''
 const RONDA_A =  'Ronda ' + n_ronda + ' for A' 
 const RONDA_B =  'Ronda ' + n_ronda + ' for B'
 
+export const EMPTY = ' -  |';
+
 export default function usePrinter() {
     function printHeading(text) {
         const pad = '='.repeat(text.length)

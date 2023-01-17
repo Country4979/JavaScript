@@ -9,7 +9,6 @@ export default class BARCO {
     }
 }
 
-export const EMPTY = ' -  |';
 
 export const LANCHA = new BARCO('🛶  |', 1, ['x0', 'y0'], ['x1', 'y1'])
 export const CRUCERO = new BARCO('🚤  |', 2, ['x0', 'y0'], ['x1', 'y1'])

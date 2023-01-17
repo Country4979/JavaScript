@@ -1,4 +1,4 @@
-import { EMPTY } from './data.js'
+import { EMPTY } from './printer.js'
 import { playerA, playerB } from './data.js'
 export const board = [];
 export const gridSize = 10;

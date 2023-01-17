@@ -1,5 +1,6 @@
-import { LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES, EMPTY } from './data.js'
+import { LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES } from './data.js'
 import { random, playerAGrid, playerBGrid, x, y } from './game.js'
+import { EMPTY } from './printer.js'
 
 
 
