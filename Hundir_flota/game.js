@@ -28,28 +28,42 @@ export function random(min, max) {
 
 //Función juego
 export function game(){
-    while (shoot < 100 && playerA.life != 0 && playerB.life != 0) {
-        if (shoot % 2 == 0){
-            printLine("Ronda " + playerB.shoots + " for " + next_player())
-            //function to_shoot();
-            console.log(`Shoot #${playerB.shoots}pointing to ${shootCoords[0]}${String.fromCharCode(shootCoords[1] + 65)}: `)
-            damage (playerB, shootCoords[0], shootCoords[1])
+    while (shoot < 4 && playerA.life != 0 && playerB.life != 0) {
+        if (shoot % 2 == 0){            //DISPARO PLAYER B
+            printLine("Round " + playerB.shoots + " for " + next_player())
+            toShoot(playerB);
+            
+            console.log(`Shoot #${playerB.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerA, shootCoords[0], shootCoords[1])}`)
+            damage (playerA, shootCoords[0], shootCoords[1])
+            console.log()
+            printLine('Own board')
+            print_Grid(playerBGrid)
+
+            console.log()
+            printLine('Enemy board')
+            print_Grid(playerAGrid, true)
+            console.log()
+            
             //to_win();
         } 
-        else {
+        else {                          //DISPARO PLAYER A
             printLine("Ronda " + playerA.shoots + " for " + next_player())
-             //function to_shoot();
-            console.log(`Shoot #${playerA.shoots}pointing to ${shootCoords[0]}${String.fromCharCode(shootCoords[1] + 65)}: `)
-            damage (playerA, shootCoords[0], shootCoords[1])
-            
+            toShoot(playerA);
+
+            console.log(`Shoot #${playerA.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerB, shootCoords[0], shootCoords[1])}`)
+            damage (playerB, shootCoords[0], shootCoords[1])
+            console.log()
+            printLine('Own board')
+            print_Grid(playerAGrid)
+
+            console.log()
+            printLine('Enemy board')
+            print_Grid(playerBGrid, true)
+            console.log()
             //to_win()
         }
         shoot++
     }
-    printLine("Ronda " + playerB.shoots + " for " + next_player())
-    //function to_shoot();
-    console.log(`Shoot #${playerA.shoots}pointing to ${shootCoords[0]}${String.fromCharCode(shootCoords[1] + 65)}: `)
-    damage (playerB, shootCoords[0], shootCoords[1])
 }
 
 //Función siguiente jugador
@@ -62,13 +76,31 @@ function next_player(){
         return playerB.name
     }
 }
+
+//DIBUJAR FUEGO Y AGUA --> FUNCIONA 
+let DAMAGE = '';
+function W_F(player, x1, y1){
+    if(player.grid[y1][x1] != EMPTY){
+        return FIRE
+
+    } else {
+        return WATER
+    }
+}
+
 //Función reemplazar EMPTY por agua o tocado
 function damage(player, x1, y1){
-    console.log(player.grid[y1][x1])
+    //console.log(player.grid[y1][x1])
     if(player.grid[y1][x1] != EMPTY){
-        player.grid[y1][x1] = DAMAGE[1]
+        player.grid[y1][x1] = GRID_DAMAGE[1]
+        //DAMAGE = FIRE
+        
+        //EJECUTAR FUNCION VER QUE BARCO ES EL DAÑADO
+        
     }
     else {
-        player.grid[y1][x1] = DAMAGE[0]
+        player.grid[y1][x1] =  GRID_DAMAGE[0]
+        //DAMAGE = WATER
+        
     }
 }
