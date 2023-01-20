@@ -1,12 +1,20 @@
-export default function usePrinter() {
-    const LINEAINFERIOR = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
-    const LINEAINFERIOR1 = [' |\t   ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     |'];
-    const LINEAINFERIOR2 = [' |_________', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____','_____|'];
-    const LINEA_TITULO = '==================================================='
-    const SEMILINEA1 = '========='
-    const SEMILINEA2 = '================='
-    const SEMILINEA3 = '================' // TODO mejorar para que tenga la misma longitud que RONDA_A y Ronda_B --> PRINThEADING
+import { create_Grid } from './game.js'
 
+export const LINEAINFERIOR = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
+export const LINEAINFERIOR1 = [' |\t   ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     |'];
+export const LINEAINFERIOR2 = [' |_________', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____', '_____','_____|'];
+
+export const LINEA_TITULO = '==================================================='
+export const SEMILINEA1 = '========='
+export const SEMILINEA2 = '================='
+export const SEMILINEA3 = '================' // TODO mejorar para que tenga la misma longitud que RONDA_A y Ronda_B --> PRINThEADING
+export let n_ronda = ''
+const RONDA_A =  'Ronda ' + n_ronda + ' for A' 
+const RONDA_B =  'Ronda ' + n_ronda + ' for B'
+
+export const EMPTY = ' -  |';
+
+export default function usePrinter() {
     function printHeading(text) {
         const pad = '='.repeat(text.length)
         console.log(`==========${pad}==========`)
@@ -29,7 +37,7 @@ export default function usePrinter() {
             let rowStr = ' |    ' + i + '    | ';       // Los cabeceros de las filas
             for (let cell of grid[i]) {
                 if (isEnemy && cell == '0') {   // if (isEnemy && cell == LANCHA.figure || isEnemy && cell == CRUCERO.figure || isEnemy && cell == SUBMARINO.figure || isEnemy && cell == BUQUE.figure || isEnemy && cell == PORTAAVIONES.figure) {
-                    rowStr += ' - ' //  += EMPTY
+                    rowStr += ' - ' //  += EMPTRY
                     
                 } else {
                     rowStr += cell + ' ';

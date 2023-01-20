@@ -1,81 +1,44 @@
-/* 
-
-*/
-import placesShips from './ship_functions.js'
-import usePrinter, { EMPTY, LINEAINFERIOR, LINEAINFERIOR1, LINEAINFERIOR2, LINEA_TITULO, SEMILINEA1, SEMILINEA2, SEMILINEA3 } from './printer.js'
-
-import BARCO, { LANCHA, CRUCERO,  SUBMARINO, BUQUE, PORTAAVIONES, FIGURE_SHOOT,} from './data.js'
-import { boardGameGrid, playerAGrid, playerBGrid, game } from './game.js'
-
-
-const {
-    PortaavionesH, PortaavionesV, placePortaaviones,
-    placeBuqueH, placeBuqueV, placeBuque,
-    placeSubmarinoH, placeSubmarinoV, placeSubmarino,
-    placeCruceroH, placeCruceroV, placeCrucero,
-    placeLancha
-    } = placesShips() 
+//LAS IMPORTACIONES  
+import usePrinter from './printer.js'
 const { printHeading, printLine, create_Headers, print_Grid } = usePrinter()
+import { game } from './game.js'
+import { BARCO, PLAYER} from './data.js'
 
 
+//✅ TÍTULO
+printHeading('THE BATTTLESHIP SIMULATOR')
+console.log('                        By Javier Girón López')
+    //Texto con el título
+//TODO SETUP DEL JUEGO
+    //game.setUp
+        //CREAR JUGADOR A
 
+        //CREAR JUGADRO B
 
+        //CREAR EL TABLERO DE JUGADOR A
 
-//MOSTRAR TÍTULOS
+        //CREAR EL TABLERO DE JUGADOR B
 
-printHeading(' The Battleship simulator starts ')
-console.log()
-printHeading(' This the is board game ')
-console.log()
+        //COLOCAR LOS BARCOS DE JUGADOR A
 
-//TABLERO
-print_Grid(boardGameGrid)
-console.log()
+        //COLOCAR LOS BARCOS DE JUGADOR B
 
-//EL JUEGO COMIENZA
-printHeading(' The game starts ')
-console.log()
+        //MOSTRAR TABLERO JUGADOR A
 
-//MOSTRAR TABLERO PLAYER A CON LOS BARCOS
-printLine('This is the Player A boardgame')
+        //MOSTRAR TABLERO JUGADOR B
 
-//Colocar los barcos
-// ✅ Colocamos 1 portaaviones en el tablero del PlayerA
-placePortaaviones(playerAGrid)
-// ✅ Colocamos un buqe en el tablero del PlayerA
-placeBuque(playerAGrid)
+//TODO JUEGO COMIENZA
 
-// ✅ Colocamos los 2 submarinos en el tablero del Player A
-placeSubmarino(playerAGrid)
+//TODO TITULO DE JUEGO COMIENZA
 
-// ✅ Colocamos los 3 cruceros en el tablero del Player A
-placeCrucero(playerAGrid)
+//REPETICIÓN DE TURNOS 200 DISPAROS (50 POR JUGADOR)
+    //TURNO DEL JUGADOR A
 
-//Colocamos las 3 lanchas en el tablero del playerA
-placeLancha(playerAGrid)
+    //TURNO JUGADOR B
 
-//Imprimimos es tablero
-print_Grid(playerAGrid)
-console.log()
-//HACEMOS LO MISMO PARA EL PLAYER B
-printLine('This is the Player B boardgame')
-
-placePortaaviones(playerBGrid)
-placeBuque(playerBGrid)
-placeSubmarino(playerBGrid)
-placeCrucero(playerBGrid)
-placeLancha(playerBGrid)
-
-//Imprimimos es tablero
-print_Grid(playerBGrid)
+//✅ JUEGO TERMINA
+printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
 console.log()
 
-print_Grid(playerBGrid)
-//EL JUEGO
-game()
-//RESULTADO
-
-/*GANADORES
-console.log(LINEA_TITULO)
-console.log('EL GANADOR ES ' + winner + '. ENHORABUENA, ' + winner)
-*/
+//✅ MOSTRAR RESULTADOS
+printHeading(`THE WINNER IS: ${game.toWin()}`)

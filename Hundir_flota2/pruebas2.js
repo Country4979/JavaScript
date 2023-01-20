@@ -27,7 +27,7 @@ const FIRE = '🔥';
 const  GRID_DAMAGE = [ ` ${WATER} |`, ` ${FIRE} |`]
 let coords = []
 
-let Typeship = [PORTAAVIONES, BUQUE, SUBMARINO1, SUBMARINO2, CRUCERO1, CRUCERO2, CRUCERO3, LANCHA1, LANCHA2, LANCHA3]
+let typeShip = [PORTAAVIONES, BUQUE, SUBMARINO1, SUBMARINO2, CRUCERO1, CRUCERO2, CRUCERO3, LANCHA1, LANCHA2, LANCHA3]
 const EMPTY = ' -  |'
 
 const LINEAINFERIOR = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
@@ -45,28 +45,23 @@ const playerA = {
     grid: playerAGrid,
     life: 5,
     shoots: 1,
-    shootCoordsLog: [],
-    shootCoords: [],
+    shootCoordsLog: [6,5],
+    shootCoords: [[6,5], [0,1]],
     portaaviones: [],
-    shipCoords(player, position){
-        let x1 = randomCoords[0];
-        let y1 = randomCoords[1];
-        //this.totalCoords(player, x1, y1)
-    },
-    totalCoords(player){
+ /*   shipCoords(player, typeShip, life){     //MÉTODO PARA PONER LA POSICION DEL BARCO -- ver como hacer para que el numeo d ciclos = vida barco
+                            //cOMO ES EN ORDEN¿?
         let x1 = randomCoords[0];
         let y1 = randomCoords[1];
         let totalposition = []
-        for(let i = 0; i < 4; i++){
+        for(let i = 0; i < (life-1); i++){
                 totalposition.push(randomCoords.map(e => e))
                 console.log(`Posicion total: ${totalposition}`)
                 randomCoords[0] = ++x1
-                console.log(randomCoords)
-                this.portaaviones.push(randomCoords.map(e => e))
+                this.typeShip.push(randomCoords.map(e => e))
         }
-    }
+    }*/
 }
-let shootCoordsLogA = []
+let shootCoordsLogA = [6,5]
 
 const playerB = {
     name: 'Player B',
@@ -95,6 +90,7 @@ function create_Grid(size) {
     }
     return grid
 }
+
 function create_Headers(size) {     //Los cabeceros de las columnas
     let result = ' |  ';
     for (let i = 65; i < size + 65; i++) {
@@ -105,7 +101,8 @@ function create_Headers(size) {     //Los cabeceros de las columnas
 
 function random(min, max) {                     
     return Math.floor((Math.random() * (max - min + 1)) + min)
-}//FUNCIONES DEL PORTAAVIONES
+}
+//FUNCIONES DEL PORTAAVIONES
 
 let randomCoords = [];
 let initialCoords = []
@@ -118,43 +115,38 @@ function placePortaaviones(player, playerGrid){                          //Decid
         let y1 = Math.floor(Math.random() * 10); 
         randomCoords = [x1, y1]
         initialCoords = [x1, y1]
-        console.log(`Esta es la posición inicial: ${randomCoords}`)
+        //console.log(`Esta es la posición inicial: ${randomCoords}`)
         PortaavionesH(PORTAAVIONES.figure, playerGrid, x1, y1) 
     }
     else{
         let y1  = random(0, 10 - PORTAAVIONES.length);                    
         let x1 = Math.floor(Math.random() * 10);
         randomCoords = [x1, y1]
-        console.log(`Esta es la posición inicial: ${randomCoords}`)
+        //console.log(`Esta es la posición inicial: ${randomCoords}`)
         PortaavionesV(PORTAAVIONES.figure, playerGrid, x1, y1)
     }
     //player.shipCoords(player, randomCoords)
     player.portaaviones = ['🚢  |', 5, initialCoords]
-    console.log(playerA)  
+    //console.log(playerA)  
 };
 
 function PortaavionesH(figure, grid, x1, y1) {            //Función para colocar los barcos el portaaviones en el eje X
-    //let x1  = random(0, 10 - PORTAAVIONES.length);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
-    //let y1 = Math.floor(Math.random() * 10);            //Obligo a colocarlo entre el  0 y el 10 y en celda EMPTY
-      
-    //let portAH = []
     for (let i = 0; i < 5; i++)
-        if (grid[y1][x1] = EMPTY && x1 < 10 && x1 >= 0){
+        if (grid[y1][x1] = EMPTY && x1 < 10 && x1 >= 0){    //Obligo a colocarlo entre el  0 y el 10 y en celda EMPTY
             grid[y1][x1] = figure;
             ++x1;        
         }
-    pH = true
+    //typeShip = 'portaaviones'
+    //player. shipCoords(player, typeShip)
+
 };
 
 function PortaavionesV(figure, grid, x1, y1) {            //Función para colocar los barcos el portaaviones en el eje Y
-    //let y1  = random(0, 10 - PORTAAVIONES.length);                    
-    //let x1 = Math.floor(Math.random() * 10);
     for (let i = 0; i < 5; i++)
         if (grid[y1][x1] == EMPTY && y1 < 10 && y1 >= 0){
             grid[y1][x1] = figure;
             y1++;
         }
-    pH = false
 };
 
 //FUNCIONES BUQUE
@@ -328,10 +320,9 @@ function printLine(text) {
     
     //const playerACoords = [];
     //const playerBCoords = [];
-    let shootCoords = [];
-    let stringCoords = shootCoords.toString()
+
     
-    
+    const shootCoords =  [];
     //FUNCIÓN VER REGISTRO --> NO FUNCIONA
     function toShoot(player){
         let x1 = random(0, 9); //Intervalo entre 0 y 9 para el aleatorio pq las filas tienen un índice 0 = i
@@ -340,7 +331,7 @@ function printLine(text) {
         shootCoords[0] = x1;
         shootCoords[1] = y1;
         console.log(shootCoords)
-        toLog(player)
+        //toLog(player)
         
         //teste del nuevo diapro
         /*const isValidShoot = testLog(player)
@@ -351,7 +342,7 @@ function printLine(text) {
         }*/
     }
 
-    function toLog(player){
+/*    function toLog(player){
         let newArr = []
         if (player == playerA){
             newArr = shootCoordsLogA.map(e => e)
@@ -370,18 +361,9 @@ function printLine(text) {
             //console.log(newArr)
             playerA.shootCoordsLog = newArr
             //console.log(playerA.shootCoordsLog)   
-        //}*/
-    }
+        //}
+    }*/
     
-    function testLog (player){ 
-        let ArrPaloma  = [[0,1], [0,2], [0,3]]
-        let result = ArrPaloma.find(e => e = shootCoords)
-        console.log(result)
-        if(result != 0){
-            console.log('vuelve a disparar, anda')
-        }
-        else {console.log('Well Done')}
-    }   
 
     
     function game(){
@@ -393,24 +375,24 @@ function printLine(text) {
             //toLog(playerB)
             console.log(`Shoot #${playerB.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerA, shootCoords[0], shootCoords[1])}`)
             damage (playerA, shootCoords[0], shootCoords[1])
-            /*console.log()
+            console.log()
             printLine('Own board')
             print_Grid(playerBGrid)
 
             console.log()
             printLine('Enemy board')
             print_Grid(playerAGrid, true)
-            console.log()*/
+            console.log()
             
             //to_win();
         } 
         else {                          //DISPARO PLAYER A
             printLine("Ronda " + playerA.shoots + " for " + next_player())
             toShoot(playerA);
-            toLog(playerA)  
+            //toLog(playerA)  
             console.log(`Shoot #${playerA.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerB, shootCoords[0], shootCoords[1])}`)
             damage (playerB, shootCoords[0], shootCoords[1])
-            /*console.log()
+            console.log()
             printLine('Own board')
             print_Grid(playerAGrid)
 
@@ -418,7 +400,7 @@ function printLine(text) {
             printLine('Enemy board')
             print_Grid(playerBGrid, true)
             console.log()
-            //to_win()*/
+            //to_win()
         }
         shoot++
     }
@@ -474,52 +456,33 @@ function next_player(){
     }
 }
 
-/*function portaaviones(player){
-    let portCoord = randomCoords
-    let newArr = randomCoords
-    if (pH){
-        for (let i = 0; i <PORTAAVIONES.life; i++){
-            newArr[0] =+ 1
-            portCoord.push(newAA)
-        }
-    }
-    else {
-        for (let i = 0; i <PORTAAVIONES.life; i++){
-            newArr[1] =+ 1
-            portCoord.push(newAA)
-        }
-    }
-    console.log(newArr)
-}*/
-
-
 
 placePortaaviones(playerA, playerAGrid)
 
-playerA.totalCoords(playerA)
-console.log(playerA.portaaviones)
-
+//playerA.shipCoords(playerA, typeShip, 5)
+//console.log(playerA.portaaviones)
+//console.log(playerA.portaaviones[4][0])
   
 //playerA.portaaviones.push(randomCoords)
 //playerA.portaaviones.push(randomCoords)
 
-//placePortaaviones(playerBGrid)
-//placeBuque(playerAGrid)
-//placeBuque(playerBGrid)
-//placeSubmarino(playerAGrid)
-//placeSubmarino(playerBGrid)
-//placeCrucero(playerAGrid)
-//placeCrucero(playerBGrid)
-//placeLancha(playerAGrid)
-//placeLancha(playerBGrid)
+placePortaaviones(playerB, playerBGrid)
+placeBuque(playerAGrid)
+placeBuque(playerBGrid)
+placeSubmarino(playerAGrid)
+placeSubmarino(playerBGrid)
+placeCrucero(playerAGrid)
+placeCrucero(playerBGrid)
+placeLancha(playerAGrid)
+placeLancha(playerBGrid)
 
-//console.log(playerA.name)
-//print_Grid(playerAGrid)
-//console.log()
-//console.log(playerB.name)
-//console.log()
-//print_Grid(playerBGrid)
-//game()
+console.log(playerA.name)
+print_Grid(playerAGrid)
+console.log()
+console.log(playerB.name)
+console.log()
+print_Grid(playerBGrid)
+game()
 //console.log(playerA.shootCoordsLog)
 //console.log(playerB.shootCoordsLog)
 
@@ -562,3 +525,46 @@ console.log(playerA.portaaviones)
 
 Arr(0,1)
 console.log(totalposition)*/
+
+
+/*function verificarDisparo(player){
+    console.log(shootCoords)
+    for(let find in stringCoords){
+        find = stringCoords.includes(shootCoords)
+            console.log(find)
+            if(find == true){
+                console.log(`El diparo ${shootCoords} ya se ha realizado`)
+            }
+            else {
+                console.log('Well done!')
+            }
+    }*/
+/*function verificarDisparo(player){
+    console.log(shootCoords)
+    for(let i = 0; i < stringCoords.length; i++){
+        for(let j = 0; j < 2; j++){
+            let find = stringCoords[i][j].includes(shootCoords[0][1])
+            console.log(find)
+            if(find == true){
+                console.log(`El diparo ${shootCoords} ya se ha realizado`)
+            }
+            else {
+                console.log('Well done!')
+            }
+        
+        }
+    }
+}
+verificarDisparo(playerA)*/
+
+/*let shootCoords = [0,1];
+
+const find = playerA.shootCoordsLog.findIndex(elemento => elemento[0] === shootCoords[0] && elemento[1] === shootCoords[1]);
+    console.log(find)
+    if (find != -1){
+        console.log(`El diparo ${shootCoords} ya se ha realizado`)
+    }
+    else {
+        console.log('Well done!')
+    }
+*/
