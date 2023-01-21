@@ -1,5 +1,5 @@
 import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES } from './data.js'
-
+import * as board from './board.js'
 export default {
     rondas: 0,
     totalShoots: 0,
@@ -20,7 +20,8 @@ export default {
     },
 
     setupGame(player){  // funciones de inicio del juego      
-        return {shipsToPlayers}    
+         board.create_Grid(size)
+         board.create_Headers(size)
     },
      
         //Crear tablero

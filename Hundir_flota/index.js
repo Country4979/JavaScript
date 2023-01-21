@@ -1,6 +1,6 @@
 //LAS IMPORTACIONES  
 import usePrinter from './printer.js'
-const { printHeading, printLine, create_Headers, print_Grid } = usePrinter()
+const { printHeading, printLine, print_Grid } = usePrinter()
 import game from './game.js'
 //const { shipsToPlayers, setupGame } = game()
 import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES } from './data.js'
@@ -11,25 +11,28 @@ printHeading('THE BATTTLESHIP SIMULATOR')
 console.log('                        By Javier Girón López')
     //Texto con el título
 //TODO SETUP DEL JUEGO
+
+    //✅CREAR EL TABLERO DE JUGADOR A
+    printLine(`${playerA.name} GameBoard`)
+    print_Grid(playerA.grid)
+    console.log()
+    //✅CREAR EL TABLERO DE JUGADOR B
+    printLine(`${playerB.name} GameBoard`)
+    print_Grid(playerB.grid)
+    console.log()
         // ✅CREAR LOS BARCOS PARA LOS JUGADORES
         game.shipsToPlayers(playerA)
         game.shipsToPlayers(playerB)
         
-        console.log(playerA)
-        console.log(playerB)
-
-        //CREAR EL TABLERO DE JUGADOR A
-
-        //CREAR EL TABLERO DE JUGADOR B
-
+        console.log(playerB.ships)
         //COLOCAR LOS BARCOS DE JUGADOR A
 
         //COLOCAR LOS BARCOS DE JUGADOR B
 
 
-        //MOSTRAR TABLERO JUGADOR A
+    //MOSTRAR TABLERO COMPLETO JUGADOR A
 
-        //MOSTRAR TABLERO JUGADOR B
+    //MOSTRAR TABLERO COMPLETO JUGADOR B
 
 //TODO JUEGO COMIENZA
 

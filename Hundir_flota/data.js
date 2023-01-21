@@ -1,3 +1,4 @@
+import { playerAGrid, playerBGrid } from "./board.js";
 class BARCO  {
     constructor (typeship){
         this.typeship = typeship
@@ -9,8 +10,7 @@ class BARCO  {
     //function touchedAndSunk --> nos dice qué barco se ha hundido
 }
 class TYPESHIP {
-    constructor (id, figure, length, position) {
-        this.id = id;
+    constructor (figure, length, position) {
         this.figure = figure;
         this.length = length;
         this.position = position;
@@ -57,10 +57,8 @@ class PLAYER {
     }*/
 
 };
-export const playerA = new PLAYER('Player A', 'playerAgrid', 24, 0, [],)
-export const playerB = new PLAYER('Player B', 'playerBgrid', 24, 0, [],)
-
-export const gridSize = 10; //Tamaño del tablero
+export const playerA = new PLAYER('Player A', playerAGrid, 24, 0, [],)
+export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [],)
 
 export const FIGURES = [];
 
