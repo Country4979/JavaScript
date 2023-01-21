@@ -1,25 +1,36 @@
-export class BARCO {
+class BARCO  {
+    constructor (typeship){
+        this.typeship = typeship
+    }
+    //métodos que necesitan los barcos
+    
+    //function lengthRest --> Restar vida al barco
+    //function touched --> A quién le ha dado un disparo
+    //function touchedAndSunk --> nos dice qué barco se ha hundido
+}
+class TYPESHIP {
     constructor (id, figure, length, position) {
         this.id = id;
         this.figure = figure;
         this.length = length;
         this.position = position;
     }
-    //métodos que necesitan los barcos
-
-    //function lengthRest --> Restar vida al barco
-    //function touched --> A quién le ha dado un disparo
-    //function touchedAndSunk --> nos dice qué barco se ha hundido
 }
 
-export class PLAYER {
-    constructor (name, grid, life, shoots, shootsLog, ship){
+export const LANCHA = new TYPESHIP('🛶  |', 1, [])
+export const CRUCERO = new TYPESHIP('🚤  |', 2, [])
+export const SUBMARINO = new TYPESHIP(' 🛳  |', 3, [])
+export const BUQUE = new TYPESHIP(' 🛥  |', 4,  [])
+export const PORTAAVIONES = new TYPESHIP('🚢  |', 5, [])
+
+class PLAYER {
+    constructor (name, grid, life, shoots, shootsLog, ships){
         this.name = name;
         this.grid = grid;
         this.life = life;
         this.shoots = shoots;
         this.shootsLog = shootsLog;
-        this.ship = ship;
+        this.ships = ships;
     }
     //Métodos que necesita cada jugador
 
@@ -46,7 +57,11 @@ export class PLAYER {
     }*/
 
 };
+export const playerA = new PLAYER('Player A', 'playerAgrid', 24, 0, [],)
+export const playerB = new PLAYER('Player B', 'playerBgrid', 24, 0, [],)
 
 export const gridSize = 10; //Tamaño del tablero
 
 export const FIGURES = [];
+
+console.log(LANCHA)
