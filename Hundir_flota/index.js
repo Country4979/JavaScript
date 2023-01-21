@@ -3,7 +3,7 @@ import usePrinter from './printer.js'
 const { printHeading, printLine, print_Grid } = usePrinter()
 import game from './game.js'
 import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES } from './data.js'
-import { gridSize, playerAGrid, playerBGrid } from './board.js'
+import { EMPTY, gridSize, playerAGrid, playerBGrid } from './board.js'
 
 
 //✅ TÍTULO
@@ -28,18 +28,21 @@ console.log('                        By Javier Girón López')
     
     
     //COLOCAR LOS BARCOS DE JUGADOR B 
+    //TODO meter todo esto en una función
+        //mejorar esa función para que coloque todos los barcos ella sola
     game.setUpGame.placeShips(playerB, playerB.ships[0].PORTAAVIONES, playerBGrid)
     game.setUpGame.placeShips(playerB, playerB.ships[1].BUQUE, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[2].SUBMARINO, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[3].SUBMARINO, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[4].CRUCERO, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[5].CRUCERO, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[6].CRUCERO, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[7].LANCHA, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[8].LANCHA, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[9].LANCHA, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[2].SUBMARINO, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[3].SUBMARINO, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[4].CRUCERO, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[5].CRUCERO, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[6].CRUCERO, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[7].LANCHA, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[8].LANCHA, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[9].LANCHA, playerBGrid)
     printLine(`${playerB.name} Game Board`)
-
+    
+    
   
     // console.log(playerB)
     

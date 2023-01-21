@@ -13,13 +13,50 @@ export default {
         random(min, max) {                     
             return Math.floor((Math.random() * (max - min + 1)) + min)
         },
-        
-        placeShipsH(figure, life, x1, y1, gridSize, grid) {
-            console.log(`Imprimo de forma Horizontal`)
-            console.log(`Valor de figure: ${figure}`)
-            console.log(`Valor de life: ${life}`)
-           
-   
+
+        placeH(player, playerShip, x1, y1, life, playerGrid){
+            let freeSpace = function (playerGrid, x1, y1) {
+                let noEmpty = '';
+                for (let i = 0; i < life; i++){
+                    if (playerGrid[y1][x1] == EMPTY){          
+                        ++x1;
+                        noEmpty = false;
+                    } else {
+                        noEmpty = true;
+                        break
+                    }
+                }
+            if (noEmpty == false) {    
+                this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                }
+            else {
+                this.placeShips(player, playerShip, playerGrid)
+                }
+            }
+        },
+
+        placeV(player, playerShip, x1, y1, playerGrid){
+            let freeSpace = function (playerGrid, x1, y1) {
+                let noEmpty = '';
+                for (let i = 0; i < life; i++){
+                    if (playerGrid[y1][x1] == EMPTY){          
+                        ++y1;
+                        noEmpty = false;
+                    } else {
+                        noEmpty = true;
+                        break
+                    }
+                }
+            if (noEmpty == false) {    
+                this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                }
+            else {
+                this.placeShips(player, playerShip, playerGrid)
+                }
+            }
+        },
+
+        placeShipsH(figure, life, x1, y1, gridSize, grid) { 
             for (let i = 0; i < life; i++){
                 if (grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
                     grid[y1][x1] = figure;
@@ -28,13 +65,7 @@ export default {
             }
         },
         
-        placeShipsV(figure, life, x1, y1, gridSize, grid) {
-            console.log(`Imprimo de forma Vertical`)
-            console.log(`Valor de figure: ${figure}`)
-            console.log(`Valor de life: ${life}`)
-            
-            
-
+        placeShipsV(figure, life, x1, y1, gridSize, grid) {         
             for (let i = 0; i < life; i++){
                 if (grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
                     grid[y1][x1] = figure;
@@ -64,19 +95,16 @@ export default {
             if (a % 2 == 0) {
                 let x1 = this.random(0, gridSize - 5);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
                 let y1 = Math.floor(Math.random() * gridSize);
+                this.placeH(player, playerShip.figure, x1, y1, playerShip.life, playerGrid)
 
-                //randomCoords = [x1, y1]
-                //initialCoords = [x1, y1]
-                //console.log(`Esta es la posición inicial: ${randomCoords}`)
-                this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                //this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
                 //return x1, y1
             }
             else{
                 let y1 = this.random(0, gridSize - 5);                    
                 let x1 = Math.floor(Math.random() * gridSize);
-                //randomCoords = [x1, y1]
-                //console.log(`Esta es la posición inicial: ${randomCoords}`)
-                this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid) //player.ships[id].figure, player.ships[id].life
+                this.placeV(player, playerShip.figure, x1, y1, playerShip.life, playerGrid)
+                //this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid) //player.ships[id].figure, player.ships[id].life
                 //return x1, y1
             }
             
