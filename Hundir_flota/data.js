@@ -10,9 +10,9 @@ class BARCO  {
     //function touchedAndSunk --> nos dice qué barco se ha hundido
 }
 class TYPESHIP {
-    constructor (figure, length, position) {
+    constructor (figure, life, position) {
         this.figure = figure;
-        this.length = length;
+        this.life = life;
         this.position = position;
     }
 }
@@ -62,4 +62,4 @@ export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [],)
 
 export const FIGURES = [];
 
-console.log(LANCHA)
+console.log(PORTAAVIONES.life)

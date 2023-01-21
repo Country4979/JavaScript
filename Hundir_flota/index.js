@@ -2,8 +2,8 @@
 import usePrinter from './printer.js'
 const { printHeading, printLine, print_Grid } = usePrinter()
 import game from './game.js'
-//const { shipsToPlayers, setupGame } = game()
 import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES } from './data.js'
+import { gridSize } from './board.js'
 
 
 //✅ TÍTULO
@@ -13,22 +13,24 @@ console.log('                        By Javier Girón López')
 //TODO SETUP DEL JUEGO
 
     //✅CREAR EL TABLERO DE JUGADOR A
-    printLine(`${playerA.name} GameBoard`)
+    printLine(`${playerA.name} Game Board`)
     print_Grid(playerA.grid)
     console.log()
     //✅CREAR EL TABLERO DE JUGADOR B
-    printLine(`${playerB.name} GameBoard`)
+    printLine(`${playerB.name} Game Board`)
     print_Grid(playerB.grid)
     console.log()
         // ✅CREAR LOS BARCOS PARA LOS JUGADORES
-        game.shipsToPlayers(playerA)
-        game.shipsToPlayers(playerB)
-        
-        console.log(playerB.ships)
+        game.setUpGame.shipsToPlayers(playerA)
+        game.setUpGame.shipsToPlayers(playerB)
+        //console.log(playerB.ships[0].PORTAAVIONES.life)
+        //console.log(playerB.ships)
         //COLOCAR LOS BARCOS DE JUGADOR A
+
 
         //COLOCAR LOS BARCOS DE JUGADOR B
 
+        game.setUpGame.placeShips(playerB, 0, PORTAAVIONES)
 
     //MOSTRAR TABLERO COMPLETO JUGADOR A
 
