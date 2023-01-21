@@ -18,7 +18,7 @@ function create_Headers(gridSize) {     //Los cabeceros de las columnas
     return ' | (INDEX)' + result
 }
 
-const EMPTY = ' -  |';
+export const EMPTY = ' -  |';
 export const gridSize = 10; //Tamaño del tablero
 export const playerAGrid = create_Grid(gridSize);
 export const playerBGrid = create_Grid(gridSize);

@@ -62,4 +62,4 @@ export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [],)
 
 export const FIGURES = [];
 
-console.log(PORTAAVIONES.life)
+//console.log(PORTAAVIONES.life)

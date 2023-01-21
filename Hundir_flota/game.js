@@ -1,6 +1,6 @@
 import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES} from './data.js'
 import * as board from './board.js'
-import { gridSize } from './board.js'
+import { gridSize, EMPTY } from './board.js'
 export default {
     rondas: 0,
     totalShoots: 0,
@@ -14,6 +14,35 @@ export default {
             return Math.floor((Math.random() * (max - min + 1)) + min)
         },
         
+        placeShipsH(figure, life, x1, y1, gridSize, grid) {
+            console.log(`Imprimo de forma Horizontal`)
+            console.log(`Valor de figure: ${figure}`)
+            console.log(`Valor de life: ${life}`)
+           
+   
+            for (let i = 0; i < life; i++){
+                if (grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
+                    grid[y1][x1] = figure;
+                    ++x1;
+                }
+            }
+        },
+        
+        placeShipsV(figure, life, x1, y1, gridSize, grid) {
+            console.log(`Imprimo de forma Vertical`)
+            console.log(`Valor de figure: ${figure}`)
+            console.log(`Valor de life: ${life}`)
+            
+            
+
+            for (let i = 0; i < life; i++){
+                if (grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
+                    grid[y1][x1] = figure;
+                    ++y1;
+                }
+            }
+        },
+
         // ✅ Crear barcos para los jugadores
         shipsToPlayers(player){
             player.ships = [
@@ -30,42 +59,29 @@ export default {
             ]
         },
         //Colocar los barcos de los jugadores
-        placeShips(player, id, ship){
+        placeShips(player, playerShip, playerGrid){ //, playergrid){
             let a = this.random(0, gridSize)
             if (a % 2 == 0) {
-                let x1  = this.random(0, gridSize - player.ships[id].life);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
+                let x1 = this.random(0, gridSize - 5);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
                 let y1 = Math.floor(Math.random() * gridSize);
-                //console.log(`Imprimo ${ship} de forma Horizontal`)
+
                 //randomCoords = [x1, y1]
                 //initialCoords = [x1, y1]
                 //console.log(`Esta es la posición inicial: ${randomCoords}`)
-                placeShipsH(player.ships[id].figure, player.ships[id].life, player.grid, x1, y1) 
+                this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                //return x1, y1
             }
             else{
-                let y1  = this.random(0, gridSize - player.ships[id].life);                    
+                let y1 = this.random(0, gridSize - 5);                    
                 let x1 = Math.floor(Math.random() * gridSize);
-                //console.log(`Imprimo ${ship} de forma Vertical`)
                 //randomCoords = [x1, y1]
                 //console.log(`Esta es la posición inicial: ${randomCoords}`)
-                placeShipsV(player.ships[id].figure, player.ships[id].life, player.grid, x1, y1)
+                this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid) //player.ships[id].figure, player.ships[id].life
+                //return x1, y1
             }
+            
         },
         
-    },
-    placeShipsH(figure, shipslife, grid, x1, y1) {
-        for (let i = 0; i < shipslife; i++)
-            if (grid[y1][x1] = EMPTY && x1 < gridSize && x1 >= 0){
-                grid[y1][x1] = figure;
-                x1++;
-            }
-    },
-    
-    placeShipsV(figure, shipslife, grid, x1, y1) {
-        for (let i = 0; i < shipslife; i++)
-            if (grid[y1][x1] = EMPTY && y1 < gridSize && y1 >= 0){
-                grid[y1][x1] = figure;
-                Y1++;
-            }
     },
     
     start(){}, //Ciclo de las rondas
