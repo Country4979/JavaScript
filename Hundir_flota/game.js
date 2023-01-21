@@ -14,66 +14,7 @@ export default {
             return Math.floor((Math.random() * (max - min + 1)) + min)
         },
 
-        placeH(player, playerShip, x1, y1, life, playerGrid){
-            let freeSpace = function (playerGrid, x1, y1) {
-                let noEmpty = '';
-                for (let i = 0; i < life; i++){
-                    if (playerGrid[y1][x1] == EMPTY){          
-                        ++x1;
-                        noEmpty = false;
-                    } else {
-                        noEmpty = true;
-                        break
-                    }
-                }
-            if (noEmpty == false) {    
-                this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
-                }
-            else {
-                this.placeShips(player, playerShip, playerGrid)
-                }
-            }
-        },
-
-        placeV(player, playerShip, x1, y1, playerGrid){
-            let freeSpace = function (playerGrid, x1, y1) {
-                let noEmpty = '';
-                for (let i = 0; i < life; i++){
-                    if (playerGrid[y1][x1] == EMPTY){          
-                        ++y1;
-                        noEmpty = false;
-                    } else {
-                        noEmpty = true;
-                        break
-                    }
-                }
-            if (noEmpty == false) {    
-                this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
-                }
-            else {
-                this.placeShips(player, playerShip, playerGrid)
-                }
-            }
-        },
-
-        placeShipsH(figure, life, x1, y1, gridSize, grid) { 
-            for (let i = 0; i < life; i++){
-                if (grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
-                    grid[y1][x1] = figure;
-                    ++x1;
-                }
-            }
-        },
         
-        placeShipsV(figure, life, x1, y1, gridSize, grid) {         
-            for (let i = 0; i < life; i++){
-                if (grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
-                    grid[y1][x1] = figure;
-                    ++y1;
-                }
-            }
-        },
-
         // ✅ Crear barcos para los jugadores
         shipsToPlayers(player){
             player.ships = [
@@ -90,20 +31,93 @@ export default {
             ]
         },
         //Colocar los barcos de los jugadores
-        placeShips(player, playerShip, playerGrid){ //, playergrid){
+        
+        freeSpaceH(playerGrid, barco, x1, y1) {
+            let noEmpty = '';
+            console.log('Pintamos en Horizontal - Tercer filtro')
+            for (let i = 0; i < barco.life; i++){
+                if (playerGrid[y1][x1] == EMPTY){          
+                    ++x1;
+                    return false;
+                } else {
+                    
+                    break
+                }
+            }
+            
+        },
+        freeSpaceV(playerGrid, barco, x1, y1) {
+            console.log('Pintamos en vertical - Tercer filtro')
+            let noEmpty = '';
+            for (let i = 0; i < barco.life; i++){
+                if (playerGrid[y1][x1] == EMPTY){          
+                    ++y1;
+                    return false;
+                } else {
+                    break
+                }
+            }   
+        },
+
+        placeH(player, barco, x1, y1, playerGrid){
+            console.log('Pintamos en Horizontal - Segundo filtro')
+            
+            if (this.freeSpaceH(playerGrid, barco, x1, y1) == false) {    
+                console.log('Pintamos en Horizontal')
+                //this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                }
+            else {
+                this.placeShips(player, barco, playerGrid)
+                }
+        },
+        
+        placeV(player, barco, x1, y1, playerGrid){
+            console.log('Pintamos en vertical - Segundo filtro')
+            if (this.freeSpaceV(playerGrid, barco, x1, y1) == false) {    
+                console.log('Pintamos en vertical')
+                //this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                }
+            else {
+                this.placeShips(player, barco, playerGrid)
+                }
+        },
+
+        placeShipsH(barco, x1, y1, gridSize, grid) {
+            console.log('Pasados todos los filtros.') 
+            for (let i = 0; i < barco.life; i++){
+                if (grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
+                    grid[y1][x1] = barco.figure;
+                    ++x1;
+                }
+            }
+        },
+        
+        placeShipsV(barco, x1, y1, gridSize, grid) {   
+            console.log('Pasados todos los filtros.')       
+            for (let i = 0; i < barco.life; i++){
+                if (grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
+                    grid[y1][x1] = barco.figure;
+                    ++y1;
+                }
+            }
+        },
+        //HASTA VER ESTO
+        placeShips(player, barco, playerGrid){ //, playergrid){
             let a = this.random(0, gridSize)
             if (a % 2 == 0) {
-                let x1 = this.random(0, gridSize - 5);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
+                let x1 = this.random(0, gridSize - barco.life);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
                 let y1 = Math.floor(Math.random() * gridSize);
-                this.placeH(player, playerShip.figure, x1, y1, playerShip.life, playerGrid)
+                console.log('Pintamos en Horizontal - Primer filtro')
+                this.placeH(player, barco, x1, y1, playerGrid)
 
                 //this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
                 //return x1, y1
             }
             else{
-                let y1 = this.random(0, gridSize - 5);                    
+                let y1 = this.random(0, gridSize - barco.life);                    
                 let x1 = Math.floor(Math.random() * gridSize);
-                this.placeV(player, playerShip.figure, x1, y1, playerShip.life, playerGrid)
+                console.log('Pintamos en vertical - Primer filtro')
+                this.placeV(player, barco, x1, y1, playerGrid)
                 //this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid) //player.ships[id].figure, player.ships[id].life
                 //return x1, y1
             }
@@ -111,10 +125,62 @@ export default {
         },
         
     },
-    
+
+    touchedAndSunk(barco){
+        barco.life--
+        if(barco.life == 0) {
+            console.log(`The ship ${barco.id} has been sunk. Well done!!`)
+        }
+        else {
+            //función next player
+        }
+    },
+
+    touched(shooter, enemy){
+        enemy.life--
+        //encontrar el barco, devolverlo y restarle una vida
+        if (enemy.life == 0){
+            printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
+            printHeading(`THE WINNER IS: ${game.toWin(shooter)}`)
+        }
+    },
+
+    WoF(shooter, enemy, x, y){
+        //función agua o tocado para los iconos
+        if (grid[y][x] == EMPTY){
+           //poner la funcion de pruebas2 para aagua
+        }
+        else{
+            //poner la funciñon de pruebas2 para tocado
+            this.touched(enemy)
+        }
+    },
+
+    toTest(shooter, x, y, enemy){
+        let find = 'encontrar el disparo' // ver función en pruebas2?
+        // mirar en shooter.shootsLog
+            if(find == -1 ){
+                shooter.shoots++
+                this.toLog(shooter, x, y)
+                this.WoF(shooter, enemy, x, y)
+            }
+            else {
+                this.toShoot(shooter, enemy)
+            }
+    },
+
+    toLog(shooter, x, y){
+        //función push para meter el disparo
+    },
+
+    toShoot(shooter, enemy){
+        let x = this.random(0, gridSize);
+        let y = this.random(0, gridSize);
+        toTest(shooter, x , y, enemy)
+    },
     start(){}, //Ciclo de las rondas
     //funión nextplayer
-    toWin(){
-        return 'Aún no lo sé'
+    toWin(shooter){
+        return shooter.name
     },
 }

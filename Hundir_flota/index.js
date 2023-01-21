@@ -31,7 +31,7 @@ console.log('                        By Javier Girón López')
     //TODO meter todo esto en una función
         //mejorar esa función para que coloque todos los barcos ella sola
     game.setUpGame.placeShips(playerB, playerB.ships[0].PORTAAVIONES, playerBGrid)
-    game.setUpGame.placeShips(playerB, playerB.ships[1].BUQUE, playerBGrid)
+    //game.setUpGame.placeShips(playerB, playerB.ships[1].BUQUE, playerBGrid)
     //game.setUpGame.placeShips(playerB, playerB.ships[2].SUBMARINO, playerBGrid)
     //game.setUpGame.placeShips(playerB, playerB.ships[3].SUBMARINO, playerBGrid)
     //game.setUpGame.placeShips(playerB, playerB.ships[4].CRUCERO, playerBGrid)
@@ -55,14 +55,35 @@ console.log('                        By Javier Girón López')
 
 //TODO TITULO DE JUEGO COMIENZA
 
-//REPETICIÓN DE TURNOS 200 DISPAROS (50 POR JUGADOR)
+//REPETICIÓN DE TURNOS 200 DISPAROS (100 POR JUGADOR)
     //TURNO DEL JUGADOR A
-
+        //Disparo:
+        //game.toShoot(playerA)
+            //random x e y ¿e igualarlo a playerAshoot?
+            //ver si se ha realizado --> Ver la función de encontrar elementos de ¿pruebaas2?
+                //si se ha realizado, volver a disparar
+                //si no se ha realizado,
+                        //añadirlo al Log del jugador
+                        //ver si tocado o agua
+                            //Si agua
+                                //figurita de agua en ambos tableros
+                                //función nextplayer
+                            //Si tocado
+                                //figurita de fuego en ambos tableros
+                                //restar vida al jugador
+                                    
+                                //función restar vida al barco
+                                    //si vida barco = 0 --> mensaje de barco hundido
+                                    //si no, nada
+                                //nextplayer                              
+           
     //TURNO JUGADOR B
+        //mismo que A
+
 
 //✅ JUEGO TERMINA
 printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
 console.log()
 
 //✅ MOSTRAR RESULTADOS
-printHeading(`THE WINNER IS: ${game.toWin()}`)
+//printHeading(`THE WINNER IS: ${game.toWin()}`)
