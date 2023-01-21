@@ -64,7 +64,7 @@ export default {
             
             if (this.freeSpaceH(playerGrid, barco, x1, y1) == false) {    
                 console.log('Pintamos en Horizontal')
-                //this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                this.placeShipsH(barco, x1, y1, gridSize, playerGrid)
                 }
             else {
                 this.placeShips(player, barco, playerGrid)
@@ -75,7 +75,7 @@ export default {
             console.log('Pintamos en vertical - Segundo filtro')
             if (this.freeSpaceV(playerGrid, barco, x1, y1) == false) {    
                 console.log('Pintamos en vertical')
-                //this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
+                this.placeShipsV(barco, x1, y1, gridSize, playerGrid)
                 }
             else {
                 this.placeShips(player, barco, playerGrid)
