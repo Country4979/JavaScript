@@ -17,7 +17,7 @@ console.log('                        By Javier Girón López')
     //print_Grid(playerA.grid)
     console.log()
     //✅CREAR EL TABLERO DE JUGADOR B
-    console.log()
+   
     // ✅CREAR LOS BARCOS PARA LOS JUGADORES
     game.setUpGame.shipsToPlayers(playerA)
     game.setUpGame.shipsToPlayers(playerB)
@@ -25,30 +25,38 @@ console.log('                        By Javier Girón López')
     //console.log(playerB.ships[0].PORTAAVIONES.figure) // <-- Acceso a figure funciona
     //console.log(playerB.ships)
     //COLOCAR LOS BARCOS DE JUGADOR A
+      //TODO meter todo esto en una función
+        //mejorar esa función para que coloque todos los barcos ella sola
+    game.setUpGame.placeShips(playerA, playerA.ships[0].PORTAAVIONES, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[1].BUQUE, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[2].SUBMARINO, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[3].SUBMARINO, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[4].CRUCERO, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[5].CRUCERO, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[6].CRUCERO, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[7].LANCHA, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[8].LANCHA, playerAGrid)
+    game.setUpGame.placeShips(playerA, playerA.ships[9].LANCHA, playerAGrid)
     
-    
+    //MOSTRAR TABLERO COMPLETO JUGADOR A
+    print_Grid(playerAGrid)
+    console.log()
     //COLOCAR LOS BARCOS DE JUGADOR B 
     //TODO meter todo esto en una función
         //mejorar esa función para que coloque todos los barcos ella sola
     game.setUpGame.placeShips(playerB, playerB.ships[0].PORTAAVIONES, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[1].BUQUE, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[2].SUBMARINO, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[3].SUBMARINO, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[4].CRUCERO, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[5].CRUCERO, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[6].CRUCERO, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[7].LANCHA, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[8].LANCHA, playerBGrid)
-    //game.setUpGame.placeShips(playerB, playerB.ships[9].LANCHA, playerBGrid)
-    printLine(`${playerB.name} Game Board`)
-    
-    
-  
-    // console.log(playerB)
-    
-    //MOSTRAR TABLERO COMPLETO JUGADOR A
-    
+    game.setUpGame.placeShips(playerB, playerB.ships[1].BUQUE, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[2].SUBMARINO, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[3].SUBMARINO, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[4].CRUCERO, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[5].CRUCERO, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[6].CRUCERO, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[7].LANCHA, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[8].LANCHA, playerBGrid)
+    game.setUpGame.placeShips(playerB, playerB.ships[9].LANCHA, playerBGrid)
+   
     //MOSTRAR TABLERO COMPLETO JUGADOR B
+    printLine(`${playerB.name} Game Board`)
     print_Grid(playerBGrid)
 
 //TODO JUEGO COMIENZA

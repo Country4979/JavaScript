@@ -33,21 +33,19 @@ export default {
         //Colocar los barcos de los jugadores
         
         freeSpaceH(playerGrid, barco, x1, y1) {
-            let noEmpty = '';
-            console.log('Pintamos en Horizontal - Tercer filtro')
+            
+            let noEmpty = '';    
             for (let i = 0; i < barco.life; i++){
                 if (playerGrid[y1][x1] == EMPTY){          
                     ++x1;
                     return false;
-                } else {
-                    
+                } else {   
                     break
                 }
-            }
-            
+            }  
         },
         freeSpaceV(playerGrid, barco, x1, y1) {
-            console.log('Pintamos en vertical - Tercer filtro')
+            
             let noEmpty = '';
             for (let i = 0; i < barco.life; i++){
                 if (playerGrid[y1][x1] == EMPTY){          
@@ -60,10 +58,9 @@ export default {
         },
 
         placeH(player, barco, x1, y1, playerGrid){
-            console.log('Pintamos en Horizontal - Segundo filtro')
             
             if (this.freeSpaceH(playerGrid, barco, x1, y1) == false) {    
-                console.log('Pintamos en Horizontal')
+
                 this.placeShipsH(barco, x1, y1, gridSize, playerGrid)
                 }
             else {
@@ -72,9 +69,9 @@ export default {
         },
         
         placeV(player, barco, x1, y1, playerGrid){
-            console.log('Pintamos en vertical - Segundo filtro')
+
             if (this.freeSpaceV(playerGrid, barco, x1, y1) == false) {    
-                console.log('Pintamos en vertical')
+
                 this.placeShipsV(barco, x1, y1, gridSize, playerGrid)
                 }
             else {
@@ -83,7 +80,7 @@ export default {
         },
 
         placeShipsH(barco, x1, y1, gridSize, grid) {
-            console.log('Pasados todos los filtros.') 
+
             for (let i = 0; i < barco.life; i++){
                 if (grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
                     grid[y1][x1] = barco.figure;
@@ -93,7 +90,7 @@ export default {
         },
         
         placeShipsV(barco, x1, y1, gridSize, grid) {   
-            console.log('Pasados todos los filtros.')       
+      
             for (let i = 0; i < barco.life; i++){
                 if (grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
                     grid[y1][x1] = barco.figure;
@@ -107,19 +104,15 @@ export default {
             if (a % 2 == 0) {
                 let x1 = this.random(0, gridSize - barco.life);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
                 let y1 = Math.floor(Math.random() * gridSize);
-                console.log('Pintamos en Horizontal - Primer filtro')
-                this.placeH(player, barco, x1, y1, playerGrid)
 
-                //this.placeShipsH(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid)
-                //return x1, y1
+                this.placeH(player, barco, x1, y1, playerGrid)
             }
             else{
                 let y1 = this.random(0, gridSize - barco.life);                    
                 let x1 = Math.floor(Math.random() * gridSize);
-                console.log('Pintamos en vertical - Primer filtro')
+
                 this.placeV(player, barco, x1, y1, playerGrid)
-                //this.placeShipsV(playerShip.figure, playerShip.life, x1, y1, gridSize, playerGrid) //player.ships[id].figure, player.ships[id].life
-                //return x1, y1
+
             }
             
         },
