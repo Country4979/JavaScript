@@ -21,8 +21,8 @@ const SUBMARINO2 = new BARCO(' 🛳  |', 3, ['x0', 'y0'], ['x1', 'y1'])
 const BUQUE = new BARCO(' 🛥  |', 4, ['x0', 'y0'], ['x1', 'y1'])
 const PORTAAVIONES = new BARCO('🚢  |', 5, ['x0', 'y0'], ['x1', 'y1'])
 
-const WATER = '💧';
-const FIRE = '🔥';
+const WATER = ' 💧 |';
+const FIRE = '🔥 |';
 
 const  GRID_DAMAGE = [ ` ${WATER} |`, ` ${FIRE} |`]
 let coords = []

@@ -61,6 +61,6 @@ class PLAYER {
 export const playerA = new PLAYER('Player A', playerAGrid, 24, 0, [], [])
 export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [], [])
 
-export const FIGURES = [];
+export const FIGURES = [' 💧 |', '🔥 |'];
 
 //console.log(PORTAAVIONES.life)

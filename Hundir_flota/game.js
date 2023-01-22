@@ -1,4 +1,4 @@
-import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES} from './data.js'
+import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES, FIGURES} from './data.js'
 import * as board from './board.js'
 import { gridSize, EMPTY, playerAGrid, playerBGrid } from './board.js'
 import usePrinter from './printer.js'
@@ -183,10 +183,12 @@ export default {
         shooter.shootCoord = shootCoords //Asigno el disparo a la propiedad shootCoord del jugador que dipara
         this.toTestLog(shooter, shootCoords)
         console.log(shooter.shootsLog)
-
         shooter.shoots++  // Aumento en 1 los disparos realizados por el jugador shooter
+        if (enemy.grid[y][x] != EMPTY){
+            enemy.grid[y][x] = FIGURES[1]
+        }
+        else {enemy.grid[y][x] = FIGURES[0]}
         
-        //toTest(shooter, x , y, enemy)
     },
     start(){
         console.log ('Comenzamos')
@@ -196,7 +198,7 @@ export default {
             //console.log(`Shoot #${playerA.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerB, shootCoords[0], shootCoords[1])}`)
             this.totalShoots++
             printLine('Own board')
-            //print_Grid(playerAGrid)
+            print_Grid(playerA.grid)
             
             console.log()
             printLine('Enemy board')
