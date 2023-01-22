@@ -1,6 +1,6 @@
 import { playerA, playerB, LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES} from './data.js'
 import * as board from './board.js'
-import { gridSize, EMPTY } from './board.js'
+import { gridSize, EMPTY, playerAGrid, playerBGrid } from './board.js'
 import usePrinter from './printer.js'
 const { printHeading, printLine, print_Grid } = usePrinter()
 
@@ -11,11 +11,22 @@ export default {
         createBoards() {
             board.create_Grid(size),
             board.create_Headers(size)
-        },
-        
-        
+        },    
         
         // ✅ Crear barcos para los jugadores
+        /*shipCoords (ship, x1, y1){
+            let totalposition = []
+            console.log (randomCoords)
+           this.ship[ship].position.push(Object.assign([], randomCoords))
+            for(let i = 0; i < (this.ship[ship].life-1); i++){
+                    totalposition.push(randomCoords.map(e => e))
+                    randomCoords[0] = ++x1
+                    //Object.assign(this.ship[ship].position.push(randomCoords.map(e => e)))
+                    (this.ship[ship].position.push(randomCoords.map(e => e)))
+                }
+            }
+        };*/
+
         shipsToPlayers(player){
             player.ships = [
                 {id: 'Portaaviones', PORTAAVIONES},
@@ -98,7 +109,7 @@ export default {
                 }
             }
         },
-        //HASTA VER ESTO
+
         placeShips(player, barco, playerGrid){ //, playergrid){
             let a = random(0, gridSize)
             if (a % 2 == 0) {
@@ -115,8 +126,7 @@ export default {
 
             }
             
-        },
-        
+        },  
     },
 
     touchedAndSunk(barco){
@@ -157,17 +167,18 @@ export default {
         }
         else {
             console.log('Well done!')
+            this.toLog(shooter, shootCoords)
         }
     },
 
-    toLog(shooter, x, y){
-        //función push para meter el disparo
+    toLog(shooter, shootCoords){    //Añadimos el disapro al registro de diparos de cada jugador
+        console.log('logeamos')
+        shooter.shootsLog.push(Object.assign([], shootCoords))
     },
     
     toShoot(shooter, enemy){
         let x = random(0, gridSize);
         let y = random(0, gridSize);
-        
         let shootCoords = [x, y]
         shooter.shootCoord = shootCoords //Asigno el disparo a la propiedad shootCoord del jugador que dipara
         this.toTestLog(shooter, shootCoords)
@@ -179,31 +190,39 @@ export default {
     },
     start(){
         console.log ('Comenzamos')
-        do {
+        do {                        //Ciclo de rondas
             printLine(`Ronda  ${playerA.shoots} for ${playerA.name}`)
             this.toShoot(playerA, playerB)    
             //console.log(`Shoot #${playerA.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerB, shootCoords[0], shootCoords[1])}`)
             this.totalShoots++
-
+            printLine('Own board')
+            //print_Grid(playerAGrid)
+            
+            console.log()
+            printLine('Enemy board')
+            //print_Grid(playerBGrid, true) //NO LO ESTÁ HACIENDO BIEN
+            console.log()
+            
             printLine(`Ronda  ${playerB.shoots} for ${playerB.name}`)
             this.toShoot(playerB, playerA)    
             //console.log(`Shoot #${playerB.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerA, shootCoords[0], shootCoords[1])}`)
             this.totalShoots++
+            printLine('Own board')
+            //print_Grid(playerBGrid)
+            
+            console.log()
+            printLine('Enemy board')
+            //print_Grid(playerAGrid, true) //NO LO ESTÁ HACIENDO BIEN
+            console.log()
         }
-        while (this.totalShoots < 4 && playerA.life != 0 && playerB.life != 0) {
+
+        while (this.totalShoots < 8 && playerA.life != 0 && playerB.life != 0) {
 
             
             /*if (shoot % 2 == 0){            //DISPARO PLAYER B
             //toShoot(playerB);
             //toLog(playerB)
             //damage (playerA, shootCoords[0], shootCoords[1])
-            console.log()
-            printLine('Own board')
-            print_Grid(playerBGrid)
-            
-            console.log()
-            printLine('Enemy board')
-            print_Grid(playerAGrid, true)
             console.log()
             
             //to_win();
@@ -213,18 +232,11 @@ export default {
             //toLog(playerA)  
                 //damage (playerB, shootCoords[0], shootCoords[1])
                 console.log()
-                printLine('Own board')
-                print_Grid(playerAGrid)
-                
-                console.log()
-                printLine('Enemy board')
-                print_Grid(playerBGrid, true)
-                console.log()
                 //to_win()
             }*/
         }
-    }, //Ciclo de las rondas
-    //funión nextplayer
+    }, 
+
     toWin(shooter){
         return shooter.name
     },
