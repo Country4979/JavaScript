@@ -68,18 +68,15 @@ game.start()
 
     //TURNO DEL JUGADOR A
         //Disparo:
-        //game.toShoot(playerA)
-            //random x e y ¿e igualarlo a playerAshoot?
-            //ver si se ha realizado --> Ver la función de encontrar elementos de ¿pruebaas2?
+            //✅ver si se ha realizado --> Ver la función de encontrar elementos de ¿pruebaas2?
                 //si se ha realizado, volver a disparar
-                //si no se ha realizado,
-                        //añadirlo al Log del jugador
+                //✅si no se ha realizado,
+                        //✅añadirlo al Log del jugador
                         //ver si tocado o agua
-                            //Si agua
-                                //figurita de agua en ambos tableros
-                                //función nextplayer
+                            //✅Si agua
+                                //✅figurita de agua en tablero enemigo
                             //Si tocado
-                                //figurita de fuego en ambos tableros
+                                //✅figurita de fuego en tablero enemigo
                                 //restar vida al jugador
                                     
                                 //función restar vida al barco

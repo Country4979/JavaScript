@@ -161,13 +161,12 @@ export default {
     
     toTestLog(shooter, shootCoords){
         const find = shooter.shootsLog.findIndex(elemento => elemento[0] === shootCoords[0] && elemento[1] === shootCoords[1]);
-        console.log(find)
         if (find != -1){
             console.log(`El diparo ${shootCoords} ya se ha realizado`)
         }
         else {
-            console.log('Well done!')
             this.toLog(shooter, shootCoords)
+            shooter.shoots++  // Aumento en 1 los disparos realizados por el jugador shooter
         }
     },
 
@@ -180,15 +179,17 @@ export default {
         let x = random(0, gridSize-1);
         let y = random(0, gridSize-1);
         let shootCoords = [x, y]
-        shooter.shootCoord = shootCoords //Asigno el disparo a la propiedad shootCoord del jugador que dipara
-        this.toTestLog(shooter, shootCoords)
+        shooter.shootCoord = shootCoords        //Asigno el disparo a la propiedad shootCoord del jugador que dipara
+        this.toTestLog(shooter, shootCoords)    //Compruebo si se ha realizado el disparo
         console.log(shooter.shootsLog)
-        shooter.shoots++  // Aumento en 1 los disparos realizados por el jugador shooter
+        
         if (enemy.grid[y][x] != EMPTY){
             enemy.grid[y][x] = FIGURES[1]
+            enemy.life--
         }
         else {enemy.grid[y][x] = FIGURES[0]}
-        
+        console.log(`Vida de ${shooter.name}: ${shooter.life}`)
+        console.log(`Vida de ${enemy.name}: ${enemy.life}`)
     },
     start(){
         console.log ('Comenzamos')
