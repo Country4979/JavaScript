@@ -193,7 +193,7 @@ export default {
             figurin = '💧'
         }
 
-        console.log(`Shoot #${shootCoords} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${figurin}`)
+        console.log(`Shoot #${shooter.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${figurin}`)
         console.log(shooter.shootsLog)
         console.log(`Vida de ${shooter.name}: ${shooter.life}`)
         console.log(`Vida de ${enemy.name}: ${enemy.life}`)
@@ -201,7 +201,7 @@ export default {
     start(){
         console.log ('Comenzamos')
         do {                        //Ciclo de rondas
-            printLine(`Ronda  ${playerA.shoots} for ${playerA.name}`)
+            printLine(`Ronda ${playerA.shoots} for ${playerA.name}`)
             this.toShoot(playerA, playerB)    
             this.totalShoots++
             printLine('Own board')
