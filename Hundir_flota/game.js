@@ -148,17 +148,6 @@ export default {
         }
     },
     
-    WoF(shooter, enemy, x, y){
-        //función agua o tocado para los iconos
-        if (grid[y][x] == EMPTY){
-            //poner la funcion de pruebas2 para aagua
-        }
-        else{
-            //poner la funciñon de pruebas2 para tocado
-            this.touched(enemy)
-        }
-    },
-    
     toTestLog(shooter, enemy, shootCoords){
         const find = shooter.shootsLog.findIndex(elemento => elemento[0] === shootCoords[0] && elemento[1] === shootCoords[1]);
         if (find != -1){
@@ -200,55 +189,48 @@ export default {
     },
     start(){
         console.log ('Comenzamos')
-        do {                        //Ciclo de rondas
-            printLine(`Ronda ${playerA.shoots} for ${playerA.name}`)
-            this.toShoot(playerA, playerB)    
-            this.totalShoots++
-            printLine('Own board')
-            print_Grid(playerA.grid)
-            
-            console.log()
-            printLine('Enemy board')
-            print_Grid(playerB.grid, true) //NO LO ESTÁ HACIENDO . NO PINTA LOS TOCAS NI AGUAS NI LO DEJA VACIO
-            console.log()
-            
-            printLine(`Ronda  ${playerB.shoots} for ${playerB.name}`)
-            this.toShoot(playerB, playerA)    
-            //console.log(`Shoot #${playerB.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerA, shootCoords[0], shootCoords[1])}`)
-            this.totalShoots++
-            printLine('Own board')
-            print_Grid(playerB.grid)
-            
-            console.log()
-            printLine('Enemy board')
-            print_Grid(playerA.grid, true) //NO LO ESTÁ HACIENDO . NO PINTA LOS TOCAS NI AGUAS NI LO DEJA VACIO
-            console.log()
-        }
-
-        while (this.totalShoots < 8 && playerA.life != 0 && playerB.life != 0) {
-
-            
-            /*if (shoot % 2 == 0){            //DISPARO PLAYER B
-            //toShoot(playerB);
-            //toLog(playerB)
-            //damage (playerA, shootCoords[0], shootCoords[1])
-            console.log()
-            
-            //to_win();
-        } 
-        else {                          //DISPARO PLAYER A
-            //toShoot(playerA);
-            //toLog(playerA)  
-                //damage (playerB, shootCoords[0], shootCoords[1])
+        for (let i = 0; i < 200; i++){
+            if (playerA.life > 0 && playerB.life >0){
+                       //do {                        //Ciclo de rondas
+                printLine(`Ronda ${playerA.shoots} for ${playerA.name}`)
+                this.toShoot(playerA, playerB)    
+                this.totalShoots++
+                console.log(this.totalShoots)
+                printLine('Own board')
+                print_Grid(playerA.grid)
+                
                 console.log()
-                //to_win()
-            }*/
-        }
+                printLine('Enemy board')
+                print_Grid(playerB.grid, true)
+                console.log()
+                
+                printLine(`Ronda  ${playerB.shoots} for ${playerB.name}`)
+                this.toShoot(playerB, playerA)    
+                printLine('Own board')
+                print_Grid(playerB.grid)
+                
+                console.log()
+                printLine('Enemy board')
+                print_Grid(playerA.grid, true)
+                console.log()
+            }
+            else  {
+                printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
+                console.log()
+                this.toWin()
+                break
+            }
+        } 
     }, 
 
-    toWin(shooter){
-        return shooter.name
-    },
+    toWin(){
+        if(playerA.life > 0){
+            printHeading(`THE WINNER IS: ${playerA.name}`)
+        }  
+        else {
+            printHeading(`THE WINNER IS: ${playerB.name}`)
+        }
+    }
 }
 function random(min, max) {                     
     return Math.floor((Math.random() * (max - min + 1)) + min)

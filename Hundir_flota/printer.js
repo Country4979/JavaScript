@@ -9,7 +9,7 @@ export default function usePrinter() {
     const LINEA_TITULO = '==================================================='
     const SEMILINEA1 = '========='
     const SEMILINEA2 = '================='
-    const SEMILINEA3 = '================' // TODO mejorar para que tenga la misma longitud que RONDA_A y Ronda_B --> PRINThEADING
+    const SEMILINEA3 = '================'
 
     function printHeading(text) {
         const pad = '='.repeat(text.length)

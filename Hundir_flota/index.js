@@ -89,8 +89,6 @@ game.start()
 
 
 //✅ JUEGO TERMINA
-printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
-console.log()
+
 
 //✅ MOSTRAR RESULTADOS
-//printHeading(`THE WINNER IS: ${game.toWin()}`)
