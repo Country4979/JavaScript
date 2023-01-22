@@ -159,10 +159,10 @@ export default {
         }
     },
     
-    toTestLog(shooter, shootCoords){
+    toTestLog(shooter, enemy, shootCoords){
         const find = shooter.shootsLog.findIndex(elemento => elemento[0] === shootCoords[0] && elemento[1] === shootCoords[1]);
         if (find != -1){
-            console.log(`El diparo ${shootCoords} ya se ha realizado`)
+            this.toShoot(shooter, enemy)
         }
         else {
             this.toLog(shooter, shootCoords)
@@ -171,7 +171,7 @@ export default {
     },
 
     toLog(shooter, shootCoords){    //Añadimos el disapro al registro de diparos de cada jugador
-        console.log('logeamos')
+        
         shooter.shootsLog.push(Object.assign([], shootCoords))
     },
     
@@ -179,15 +179,22 @@ export default {
         let x = random(0, gridSize-1);
         let y = random(0, gridSize-1);
         let shootCoords = [x, y]
+        let figurin = '';
         shooter.shootCoord = shootCoords        //Asigno el disparo a la propiedad shootCoord del jugador que dipara
-        this.toTestLog(shooter, shootCoords)    //Compruebo si se ha realizado el disparo
-        console.log(shooter.shootsLog)
+        this.toTestLog(shooter, enemy, shootCoords)    //Compruebo si se ha realizado el disparo
         
         if (enemy.grid[y][x] != EMPTY){
             enemy.grid[y][x] = FIGURES[1]
             enemy.life--
+            figurin = '🔥'
         }
-        else {enemy.grid[y][x] = FIGURES[0]}
+        else {
+            enemy.grid[y][x] = FIGURES[0]
+            figurin = '💧'
+        }
+
+        console.log(`Shoot #${shootCoords} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${figurin}`)
+        console.log(shooter.shootsLog)
         console.log(`Vida de ${shooter.name}: ${shooter.life}`)
         console.log(`Vida de ${enemy.name}: ${enemy.life}`)
     },
@@ -196,7 +203,6 @@ export default {
         do {                        //Ciclo de rondas
             printLine(`Ronda  ${playerA.shoots} for ${playerA.name}`)
             this.toShoot(playerA, playerB)    
-            //console.log(`Shoot #${playerA.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerB, shootCoords[0], shootCoords[1])}`)
             this.totalShoots++
             printLine('Own board')
             print_Grid(playerA.grid)
