@@ -139,12 +139,11 @@ export default {
         }
     },
     
-    touched(shooter, enemy){
-        enemy.life--
-        //encontrar el barco, devolverlo y restarle una vida
+    toTestLife(shooter, enemy){
         if (enemy.life == 0){
             printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
-            printHeading(`THE WINNER IS: ${game.toWin(shooter)}`)
+            printHeading(`THE WINNER IS: ${shooter}`)
+            this.dead = true
         }
     },
     
@@ -186,16 +185,18 @@ export default {
         console.log(shooter.shootsLog)
         console.log(`Vida de ${shooter.name}: ${shooter.life}`)
         console.log(`Vida de ${enemy.name}: ${enemy.life}`)
+        this.toTestLife(shooter, enemy)
     },
     start(){
-        console.log ('Comenzamos')
-        for (let i = 0; i < 200; i++){
-            if (playerA.life > 0 && playerB.life >0){
-                       //do {                        //Ciclo de rondas
+        let dead = false;
+        while (dead == false && this.totalShoots < 200){
+        
+                //Ciclo de rondas
+                //JUGADOR A
                 printLine(`Ronda ${playerA.shoots} for ${playerA.name}`)
                 this.toShoot(playerA, playerB)    
                 this.totalShoots++
-                console.log(this.totalShoots)
+                console.log(this.totalShoots)    //Borrar luego
                 printLine('Own board')
                 print_Grid(playerA.grid)
                 
@@ -204,8 +205,11 @@ export default {
                 print_Grid(playerB.grid, true)
                 console.log()
                 
+                //JUGADOR B
                 printLine(`Ronda  ${playerB.shoots} for ${playerB.name}`)
-                this.toShoot(playerB, playerA)    
+                this.toShoot(playerB, playerA)
+                this.totalShoots++
+                console.log(this.totalShoots)    //Borrar luego
                 printLine('Own board')
                 print_Grid(playerB.grid)
                 
@@ -214,23 +218,23 @@ export default {
                 print_Grid(playerA.grid, true)
                 console.log()
             }
-            else  {
+          /*  else  {
                 printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
                 console.log()
                 this.toWin()
                 break
             }
-        } 
+        } */
     }, 
 
-    toWin(){
+    /*toWin(){
         if(playerA.life > 0){
             printHeading(`THE WINNER IS: ${playerA.name}`)
         }  
         else {
             printHeading(`THE WINNER IS: ${playerB.name}`)
         }
-    }
+    }*/
 }
 function random(min, max) {                     
     return Math.floor((Math.random() * (max - min + 1)) + min)
