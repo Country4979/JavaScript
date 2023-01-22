@@ -13,11 +13,8 @@ console.log('                        By Javier Girón López')
 //TODO SETUP DEL JUEGO
 
     //✅CREAR EL TABLERO DE JUGADOR A
-    printLine(`${playerA.name} Game Board`)
-    //print_Grid(playerA.grid)
-    console.log()
     //✅CREAR EL TABLERO DE JUGADOR B
-   
+    
     // ✅CREAR LOS BARCOS PARA LOS JUGADORES
     game.setUpGame.shipsToPlayers(playerA)
     game.setUpGame.shipsToPlayers(playerB)
@@ -25,8 +22,9 @@ console.log('                        By Javier Girón López')
     //console.log(playerB.ships[0].PORTAAVIONES.figure) // <-- Acceso a figure funciona
     //console.log(playerB.ships)
     //COLOCAR LOS BARCOS DE JUGADOR A
-      //TODO meter todo esto en una función
-        //mejorar esa función para que coloque todos los barcos ella sola
+    //TODO LOS BARCOS SE PISAN
+    //TODO meter todo esto en una función
+    //mejorar esa función para que coloque todos los barcos ella sola
     game.setUpGame.placeShips(playerA, playerA.ships[0].PORTAAVIONES, playerAGrid)
     game.setUpGame.placeShips(playerA, playerA.ships[1].BUQUE, playerAGrid)
     game.setUpGame.placeShips(playerA, playerA.ships[2].SUBMARINO, playerAGrid)
@@ -38,12 +36,10 @@ console.log('                        By Javier Girón López')
     game.setUpGame.placeShips(playerA, playerA.ships[8].LANCHA, playerAGrid)
     game.setUpGame.placeShips(playerA, playerA.ships[9].LANCHA, playerAGrid)
     
-    //MOSTRAR TABLERO COMPLETO JUGADOR A
-    print_Grid(playerAGrid)
-    console.log()
-    //COLOCAR LOS BARCOS DE JUGADOR B 
+    //COLOCAR LOS BARCOS DE JUGADOR B
+    // TODO LOS BARCOS SE PISAN
     //TODO meter todo esto en una función
-        //mejorar esa función para que coloque todos los barcos ella sola
+    //mejorar esa función para que coloque todos los barcos ella sola
     game.setUpGame.placeShips(playerB, playerB.ships[0].PORTAAVIONES, playerBGrid)
     game.setUpGame.placeShips(playerB, playerB.ships[1].BUQUE, playerBGrid)
     game.setUpGame.placeShips(playerB, playerB.ships[2].SUBMARINO, playerBGrid)
@@ -54,16 +50,22 @@ console.log('                        By Javier Girón López')
     game.setUpGame.placeShips(playerB, playerB.ships[7].LANCHA, playerBGrid)
     game.setUpGame.placeShips(playerB, playerB.ships[8].LANCHA, playerBGrid)
     game.setUpGame.placeShips(playerB, playerB.ships[9].LANCHA, playerBGrid)
-   
+    
+    //MOSTRAR TABLERO COMPLETO JUGADOR A
+    printLine(`${playerA.name} Game Board`)
+    print_Grid(playerAGrid)
+    console.log()
+    console.log()
     //MOSTRAR TABLERO COMPLETO JUGADOR B
     printLine(`${playerB.name} Game Board`)
     print_Grid(playerBGrid)
 
-//TODO JUEGO COMIENZA
-
-//TODO TITULO DE JUEGO COMIENZA
-
+//✅ JUEGO COMIENZA
+printHeading('THE BATTTLESHIP SIMULATOR STARTS')
+console.log()
+game.start()
 //REPETICIÓN DE TURNOS 200 DISPAROS (100 POR JUGADOR)
+
     //TURNO DEL JUGADOR A
         //Disparo:
         //game.toShoot(playerA)

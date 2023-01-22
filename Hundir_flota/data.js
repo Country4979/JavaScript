@@ -24,11 +24,12 @@ export const BUQUE = new TYPESHIP(' 🛥  |', 4,  [])
 export const PORTAAVIONES = new TYPESHIP('🚢  |', 5, [])
 
 class PLAYER {
-    constructor (name, grid, life, shoots, shootsLog, ships){
+    constructor (name, grid, life, shoots, shootCoord, shootsLog, ships){
         this.name = name;
         this.grid = grid;
         this.life = life;
         this.shoots = shoots;
+        this.shootCoord = shootCoord;
         this.shootsLog = shootsLog;
         this.ships = ships;
     }
@@ -57,8 +58,8 @@ class PLAYER {
     }*/
 
 };
-export const playerA = new PLAYER('Player A', playerAGrid, 24, 0, [],)
-export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [],)
+export const playerA = new PLAYER('Player A', playerAGrid, 24, 0, [], [])
+export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [], [])
 
 export const FIGURES = [];
 
