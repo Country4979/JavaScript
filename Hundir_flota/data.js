@@ -47,20 +47,12 @@ class PLAYER {
                 //Object.assign(this.ship[ship].position.push(randomCoords.map(e => e)))
                 (this.ship[ship].position.push(randomCoords.map(e => e)))
             }
-    }
-    //DISPARAR
-    toShoot() {
-        let x1 = random(0, 10)
-        let y1 = random(0, 10)
-        // function toTestLog() --> si está en el shootLog
-        // function si tocado o agua
-        //function lifeRest --> Restar vida
     }*/
 
 };
 export const playerA = new PLAYER('Player A', playerAGrid, 24, 0, [], [])
 export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [], [])
 
-export const FIGURES = [' 💧 |', '🔥 |'];
+export const FIGURES = [' 💧 |', ' 🔥 |'];
 
-//console.log(PORTAAVIONES.life)
+//console.log(PORTAAVIONES.figure)

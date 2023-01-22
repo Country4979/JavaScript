@@ -1,4 +1,7 @@
 import * as board from './board.js'
+import { LANCHA, CRUCERO, SUBMARINO, BUQUE, PORTAAVIONES} from './data.js'
+import { EMPTY } from './board.js'
+
 export default function usePrinter() {
     const LINEAINFERIOR = ['  _________', '______', '______', '______', '______', '______', '______', '______', '______', '___'];
     const LINEAINFERIOR1 = [' |\t   ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     ', '     |'];
@@ -29,8 +32,8 @@ export default function usePrinter() {
         for (let i = 0; i < grid.length; i++) {
             let rowStr = ' |    ' + i + '    | ';       // Los cabeceros de las filas
             for (let cell of grid[i]) {
-                if (isEnemy && cell == '0') {   // if (isEnemy && cell == LANCHA.figure || isEnemy && cell == CRUCERO.figure || isEnemy && cell == SUBMARINO.figure || isEnemy && cell == BUQUE.figure || isEnemy && cell == PORTAAVIONES.figure) {
-                    rowStr += ' - ' //  += EMPTY
+                if (isEnemy && cell == LANCHA.figure || isEnemy && cell == CRUCERO.figure || isEnemy && cell == SUBMARINO.figure || isEnemy && cell == BUQUE.figure || isEnemy && cell == PORTAAVIONES.figure) {
+                    rowStr += EMPTY + ' '
                     
                 } else {
                     rowStr += cell + ' ';

@@ -177,8 +177,8 @@ export default {
     },
     
     toShoot(shooter, enemy){
-        let x = random(0, gridSize);
-        let y = random(0, gridSize);
+        let x = random(0, gridSize-1);
+        let y = random(0, gridSize-1);
         let shootCoords = [x, y]
         shooter.shootCoord = shootCoords //Asigno el disparo a la propiedad shootCoord del jugador que dipara
         this.toTestLog(shooter, shootCoords)
@@ -202,7 +202,7 @@ export default {
             
             console.log()
             printLine('Enemy board')
-            //print_Grid(playerBGrid, true) //NO LO ESTÁ HACIENDO BIEN
+            print_Grid(playerA.grid, true) //NO LO ESTÁ HACIENDO . NO PINTA LOS TOCAS NI AGUAS NI LO DEJA VACIO
             console.log()
             
             printLine(`Ronda  ${playerB.shoots} for ${playerB.name}`)
@@ -210,11 +210,11 @@ export default {
             //console.log(`Shoot #${playerB.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${W_F(playerA, shootCoords[0], shootCoords[1])}`)
             this.totalShoots++
             printLine('Own board')
-            //print_Grid(playerBGrid)
+            print_Grid(playerB.grid)
             
             console.log()
             printLine('Enemy board')
-            //print_Grid(playerAGrid, true) //NO LO ESTÁ HACIENDO BIEN
+            print_Grid(playerA.grid, true) //NO LO ESTÁ HACIENDO . NO PINTA LOS TOCAS NI AGUAS NI LO DEJA VACIO
             console.log()
         }
 
