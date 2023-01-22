@@ -41,6 +41,19 @@ export default {
                 {id: 'Lancha3', LANCHA}
             ]
         },
+        playerShip(player1, playerGrid){
+            this.placeShips(player1, player1.ships[0].PORTAAVIONES, playerGrid)
+            this.placeShips(player1, player1.ships[1].BUQUE, playerGrid)
+            this.placeShips(player1, player1.ships[2].SUBMARINO, playerGrid)
+            this.placeShips(player1, player1.ships[3].SUBMARINO, playerGrid)
+            this.placeShips(player1, player1.ships[4].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[5].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[6].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[7].LANCHA, playerGrid)
+            this.placeShips(player1, player1.ships[8].LANCHA, playerGrid)
+            this.placeShips(player1, player1.ships[9].LANCHA, playerGrid)
+
+        },
         //Colocar los barcos de los jugadores
         
         freeSpaceH(playerGrid, barco, x1, y1) {
@@ -139,38 +152,31 @@ export default {
         }
     },
     
-    toTestLife(shooter, enemy){
-        if (enemy.life == 0){
-            printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
-            printHeading(`THE WINNER IS: ${shooter}`)
-            this.dead = true
-        }
+    toShoot(shooter, enemy){
+        let x = random(0, gridSize-1);
+        let y = random(0, gridSize-1);
+        let shootCoords = [x, y]
+        shooter.shootCoord = shootCoords //Asigno el disparo a la propiedad shootCoord del jugador que dipara
+        return shootCoords
     },
-    
+
     toTestLog(shooter, enemy, shootCoords){
         const find = shooter.shootsLog.findIndex(elemento => elemento[0] === shootCoords[0] && elemento[1] === shootCoords[1]);
         if (find != -1){
             this.toShoot(shooter, enemy)
         }
         else {
-            this.toLog(shooter, shootCoords)
             shooter.shoots++  // Aumento en 1 los disparos realizados por el jugador shooter
+            this.toLog(shooter, shootCoords)
         }
     },
 
     toLog(shooter, shootCoords){    //Añadimos el disapro al registro de diparos de cada jugador
-        
         shooter.shootsLog.push(Object.assign([], shootCoords))
     },
-    
-    toShoot(shooter, enemy){
-        let x = random(0, gridSize-1);
-        let y = random(0, gridSize-1);
-        let shootCoords = [x, y]
+
+    toSeeEnemyGrid(shootCoords, enemy){
         let figurin = '';
-        shooter.shootCoord = shootCoords        //Asigno el disparo a la propiedad shootCoord del jugador que dipara
-        this.toTestLog(shooter, enemy, shootCoords)    //Compruebo si se ha realizado el disparo
-        
         if (enemy.grid[y][x] != EMPTY){
             enemy.grid[y][x] = FIGURES[1]
             enemy.life--
@@ -180,61 +186,64 @@ export default {
             enemy.grid[y][x] = FIGURES[0]
             figurin = '💧'
         }
-
-        console.log(`Shoot #${shooter.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${figurin}`)
-        console.log(shooter.shootsLog)
-        console.log(`Vida de ${shooter.name}: ${shooter.life}`)
-        console.log(`Vida de ${enemy.name}: ${enemy.life}`)
-        this.toTestLife(shooter, enemy)
+        
     },
+
+    TestLife(enemy){
+        if (enemy.life == 0){
+            this.dead = true
+        }
+    },
+    
+    round(shooter, enemy) {
+        printLine(`Ronda ${shooter.shoots} for ${shooter.name}`)
+        this.toShoot(shooter, enemy)
+        this.toTestLog(shooter, enemy, shootCoords)    //Compruebo si se ha realizado el disparo
+        toSeeEnemyGrid(shootCoords, enemy)             // Miro en el tablero del enemigo
+        console.log(`Shoot #${shooter.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${figurin}`)
+        console.log(`${100 - shooter.shoots} shots left`)        
+        console.log(this.totalShoots)    //Borrar luego
+        
+        printLine('Own board')
+        print_Grid(shooter.grid)
+        
+        console.log()
+        printLine('Enemy board')
+        print_Grid(enemy.grid, true)
+        console.log()
+        this.totalShoots++
+        
+        console.log(shooter.shootsLog)      //Borrar luego
+        console.log(`Vida de ${shooter.name}: ${shooter.life}`)     //Borrar luego
+        console.log(`Vida de ${enemy.name}: ${enemy.life}`)     //Borrar luego
+    },
+
+    toDecide(){
+        let who = 1;
+        if(who % 2 == 0){
+            this.shooter = playerB
+            this.enemy = playerA
+        }
+        else{
+            this.shooter = playerA
+            this.enemy  = playerB
+        }
+        who++
+    },
+    
     start(){
+        let shooter = '';
+        let enemy = '';
         let dead = false;
         while (dead == false && this.totalShoots < 200){
-        
-                //Ciclo de rondas
-                //JUGADOR A
-                printLine(`Ronda ${playerA.shoots} for ${playerA.name}`)
-                this.toShoot(playerA, playerB)    
-                this.totalShoots++
-                console.log(this.totalShoots)    //Borrar luego
-                printLine('Own board')
-                print_Grid(playerA.grid)
-                
-                console.log()
-                printLine('Enemy board')
-                print_Grid(playerB.grid, true)
-                console.log()
-                
-                //JUGADOR B
-                printLine(`Ronda  ${playerB.shoots} for ${playerB.name}`)
-                this.toShoot(playerB, playerA)
-                this.totalShoots++
-                console.log(this.totalShoots)    //Borrar luego
-                printLine('Own board')
-                print_Grid(playerB.grid)
-                
-                console.log()
-                printLine('Enemy board')
-                print_Grid(playerA.grid, true)
-                console.log()
-            }
-          /*  else  {
-                printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
-                console.log()
-                this.toWin()
-                break
-            }
-        } */
-    }, 
+            this.toDecide()
+            this.round(shooter, enemy)    
+            this.TestLife(enemy) 
+        } 
+        printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
+        printHeading(`THE WINNER IS: ${shooter}`)
+    }
 
-    /*toWin(){
-        if(playerA.life > 0){
-            printHeading(`THE WINNER IS: ${playerA.name}`)
-        }  
-        else {
-            printHeading(`THE WINNER IS: ${playerB.name}`)
-        }
-    }*/
 }
 function random(min, max) {                     
     return Math.floor((Math.random() * (max - min + 1)) + min)
