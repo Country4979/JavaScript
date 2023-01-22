@@ -203,7 +203,7 @@ export default {
             
             console.log()
             printLine('Enemy board')
-            print_Grid(playerA.grid, true) //NO LO ESTÁ HACIENDO . NO PINTA LOS TOCAS NI AGUAS NI LO DEJA VACIO
+            print_Grid(playerB.grid, true) //NO LO ESTÁ HACIENDO . NO PINTA LOS TOCAS NI AGUAS NI LO DEJA VACIO
             console.log()
             
             printLine(`Ronda  ${playerB.shoots} for ${playerB.name}`)
