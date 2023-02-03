@@ -42,104 +42,86 @@ export default {
             ]
         },
         playerShip(player1, playerGrid){
-            let i = 0;
-            let a = '';
-            for (i = 0; i < 9; i++){
-                if (i == 0){
-                    this.placeShips(player1, player1.ships[i].PORTAAVIONES, playerGrid)  
-               }
-                else if (i == 1){
-                    this.placeShips(player1, player1.ships[i].BUQUE, playerGrid)
-                }
-                else if (i == 2 || i == 3){
-                    this.placeShips(player1, player1.ships[i].SUBMARINO, playerGrid)
-                }
-                else if (i == 4 || i == 5 || i == 6){
-                    this.placeShips(player1, player1.ships[i].CRUCERO, playerGrid)
-                }
-                else {
-                    this.placeShips(player1, player1.ships[i].LANCHA, playerGrid)
-                }
-            }
+            this.placeShips(player1, player1.ships[0].PORTAAVIONES, playerGrid)
+            this.placeShips(player1, player1.ships[1].BUQUE, playerGrid)
+            this.placeShips(player1, player1.ships[2].SUBMARINO, playerGrid)
+            this.placeShips(player1, player1.ships[3].SUBMARINO, playerGrid)
+            this.placeShips(player1, player1.ships[4].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[5].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[6].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[7].LANCHA, playerGrid)
+            this.placeShips(player1, player1.ships[8].LANCHA, playerGrid)
+            this.placeShips(player1, player1.ships[9].LANCHA, playerGrid)
+
         },
         //Colocar los barcos de los jugadores
         
         freeSpaceH(playerGrid, barco, x1, y1) {
-            let noEmpty = 0;    
+            let noEmpty = '';    
             for (let i = 0; i < barco.life; i++){
                 if (playerGrid[y1][x1] == EMPTY){          
                     ++x1;
-                    
+                    noEmpty = false;
                 } else {
-                    ++noEmpty;  
+                    noEmpty = true;  
                     break
                 }
             }
-            console.log(noEmpty)
             return noEmpty 
         },
 
         freeSpaceV(playerGrid, barco, x1, y1) {
-            let noEmpty = 0;
+            let noEmpty = '';
             for (let i = 0; i < barco.life; i++){
                 if (playerGrid[y1][x1] == EMPTY){          
                     ++y1;
-                    
+                    noEmpty = false;
                 } else {
-                    ++noEmpty;
+                    noEmpty = true;
                     break   
                 }
-            console.log(noEmpty)
             return noEmpty
             }   
         },
 
         placeH(player, barco, x1, y1, playerGrid){
-            if (this.freeSpaceH(playerGrid, barco, x1, y1) === 0) {    
+            
+            if (this.freeSpaceH(playerGrid, barco, x1, y1) == false) {    
+
                 this.placeShipsH(barco, x1, y1, gridSize, playerGrid)
             }
             else {
-                this.place(player, barco, playerGrid)
+                this.placeShips(player, barco, playerGrid)
                 }
-            return true
-        },
+            },
             
-        placeV(player, barco, x1, y1, playerGrid){
-            if (this.freeSpaceV(playerGrid, barco, x1, y1) == 0) {    
+            placeV(player, barco, x1, y1, playerGrid){
+                
+            if (this.freeSpaceV(playerGrid, barco, x1, y1) == false) {    
+                
                 this.placeShipsV(barco, x1, y1, gridSize, playerGrid)
                 }
-            else {
-                this.place(player, barco, playerGrid)
+                else {
+                this.placeShips(player, barco, playerGrid)
             }
-            return false
         },
 
-        placeShipsH(barco, x1, y1, gridSize, grid, player) {
-            console.log(barco)
+        placeShipsH(barco, x1, y1, gridSize, grid) {
+
             for (let i = 0; i < barco.life; i++){
                 if (grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
                     grid[y1][x1] = barco.figure;
-                    let array = [x1, y1];
-                    barco.position.push(array)
                     ++x1;
-                }
-                else{
-                    this.place(player, barco, grid)
                 }
             }
         },
         
-        placeShipsV(barco, x1, y1, gridSize, grid, player) {   
-            console.log(barco)
+        placeShipsV(barco, x1, y1, gridSize, grid) {   
+            
             for (let i = 0; i < barco.life; i++){
                 if (grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
                     grid[y1][x1] = barco.figure;
-                    let array = [x1, y1];
-                    barco.position.push(Object.assign([], array))
                     ++y1;
-                }
-                else{
-                    this.place(player, barco, grid)
                 }
             }
         },
@@ -149,13 +131,15 @@ export default {
             if (a % 2 == 0) {
                 let x1 = random(0, gridSize - barco.life);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
                 let y1 = Math.floor(Math.random() * gridSize);
+                
                 this.placeH(player, barco, x1, y1, playerGrid)
-                console.log(`Esto es x: ${x1} y esto es y: ${y1}`)
             }
             else{
                 let y1 = random(0, gridSize - barco.life);                    
                 let x1 = Math.floor(Math.random() * gridSize);
+
                 this.placeV(player, barco, x1, y1, playerGrid)
+
             }
         },
 
@@ -257,8 +241,8 @@ export default {
         let shooter = '';
         let enemy = '';
         let dead = false;
-        while (dead == false && this.totalShoots < 10){
-            //this.toDecide()
+        while (dead == false && this.totalShoots < 200){
+            this.toDecide()
             /*this.round(shooter, enemy)    
             this.TestLife(enemy) 
         } 

@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Hundir_flota\\funcionesPlayer.js"
+            "program": "${workspaceFolder}\\Hundir_flota\\index.js"
             "outputCapture": "std"
         }
     ]
