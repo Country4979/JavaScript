@@ -33,18 +33,8 @@ console.log('                        By Javier Girón López')
     //MOSTRAR TABLERO COMPLETO JUGADOR A
     printLine(`${playerA.name} Game Board`)
     print_Grid(playerAGrid)
-    //console.log(playerA.ships[0].PORTAAVIONES.position)
-    //console.log(playerA.ships[1].BUQUE.position)
-    //console.log(playerA.ships[2].SUBMARINO.position)
-    //console.log(playerA.ships[3].SUBMARINO.position)
-    /*console.log(playerA.ships[4].CRUCERO.position)
-    console.log(playerA.ships[5].CRUCERO.position)
-    console.log(playerA.ships[6].CRUCERO.position)
-    console.log(playerA.ships[7].LANCHA.position)
-    console.log(playerA.ships[8].LANCHA.position)
-    console.log(playerA.ships[9].LANCHA.position)*/
-
     console.log()
+
     //MOSTRAR TABLERO COMPLETO JUGADOR B
     printLine(`${playerB.name} Game Board`)
     print_Grid(playerBGrid)
@@ -52,7 +42,7 @@ console.log('                        By Javier Girón López')
 //✅ JUEGO COMIENZA
 printHeading('THE BATTTLESHIP SIMULATOR STARTS')
 console.log()
-//game.start()
+game.start()
 //REPETICIÓN DE TURNOS 200 DISPAROS (100 POR JUGADOR)
 
     //TURNO DEL JUGADOR A

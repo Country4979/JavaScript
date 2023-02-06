@@ -133,8 +133,39 @@ export default {
             while (find != -1 && coords[0] <= gridSize - barco.life)
             this.place(player, barco, coords, gridSize, playerGrid, a)                         
         },
+    },
+  
+    
 
-    touchedAndSunk(barco){
+    toShoot(shooter, enemy){
+        let x = random(0, gridSize-1);
+        let y = random(0, gridSize-1);
+        let x1 = random(0, gridSize-1);
+        let y1 = random(0, gridSize-1);
+        let shooterShootCoord = [x, y]
+        let enemyShootCoord = [x1, y1]
+        shooter.shootCoord = shooterShootCoord //Asigno el disparo a la propiedad shootCoord del jugador que dipara
+        enemy.shootCoord = enemyShootCoord
+    },
+
+    toTestLog(shooter, enemy, shootCoord, find){
+        console.log(find)
+        for (let i = 0; i <= shooter.shootsLog.length; i++){
+            find = shooter.shootsLog.findIndex(elemento => {elemento[0] === shootCoord[0] && elemento[1] === shootCoord[1]})
+            
+            if (find != -1){
+                break
+            }
+        }
+        return find
+    },
+    
+    toLog(shooter, shootCoord){    //Añadimos el disapro al registro de diparos de cada jugador
+        shooter.shootsLog.push(Object.assign([], shootCoord))
+        shooter.shoots++
+        console.log(`Disparo ${shootCoord} registrado correctamente`)},
+
+    /*touchedAndSunk(barco){
         barco.life--
         if(barco.life == 0) {
             console.log(`The ship ${barco.id} has been sunk. Well done!!`)
@@ -142,30 +173,9 @@ export default {
         else {
             //función next player
         }
-    },
-    
-    toShoot(shooter, enemy){
-        let x = random(0, gridSize-1);
-        let y = random(0, gridSize-1);
-        let shootCoords = [x, y]
-        shooter.shootCoord = shootCoords //Asigno el disparo a la propiedad shootCoord del jugador que dipara
-        return shootCoords
-    },
+    }
 
-    toTestLog(shooter, enemy, shootCoords){
-        const find = shooter.shootsLog.findIndex(elemento => elemento[0] === shootCoords[0] && elemento[1] === shootCoords[1]);
-        if (find != -1){
-            this.toShoot(shooter, enemy)
-        }
-        else {
-            shooter.shoots++  // Aumento en 1 los disparos realizados por el jugador shooter
-            this.toLog(shooter, shootCoords)
-        }
-    },
 
-    toLog(shooter, shootCoords){    //Añadimos el disapro al registro de diparos de cada jugador
-        shooter.shootsLog.push(Object.assign([], shootCoords))
-    },
 
     toSeeEnemyGrid(shootCoords, enemy){
         let figurin = '';
@@ -179,19 +189,29 @@ export default {
             figurin = '💧'
         }
         
-    },
+    }
 
     TestLife(enemy){
         if (enemy.life == 0){
             this.dead = true
         }
-    },
+    }*/
     
-    round(shooter, enemy) {
-        printLine(`Ronda ${shooter.shoots} for ${shooter.name}`)
-        this.toShoot(shooter, enemy)
-        this.toTestLog(shooter, enemy, shootCoords)    //Compruebo si se ha realizado el disparo
-        toSeeEnemyGrid(shootCoords, enemy)             // Miro en el tablero del enemigo
+    round(shooter, enemy, countRound) {
+        let find = 'Soy find';
+        printLine(`Ronda ${countRound} for ${shooter.name}`)
+        do {this.toShoot(shooter, enemy)
+            console.log( shooter.shootCoord)
+            find = this.toTestLog(shooter, enemy, shooter.shootCoord, find)    //Compruebo si se ha realizado el disparo    
+            printLine(`Ronda ${countRound} for ${enemy.name}`)
+            console.log(enemy.shootCoord)
+            
+        }
+        while (find != -1)
+  
+        this.toLog(shooter, shooter.shootCoord)
+        console.log(find)
+        /*toSeeEnemyGrid(shootCoords, enemy)             // Miro en el tablero del enemigo
         console.log(`Shoot #${shooter.shoots} pointing to ${shootCoords[1]}${String.fromCharCode(shootCoords[0] + 65)}: ${figurin}`)
         console.log(`${100 - shooter.shoots} shots left`)        
         console.log(this.totalShoots)    //Borrar luego
@@ -207,39 +227,42 @@ export default {
         
         console.log(shooter.shootsLog)      //Borrar luego
         console.log(`Vida de ${shooter.name}: ${shooter.life}`)     //Borrar luego
-        console.log(`Vida de ${enemy.name}: ${enemy.life}`)     //Borrar luego
+        console.log(`Vida de ${enemy.name}: ${enemy.life}`)     //Borrar luego*/
     },
 
     toDecide(){
-        let who = 1;
+        let who = this.totalShoots;
         if(who % 2 == 0){
-            this.shooter = playerB
-            this.enemy = playerA
+            this.shooter = playerA
+            this.enemy = playerB
         }
         else{
-            this.shooter = playerA
-            this.enemy  = playerB
+            this.shooter = playerB
+            this.enemy  = playerA  
         }
-        who++
+        return this.shooter, this.enemy
     },
-    
+
     start(){
         let shooter = '';
         let enemy = '';
         let dead = false;
-        while (dead == false && this.totalShoots < 10){
-            console.log(this.totalShoots)
-            //this.toDecide()
-            /*this.round(shooter, enemy)    
-            this.TestLife(enemy)*/
-            this.totalShoots++ 
-        } 
+        let countRound = 0;
+        while (dead == false && this.totalShoots < 20){
+            this.toDecide()
+            this.round(this.shooter, this.enemy, countRound)    //<-- HACE ALGO RARO CON EL ORDEN
+            //this.TestLife(enemy)
+            this.totalShoots++
+            countRound++
+        }
+        console.log()
         printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
+        console.log( playerA.shootsLog, playerA.shoots)
+        console.log( playerB.shootsLog, playerB.shoots)
         //printHeading(`THE WINNER IS: ${shooter}`)*/
     },
 
     }
-}
 
 function random(min, max) {                     
     return Math.floor((Math.random() * (max - min + 1)) + min)
