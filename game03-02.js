@@ -39,177 +39,111 @@ export default {
                 {id: 'Lancha1', LANCHA},
                 {id: 'Lancha2', LANCHA},
                 {id: 'Lancha3', LANCHA}
-            ],
-            player.positions = [[],[],[],[],[],[],[],[],[],[]]
+            ]
         },
-
-        pos: 0,
-
         playerShip(player1, playerGrid){
-            let i = 0;
-            for (i = 0; i < 10; i++){
-                if (i == 0){
-                    this.pos = i;  
-                    this.placeShips(player1, player1.ships[i].PORTAAVIONES, playerGrid)
-               }
-                else if (i == 1){
-                    this.pos = i;
-                    this.placeShips(player1, player1.ships[i].BUQUE, playerGrid)
-                    
-                }
-                else if (i == 2 || i == 3){
-                    this.pos = i;
-                    this.placeShips(player1, player1.ships[i].SUBMARINO, playerGrid)
-                }
-                else if (i == 4 || i == 5 || i == 6){
-                    this.pos = i;
-                    this.placeShips(player1, player1.ships[i].CRUCERO, playerGrid)
-                }
-                else {
-                    this.pos = i;
-                    this.placeShips(player1, player1.ships[i].LANCHA, playerGrid)
-                }
-            }
+            this.placeShips(player1, player1.ships[0].PORTAAVIONES, playerGrid)
+            this.placeShips(player1, player1.ships[1].BUQUE, playerGrid)
+            this.placeShips(player1, player1.ships[2].SUBMARINO, playerGrid)
+            this.placeShips(player1, player1.ships[3].SUBMARINO, playerGrid)
+            this.placeShips(player1, player1.ships[4].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[5].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[6].CRUCERO, playerGrid)
+            this.placeShips(player1, player1.ships[7].LANCHA, playerGrid)
+            this.placeShips(player1, player1.ships[8].LANCHA, playerGrid)
+            this.placeShips(player1, player1.ships[9].LANCHA, playerGrid)
+
         },
         //Colocar los barcos de los jugadores
-        BORRARESTO(){
-        /*freeSpace(player, playerGrid, x1, y1) {
-            let array = [x1, y1]
-            for (let i= 0; i < 10; i++){
-                const find = player.position[i].findIndex(element => element[0] === array[0] && element[1] === array[1]);
-                return find
-            }
-        },
+        
         freeSpaceH(playerGrid, barco, x1, y1) {
-            let noEmpty = 0;    
+            let noEmpty = '';    
             for (let i = 0; i < barco.life; i++){
                 if (playerGrid[y1][x1] == EMPTY){          
                     ++x1;
-                    
+                    noEmpty = false;
                 } else {
-                    ++noEmpty;  
+                    noEmpty = true;  
                     break
                 }
             }
-            console.log(noEmpty)
-            return noEmpty
+            return noEmpty 
         },
 
         freeSpaceV(playerGrid, barco, x1, y1) {
-            let noEmpty = 0;
+            let noEmpty = '';
             for (let i = 0; i < barco.life; i++){
                 if (playerGrid[y1][x1] == EMPTY){          
                     ++y1;
-                    
+                    noEmpty = false;
                 } else {
-                    ++noEmpty;
+                    noEmpty = true;
                     break   
                 }
-            console.log(noEmpty)
             return noEmpty
             }   
-        },*/
-
-        /*placeH(player, barco, x1, y1, playerGrid){
-            
-            if (
-                this.freeSpace(player, playerGrid, x1, y1) === -1 || this.freeSpace(player, playerGrid, x1, y1) == undefined){
-                //this.freeSpaceH(player, playerGrid, barco, x1, y1) === 0) {    
-                this.placeShipsH(player, barco, x1, y1, gridSize, playerGrid)
-            }
-            else {
-                this.place(player, barco, playerGrid)
-                }
         },
-            
-        placeV(player, barco, x1, y1, playerGrid){
-            
-            if (this.freeSpace(player, playerGrid, x1, y1) === -1 || this.freeSpace(player, playerGrid, x1, y1) == undefined){
-                //this.freeSpaceV(player, playerGrid, barco, x1, y1) == 0) {    
-                this.placeShipsV(player, barco, x1, y1, gridSize, playerGrid)
-                }
-            else {
-                this.place(player, barco, playerGrid)
-            }
-        },*/},
 
-        placeShipsH(player, barco, x1, y1, gridSize, grid) {
-            let array = [x1, y1];
-            let find = ''; 
-            for (let i= 0; i < 10; i++){
-                find = player.positions[i].findIndex(element => element[0] === array[0] && element[1] === array[1]);
-                console.log(find)
+        placeH(player, barco, x1, y1, playerGrid){
+            
+            if (this.freeSpaceH(playerGrid, barco, x1, y1) == false) {    
+
+                this.placeShipsH(barco, x1, y1, gridSize, playerGrid)
             }
+            else {
+                this.placeShips(player, barco, playerGrid)
+                }
+            },
+            
+            placeV(player, barco, x1, y1, playerGrid){
+                
+            if (this.freeSpaceV(playerGrid, barco, x1, y1) == false) {    
+                
+                this.placeShipsV(barco, x1, y1, gridSize, playerGrid)
+                }
+                else {
+                this.placeShips(player, barco, playerGrid)
+            }
+        },
+
+        placeShipsH(barco, x1, y1, gridSize, grid) {
+
             for (let i = 0; i < barco.life; i++){
-                if (find == -1 && x1 < gridSize && x1 >= 0){
-                    let array = [x1, y1];
-                    //grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
+                if (grid[y1][x1] == EMPTY && x1 < gridSize && x1 >= 0){
                     grid[y1][x1] = barco.figure;
-                    //array = [++x1,y1]
-                    player.positions[this.pos].push(Object.assign([], array))
-                    ++x1;   
-//console.log('valor ' + player.ships[this.pos].barco.position)               // <-- NO FUNCIONA
-                    //barco.position.push(Object.assign([], array))
-                                       
-                }
-                else{
-                    this.place(player, barco, grid)
+                    ++x1;
                 }
             }
-            console.log(player.positions)
         },
         
-        placeShipsV(player, barco, x1, y1, gridSize, grid) {
-            let array = [x1, y1];
-            let find = -1; 
-            for (let i= 0; i < 10; i++){
-                find = player.positions[i].findIndex(element => element[0] === array[0] && element[1] === array[1]);
-                if (find != -1){
-                    break
-                }
-
-            } 
-            //console.log(player.name)                                        //borrer
-            //console.log(`valor de pos ${this.pos}`)                                        //borrer
+        placeShipsV(barco, x1, y1, gridSize, grid) {   
+            
             for (let i = 0; i < barco.life; i++){
-                if (find == -1 && x1 < gridSize && x1 >= 0){
-                    let array = [x1, y1];
-                    //grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
+                if (grid[y1][x1] == EMPTY && y1 < gridSize && y1 >= 0){
                     grid[y1][x1] = barco.figure;
-                    //array = [x1, ++y1]
-                    player.positions[this.pos].push(Object.assign([], array))
                     ++y1;
-//console.log('valor ' + player.ships[this.pos].barco.position)                 // <-- NO FUNCIONA
-                    //barco.position.push(Object.assign([], array))  
-                }
-                else{
-                    this.place(player, barco, grid)
                 }
             }
-            console.log(player.positions)
         },
         
         place(player, barco, playerGrid){
-            
             let a = random(0, gridSize)
             if (a % 2 == 0) {
                 let x1 = random(0, gridSize - barco.life);      //Obtengo un número aleatorio para el espacio máximo en el que puede colocarse este barco.
                 let y1 = Math.floor(Math.random() * gridSize);
-console.log(`Esto es x: ${x1} y esto es y: ${y1}`)              //Borrar
-                this.placeShipsH(player, barco, x1, y1, gridSize, playerGrid)
                 
+                this.placeH(player, barco, x1, y1, playerGrid)
             }
             else{
                 let y1 = random(0, gridSize - barco.life);                    
                 let x1 = Math.floor(Math.random() * gridSize);
-console.log(`Esto es x: ${x1} y esto es y: ${y1}`)              //Borrar
-                this.placeShipsV(player, barco, x1, y1, gridSize, playerGrid)
-                
+
+                this.placeV(player, barco, x1, y1, playerGrid)
+
             }
         },
 
         placeShips(player, barco, playerGrid){
-            
             this.place(player, barco, playerGrid)           
         },  
     },
@@ -307,19 +241,17 @@ console.log(`Esto es x: ${x1} y esto es y: ${y1}`)              //Borrar
         let shooter = '';
         let enemy = '';
         let dead = false;
-        while (dead == false && this.totalShoots < 10){
-            console.log(this.totalShoots)
-            //this.toDecide()
+        while (dead == false && this.totalShoots < 200){
+            this.toDecide()
             /*this.round(shooter, enemy)    
-            this.TestLife(enemy)*/
-            this.totalShoots++ 
+            this.TestLife(enemy) 
         } 
         printHeading('THE BATTTLESHIP SIMULATOR HAS ENDED')
-        //printHeading(`THE WINNER IS: ${shooter}`)*/
+        printHeading(`THE WINNER IS: ${shooter}`)*/
     }
 
     }
-
+}
 function random(min, max) {                     
     return Math.floor((Math.random() * (max - min + 1)) + min)
 }
