@@ -17,7 +17,7 @@ console.log('                        By Javier Girón López')
     
     // ✅CREAR LOS BARCOS PARA LOS JUGADORES
     game.setUpGame.shipsToPlayers(playerA)
-    //game.setUpGame.shipsToPlayers(playerB)
+    game.setUpGame.shipsToPlayers(playerB)
     //console.log(playerB.ships[0].PORTAAVIONES.life) // <-- Acceso a life Funcina
     //console.log(playerB.ships[0].PORTAAVIONES.figure) // <-- Acceso a figure funciona
     //console.log(playerA.ships)
@@ -26,12 +26,12 @@ console.log('                        By Javier Girón López')
     //TODO meter todo esto en una función
    
     game.setUpGame.playerShip(playerA, playerAGrid)
-    //game.setUpGame.playerShip(playerB, playerBGrid)
+    game.setUpGame.playerShip(playerB, playerBGrid)
 
 
     
     //MOSTRAR TABLERO COMPLETO JUGADOR A
-    //printLine(`${playerA.name} Game Board`)
+    printLine(`${playerA.name} Game Board`)
     print_Grid(playerAGrid)
     //console.log(playerA.ships[0].PORTAAVIONES.position)
     //console.log(playerA.ships[1].BUQUE.position)
@@ -46,8 +46,8 @@ console.log('                        By Javier Girón López')
 
     console.log()
     //MOSTRAR TABLERO COMPLETO JUGADOR B
-    //printLine(`${playerB.name} Game Board`)
-    //print_Grid(playerBGrid)
+    printLine(`${playerB.name} Game Board`)
+    print_Grid(playerBGrid)
 
 //✅ JUEGO COMIENZA
 printHeading('THE BATTTLESHIP SIMULATOR STARTS')

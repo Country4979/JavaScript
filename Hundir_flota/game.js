@@ -72,7 +72,6 @@ export default {
         freeSpace(player, barco, coords, gridSize, playerGrid, find){           
             for(let i = 0; i < 10; i++){
                 find = player.positions[i].findIndex(element => element[0] === coords[0] && element[1] === coords[1]);
-                console.log('freeSpace ' + find)
                 if (find !=-1 && coords[0] > 0 && coords[0] < gridSize - barco.life){
                     break
                 }
@@ -80,26 +79,40 @@ export default {
             return find
         },
         
-        testCoords(player, barco, coords, gridSize, playerGrid, find){ //<-- FIND IGNORA EL PLAYER POSITION
+        testCoords(player, barco, coords, gridSize, playerGrid, find, a){
             let array = [coords[0],coords[1]];
-            for(let j = 0; j < barco.life; j++){
-                if (array[0] >= gridSize || playerGrid[array[1]][array[0]] != EMPTY){
-                    console.log('Detecta el empty')
-                    find = 0
-                    break
+            if (a == 'Par'){
+                for(let j = 0; j < barco.life; j++){
+                    if (array[0] > gridSize - 1 || playerGrid[array[1]][array[0]] != EMPTY){
+                        find = 0
+                        break
+                    }
+                    ++array[0]
+                }  
+            }
+            else{
+                for(let j = 0; j < barco.life; j++){
+                    if (array[1] > gridSize - 1 || playerGrid[array[1]][array[0]] != EMPTY){
+                        find = 0
+                        break
+                    }
+                    ++array[1]
                 }
-                ++array[0]
             }
             return find 
         },
 
-        place(player, barco, coords, gridSize, playerGrid){
+        place(player, barco, coords, gridSize, playerGrid, a){
             for (let i = 0; i < barco.life; i++){
                 playerGrid[coords[1]][coords[0]] = barco.figure;
                 player.positions[this.pos].push(Object.assign([], coords))
-                ++coords[0]   
+                if (a == 'Par'){
+                    ++coords[0]
+                }
+                else {
+                    ++coords[1]
+                }  
             }
-            console.log(player.positions)
         },
 
         placeShips(player, barco, playerGrid){
@@ -107,18 +120,18 @@ export default {
             let coords = '';
             let a = random(0, gridSize)
             if (a % 2 == 0) {
-                console.log('Pongo horizontales')  
+                a = 'Par'  
             }
             else{
-                console.log('Pongo verticales')
+                a = 'Impar'
             }
             do {
                 coords = this.randomCoords(barco, gridSize) //Me devuelve array de coordenadas          
                 find = this.freeSpace(player, barco, coords, gridSize, playerGrid, find) //Devuelve si está libre o no esa coordenada
-                find = this.testCoords(player, barco, coords, gridSize, playerGrid, find) // Devuelve si se puede colocar el barco ahí o no.
+                find = this.testCoords(player, barco, coords, gridSize, playerGrid, find, a) // Devuelve si se puede colocar el barco ahí o no.
             }
             while (find != -1 && coords[0] <= gridSize - barco.life)
-            this.place(player, barco, coords, gridSize, playerGrid)                         
+            this.place(player, barco, coords, gridSize, playerGrid, a)                         
         },
 
     touchedAndSunk(barco){
@@ -213,7 +226,7 @@ export default {
     start(){
         let shooter = '';
         let enemy = '';
-        let dead = false;  //VER POR QUÉ SALTA A ESTA LÍNEA DESDE PLACE(){}
+        let dead = false;
         while (dead == false && this.totalShoots < 10){
             console.log(this.totalShoots)
             //this.toDecide()
