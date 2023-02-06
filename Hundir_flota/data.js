@@ -50,8 +50,8 @@ class PLAYER {
     }*/
 
 };
-export const playerA = new PLAYER('Player A', playerAGrid, 24, 0, [], [])
-export const playerB = new PLAYER('Player B', playerBGrid, 24, 0, [], [])
+export const playerA = new PLAYER('Player A', playerAGrid, 2, 0, [], [])
+export const playerB = new PLAYER('Player B', playerBGrid, 2, 0, [], [])
 
 export const FIGURES = [' 💧 |', ' 🔥 |'];
 
