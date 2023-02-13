@@ -25,9 +25,9 @@ export default {
                 {id: 'Crucero1', CRUCERO}, 
                 {id: 'Crucero2', CRUCERO},
                 {id: 'Crucero3', CRUCERO},
-                {id: 'Lancha1', LANCHA: JSON.parse(JSON.stringify(LANCHA))},
-                {id: 'Lancha2', LANCHA: JSON.parse(JSON.stringify(LANCHA))},
-                {id: 'Lancha3', LANCHA: JSON.parse(JSON.stringify(LANCHA))}
+                {id: 'Lancha1', LANCHA},
+                {id: 'Lancha2', LANCHA},
+                {id: 'Lancha3', LANCHA}
             ],
             player.positions = [[],[],[],[],[],[],[],[],[],[]]
         },
@@ -102,74 +102,56 @@ export default {
             return find 
         },
         push(player, coords, array){
-            //console.log(coords);
-            //console.log(array)
+            console.log(coords);
             switch(this.pos) {
                 case this.pos = 1:
-                    //player.ships[1].BUQUE.position.push(Object.assign([], array));
-                    //player.ship1[3].push(array)
-                    player.ship1[3] = array
+                    player.ships[1].BUQUE.position.push(Object.assign([], array));
                     break;
                 case this.pos = 2:
-                    //player.ships[2].SUBMARINO.position.push(Object.assign([], array));
-                    //player.ship2[3].push(array)
-                    player.ship2[3] = array
+                    player.ships[2].SUBMARINO.position.push(Object.assign([], array));
                     break;
                 case this.pos = 3:
-                    //player.ships[3].SUBMARINO.position.push(Object.assign([], array));
-                    //player.ship3[3].push(array)
-                    player.ship3[3] = array
+                    player.ships[3].SUBMARINO.position.push(Object.assign([], array));
                     break;
                 case this.pos = 4:
-                    //player.ships[4].CRUCERO.position.push(Object.assign([], array));
-                    //player.ship4[3].push(array)
-                    player.ship4[3] = array
+                    player.ships[4].CRUCERO.position.push(Object.assign([], array));
                     break;
                 case this.pos = 5:
-                    //player.ships[5].CRUCERO.position.push(Object.assign([], array));
-                    //player.ship5[3].push(array)
-                    player.ship5[3] = array
+                    player.ships[5].CRUCERO.position.push(Object.assign([], array));
                     break;
                 case this.pos = 6:
-                    //player.ships[6].CRUCERO.position.push(Object.assign([], array));
-                    //player.ship6[3].push(array)
-                    player.ship6[3] = array
+                    player.ships[6].CRUCERO.position.push(Object.assign([], array));
                     break;
                 case this.pos = 7:
-                    //player.ships[7].LANCHA.position.push(Object.assign([], array));
-                    player.ship7[3] = array
-                    
+                    player.ships[7].LANCHA.position.push(Object.assign([], array));
                     break;
                 case this.pos = 8:
-                    //player.ships[8].LANCHA.position.push(Object.assign([], array));
-                    player.ship8[3] = array
-                    
+                    player.ships[8].LANCHA.position.push(Object.assign([], array));
                     break;
                 case this.pos = 9:
-                    //player.ships[9].LANCHA.position.push(Object.assign([], array));
-                    player.ship9[3] = array
-                    
+                    player.ships[9].LANCHA.position.push(Object.assign([], array));
                     break;
                 default :
-                    //player.ships[0].PORTAAVIONES.position.push(Object.assign([], array));
-                    player.ship0[3] = array
+                    player.ships[0].PORTAAVIONES.position.push(Object.assign([], array));        
             }
         },
 
         place(player, barco, coords, gridSize, playerGrid, a){
             let array = [];
-            array = []
+            console.log(array)
             for (let i = 0; i < barco.life; i++){
                 playerGrid[coords[1]][coords[0]] = barco.figure;
+                //player.positions[this.pos].push(Object.assign([], coords))
                 array.push(Object.assign([], coords))
                 if (a == 'Par'){
                     ++coords[0]
                 }
                 else {
                     ++coords[1]
-                }
-                this.push(player, coords, array)  
+                }  
             }
+            this.push(player, coords, array) 
+
         },
 
         placeShips(player, barco, playerGrid){
@@ -188,8 +170,7 @@ export default {
                 find = this.testCoords(player, barco, coords, gridSize, playerGrid, find, a) // Devuelve si se puede colocar el barco ahí o no.
             }
             while (find != -1 && coords[0] <= gridSize - barco.life)
-            this.place(player, barco, coords, gridSize, playerGrid, a)
-
+            this.place(player, barco, coords, gridSize, playerGrid, a)                         
         },
     },
     
@@ -224,81 +205,11 @@ export default {
         shooter.shoots++
     },
     
-    ship(shooter, enemy){  //life position 2 --> NO FUNCIONA PORQUE ESTÁ MIRANDO EN SHOOTLOG, NO EN POSICIONES BARCOS
-        let touched = this.enemy.shootsLog.findIndex(elemento => {elemento[0] === this.shooter.shootCoord[0] && elemento[1] === this.shooter.shootCoord[1]});
-        console.log(`Posición a buscar en es ${touched}`)
-        switch (touched) {
-            case touched == 0 || touched == 1 || touched == 2 || touched == 3 || touched == 4:
-                this.enemy.ship0[2]--;
-                if (this.enemy.ship0[2] != 0) {
-                    console.log(`Enemy ${this.enemy.ship0[0]} touched!`);
-                }
-                else{console.log(`Enemy ${this.enemy.ship0[0]} touched & drawn!`)}
-                break;
-            case touched == 5 || touched == 6 || touched == 7 || touched == 8:
-                this.enemy.ship1[2]--;
-                if (this.enemy.ship1[2] != 0) {
-                    console.log(`Enemy ${this.enemy.ship1[0]} touched!`);
-                }
-                else{console.log(`Enemy ${this.enemy.ship1[0]} touched & drawn!`)}
-                break;
-            case touched == 9 || touched == 10|| touched == 11:
-               this.this.enemy.ship2[2]--;
-                if (this.enemy.ship2[2] != 0) {
-                    console.log(`Enemy ${this.enemy.ship2[0]} touched!`);
-                }
-                else{console.log(`Enemy ${this.enemy.ship2[0]} touched & drawn!`)}
-                break;
-            case touched == 12 || touched == 13|| touched == 14:
-                this.enemy.ship3[2]--;
-                if (enemy.ship3[2] != 0) {
-                    console.log(`Enemy ${this.enemy.ship3[0]} touched!`);
-                }
-                else{console.log(`Enemy ${this.enemy.ship3[0]} touched & drawn!`)}
-                break;
-            case touched == 15 || touched == 16:
-                this.enemy.ship4[2]--;
-                if (this.enemy.ship4[2] != 0) {
-                    console.log(`Enemy ${this.enemy.ship4[0]} touched!`);
-                }
-                else{console.log(`Enemy ${this.enemy.ship4[0]} touched & drawn!`)}
-                break;
-            case touched == 17 || touched == 18:
-                this.enemy.ship5[2]--;
-                if (this.enemy.ship5[2] != 0) {
-                    console.log(`Enemy ${this.enemy.ship5[0]} touched!`);
-                }
-                else{console.log(`Enemy ${this.enemy.ship5[0]} touched & drawn!`)}
-                break;
-            case touched == 19 || touched == 20:
-                this.enemy.ship6[2]--;
-                if (this.enemy.ship6[2] != 0) {
-                    console.log(`Enemy ${this.enemy.ship6[0]} touched!`);
-                }
-                else{console.log(`Enemy ${this.enemy.ship6[0]} touched & drawn!`)}
-                break;
-            case touched == 21:
-                this.enemy.ship7[2]--;
-                console.log(`Enemy ${this.enemy.ship7[0]} touched & drawn!`);
-                break;
-            case touched == 22:
-                this.enemy.ship8[2]--;
-                console.log(`Enemy ${this.enemy.ship8[0]} touched & drawn!`);
-                break;
-            case touched == 23:
-                this.enemy.ship9[2]--;
-                console.log(`Enemy ${this.enemy.ship9[0]} touched & drawn!`);
-                break;
-
-        }
-    },
-
     toSeeEnemyGrid(shooter, enemy, figurin){        
         if (enemy.grid[shooter.shootCoord[1]][shooter.shootCoord[0]] != EMPTY){
             enemy.grid[shooter.shootCoord[1]][shooter.shootCoord[0]] = FIGURES[1]
             enemy.life--
             this.figurin = '🔥'
-            this.ship(enemy)    //Ver qué barco ha tocado y quitarle una vida
         }
         else {
             enemy.grid[shooter.shootCoord[1]][shooter.shootCoord[0]] = FIGURES[0]
@@ -343,34 +254,25 @@ export default {
         let dead = false;
         let countRound = 0;
         let figurin = '';
-        let life = 0;
-        let life1 = 1;
-//ORDENAR ESTO PARA QUE LO HAGA BIEN
+
         while (dead == false && this.totalShoots < 10){
             this.toDecide()
-            do {
-                life = this.enemy.life
-                this.round(this.shooter, this.enemy, countRound)
-                console.log(`Shoot #${this.shooter.shoots} pointing to ${this.shooter.shootCoord[1]}${String.fromCharCode(this.shooter.shootCoord[0] + 65)}: ${figurin}`)
-                figurin = this.toSeeEnemyGrid(this.shooter, this.enemy, this.figurin)             // Miro el disparo en el tablero del enemigo
-                console.log()
-                printLine('Own board')
-                print_Grid(this.shooter.grid)
-                
-                console.log()
-                printLine('Enemy board')
-                print_Grid(this.enemy.grid, true)
-                dead = this.TestLife(this.enemy, this.dead)
-                console.log(`La vida de ${this.shooter.name} es de ${this.shooter.life}`) //Borar
-                console.log(`La vida de ${this.enemy.name} es de ${this.enemy.life}`) //Borrar
-                this.totalShoots++
-                countRound++
-                life1 = this.enemy.life
-            }
-            while( life1 < life && this.enemy.life >= 1)
-            }
-            console.log(playerA)
+            this.round(this.shooter, this.enemy, countRound)
+            figurin = this.toSeeEnemyGrid(this.shooter, this.enemy, this.figurin)             // Miro el disparo en el tablero del enemigo
+            console.log(`Shoot #${this.shooter.shoots} pointing to ${this.shooter.shootCoord[1]}${String.fromCharCode(this.shooter.shootCoord[0] + 65)}: ${figurin}`)
+            console.log()
+            printLine('Own board')
+            print_Grid(this.shooter.grid)
             
+            console.log()
+            printLine('Enemy board')
+            print_Grid(this.enemy.grid, true)
+            dead = this.TestLife(this.enemy, this.dead)
+            console.log(`La vida de ${this.shooter.name} es de ${this.shooter.life}`)
+            console.log(`La vida de ${this.enemy.name} es de ${this.enemy.life}`)
+            this.totalShoots++
+            countRound++
+        }
     },
 
     toWin(){
